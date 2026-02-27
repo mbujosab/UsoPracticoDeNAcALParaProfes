@@ -1,0 +1,10 @@
+texlive
+texlive-latex-extra
+texlive-latex-recommended
+texlive-science
+texlive-pictures
+texlive-lang-spanish
+latexmk
+perl
+ghostscript
+gnuplot

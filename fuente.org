@@ -55,7 +55,7 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
 
 Fichero =.binder/apt.txt=
 
-#+BEGIN_SRC :tangle .binder/apt.txt
+#+BEGIN_SRC txt :tangle .binder/apt.txt
 texlive
 texlive-latex-extra
 texlive-latex-recommended

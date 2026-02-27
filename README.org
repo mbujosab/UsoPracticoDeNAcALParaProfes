@@ -21,8 +21,10 @@ demanda* en un entorno *MyBinder/JupyterLab*, incluyendo:
 1. Pulsa el badge de Binder (rellena =<OWNER>= y =<REPO>= con tu repo):
 
 #+begin_example
-https://mybinder.org/v2/gh/<OWNER>/<REPO>/HEAD
+https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD
 #+end_example
+
+[[https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD][Enlace al repositorio en  MyBinder]]
 
 2. [@2] Espera a que cargue JupyterLab.
 3. Abre *Terminal* (en JupyterLab: =/File → New → Terminal/=).
