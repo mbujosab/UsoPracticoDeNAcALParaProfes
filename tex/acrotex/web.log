@@ -1,0 +1,112 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=latex 2025.1.13)  27 FEB 2026 16:21
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**web.ins
+(./web.ins
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16>
+(/usr/share/texlive/texmf-dist/tex/latex/base/docstrip.tex
+\blockLevel=\count185
+\emptyLines=\count186
+\processedLines=\count187
+\commentsRemoved=\count188
+\commentsPassed=\count189
+\codeLinesPassed=\count190
+\TotalprocessedLines=\count191
+\TotalcommentsRemoved=\count192
+\TotalcommentsPassed=\count193
+\TotalcodeLinesPassed=\count194
+\NumberOfFiles=\count195
+\inFile=\read2
+\inputcheck=\read3
+\off@0=\count196
+\off@1=\count197
+\off@2=\count198
+\off@3=\count199
+\off@4=\count266
+\off@5=\count267
+\off@6=\count268
+\off@7=\count269
+\off@8=\count270
+\off@9=\count271
+\off@10=\count272
+\off@11=\count273
+\off@12=\count274
+\off@13=\count275
+\off@14=\count276
+\off@15=\count277
+\@maxfiles=\count278
+\@maxoutfiles=\count279
+
+Utility: `docstrip' v2.6b <2022-09-03>
+English documentation    <2022-09-03>
+
+**********************************************************
+* This program converts documented macro-files into fast *
+* loadable files by stripping off (nearly) all comments! *
+**********************************************************
+
+********************************************************
+* No Configuration file found, using default settings. *
+********************************************************
+
+(./web.ins
+
+Generating file(s) ./web.sty ./websec.def ./webpro.def 
+\openout0 = `./web.sty'.
+
+\openout1 = `./websec.def'.
+
+\openout2 = `./webpro.def'.
+
+
+Processing file web.dtx (copyright,package) -> web.sty
+                        (copyright,websectioning) -> websec.def
+                        (copyright,webpro) -> webpro.def
+File web.dtx ended by \endinput.
+Lines  processed: 5398
+Comments removed: 2141
+Comments  passed: 16
+Codelines passed: 3203
+
+
+Generating file(s) ./aebdocfmt.def ./aebdonotindex.def 
+\openout0 = `./aebdocfmt.def'.
+
+\openout1 = `./aebdonotindex.def'.
+
+
+Processing file web.dtx (copyright,docdefs) -> aebdocfmt.def
+                        (dnidefs) -> aebdonotindex.def
+File web.dtx ended by \endinput.
+Lines  processed: 5398
+Comments removed: 2141
+Comments  passed: 16
+Codelines passed: 3203
+
+***************************************************************
+*
+*  To finish the installation you have to copy the files 
+*
+*  *.sty, *.cfg and *.def into a directory searched by TeX
+*
+***************************************************************
+)
+Overall statistics:
+Files  processed: 2
+Lines  processed: 10796
+Comments removed: 4282
+Comments  passed: 32
+Codelines passed: 6406
+ ) ) 
+Here is how much of TeX's memory you used:
+ 375 strings out of 477917
+ 3991 string characters out of 5837449
+ 1849327 words of memory out of 5000000
+ 20608 multiletter control sequences out of 15000+600000
+ 512287 words of font info for 32 fonts, out of 8000000 for 9000
+ 85 hyphenation exceptions out of 8191
+ 16i,0n,15p,208b,151s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+No pages of output.

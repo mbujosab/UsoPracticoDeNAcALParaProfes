@@ -1,0 +1,162 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=latex 2025.1.13)  27 FEB 2026 16:20
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**exerquiz.ins
+(./exerquiz.ins
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16>
+(/usr/share/texlive/texmf-dist/tex/latex/base/docstrip.tex
+\blockLevel=\count185
+\emptyLines=\count186
+\processedLines=\count187
+\commentsRemoved=\count188
+\commentsPassed=\count189
+\codeLinesPassed=\count190
+\TotalprocessedLines=\count191
+\TotalcommentsRemoved=\count192
+\TotalcommentsPassed=\count193
+\TotalcodeLinesPassed=\count194
+\NumberOfFiles=\count195
+\inFile=\read2
+\inputcheck=\read3
+\off@0=\count196
+\off@1=\count197
+\off@2=\count198
+\off@3=\count199
+\off@4=\count266
+\off@5=\count267
+\off@6=\count268
+\off@7=\count269
+\off@8=\count270
+\off@9=\count271
+\off@10=\count272
+\off@11=\count273
+\off@12=\count274
+\off@13=\count275
+\off@14=\count276
+\off@15=\count277
+\@maxfiles=\count278
+\@maxoutfiles=\count279
+
+Utility: `docstrip' v2.6b <2022-09-03>
+English documentation    <2022-09-03>
+
+**********************************************************
+* This program converts documented macro-files into fast *
+* loadable files by stripping off (nearly) all comments! *
+**********************************************************
+
+********************************************************
+* No Configuration file found, using default settings. *
+********************************************************
+
+(./exerquiz.ins
+
+Generating file(s) ./exerquiz.sty ./aebjs.def ./aebrandom.def ./aebsumrytbls.de
+f ./usemcfi.def ./rbmintrvl.def ./eqcolor.def ./template.def ./eqfr.def ./eqde.
+def ./eqno.def ./eqnl.def ./eqes.def ./eqit.def ./eqru.def ./eqda.def ./eqpo.de
+f ./eqfin.def ./eqcat.def ./eqcz.def ./eqbr.def ./eqtr.def 
+\openout0 = `./exerquiz.sty'.
+
+\openout1 = `./aebjs.def'.
+
+\openout2 = `./aebrandom.def'.
+
+\openout3 = `./aebsumrytbls.def'.
+
+\openout4 = `./usemcfi.def'.
+
+\openout5 = `./rbmintrvl.def'.
+
+\openout6 = `./eqcolor.def'.
+
+\openout7 = `./template.def'.
+
+\openout8 = `./eqfr.def'.
+
+\openout9 = `./eqde.def'.
+
+\openout10 = `./eqno.def'.
+
+\openout11 = `./eqnl.def'.
+
+\openout12 = `./eqes.def'.
+
+\openout13 = `./eqit.def'.
+
+\openout14 = `./eqru.def'.
+
+\openout15 = `./eqda.def'.
+
+
+Processing file exerquiz.dtx (copyright,package) -> exerquiz.sty
+                             (copyright,aebjs) -> aebjs.def
+                             (copyright,randomize) -> aebrandom.def
+                             (copyright,sumrytbls) -> aebsumrytbls.def
+                             (copyright,mcfi) -> usemcfi.def
+                             (copyright,rbmIntrvl) -> rbmintrvl.def
+                             (copyright,eqcolor) -> eqcolor.def
+                             (copyright,template) -> template.def
+                             (copyright,eqfr) -> eqfr.def
+                             (copyright,eqde) -> eqde.def
+                             (copyright,eqno) -> eqno.def
+                             (copyright,eqnl) -> eqnl.def
+                             (copyright,eqes) -> eqes.def
+                             (copyright,eqit) -> eqit.def
+                             (copyright,eqru) -> eqru.def
+                             (copyright,eqda) -> eqda.def
+Lines  processed: 15180
+Comments removed: 6637
+Comments  passed: 121
+Codelines passed: 7912
+
+\openout0 = `./eqpo.def'.
+
+\openout1 = `./eqfin.def'.
+
+\openout2 = `./eqcat.def'.
+
+\openout3 = `./eqcz.def'.
+
+\openout4 = `./eqbr.def'.
+
+\openout5 = `./eqtr.def'.
+
+
+Processing file exerquiz.dtx (copyright,eqpo) -> eqpo.def
+                             (copyright,eqfin) -> eqfin.def
+                             (copyright,eqcat) -> eqcat.def
+                             (copyright,eqcz) -> eqcz.def
+                             (copyright,eqbr) -> eqbr.def
+                             (copyright,eqtr) -> eqtr.def
+Lines  processed: 15180
+Comments removed: 6637
+Comments  passed: 121
+Codelines passed: 7912
+
+***************************************************************
+*
+*  To finish the installation you have to copy the files 
+*
+*  *.sty, *.cfg and *.def into a directory searched by TeX
+*
+***************************************************************
+)
+Overall statistics:
+Files  processed: 2
+Lines  processed: 30360
+Comments removed: 13274
+Comments  passed: 242
+Codelines passed: 15824
+ ) ) 
+Here is how much of TeX's memory you used:
+ 518 strings out of 477917
+ 5523 string characters out of 5837449
+ 1849327 words of memory out of 5000000
+ 20735 multiletter control sequences out of 15000+600000
+ 512287 words of font info for 32 fonts, out of 8000000 for 9000
+ 85 hyphenation exceptions out of 8191
+ 17i,0n,15p,216b,291s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+No pages of output.
