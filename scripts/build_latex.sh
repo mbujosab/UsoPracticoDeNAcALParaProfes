@@ -32,10 +32,9 @@ if [[ ! -x "$CONDA_PY" ]]; then
   exit 1
 fi
 
-# 3) Ejecuta PythonTeX 
 pythontex --interpreter "py:${CONDA_PY}" "$BASENAME"
 
-# 4) Completa compilación (referencias, TOC, etc.)
+# 3) Completa compilación (referencias, TOC, etc.)
 latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
 
 echo "OK: generado $(basename "$BASENAME" .tex).pdf en $WORKDIR"
