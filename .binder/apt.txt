@@ -6,6 +6,7 @@ texlive-pictures
 texlive-lang-spanish
 texlive-plain-generic
 texlive-fonts-extra
+texlive-extra-utils
 latexmk
 perl
 ghostscript
