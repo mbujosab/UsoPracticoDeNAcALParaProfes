@@ -73,6 +73,7 @@ latexmk
 perl
 ghostscript
 gnuplot
+python3-pygments
 #+END_SRC
 
 Notas:
@@ -191,8 +192,7 @@ pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
 
 # 2) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
 if command -v pythontex >/dev/null 2>&1; then
-  #pythontex "$BASENAME"
-  pythontex --interpreter python:python3 "$BASENAME"
+  pythontex --interpreter python:/srv/conda/bin/python "$BASENAME"
 elif command -v pythontex3 >/dev/null 2>&1; then
   pythontex3 "$BASENAME"
 else
@@ -215,6 +215,40 @@ Ventajas:
 - Si PythonTeX no está, falla con mensaje claro.
 - latexmk se encarga de pasadas adicionales.
 
+#+BEGIN_SRC bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "Uso: $0 tex/main.tex"
+  exit 2
+fi
+
+TEXFILE="$1"
+WORKDIR="$(cd "$(dirname "$TEXFILE")" && pwd)"
+BASENAME="$(basename "$TEXFILE")"
+
+cd "$WORKDIR"
+
+export TEXINPUTS=".:./acrotex:./nacal:${TEXINPUTS:-}:"
+export BIBINPUTS=".:./referencias:${BIBINPUTS:-}:"
+export BSTINPUTS=".:./referencias:${BSTINPUTS:-}:"
+
+pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
+
+if command -v pythontex >/dev/null 2>&1; then
+  pythontex --interpreter python:/srv/conda/bin/python "$BASENAME"
+elif command -v pythontex3 >/dev/null 2>&1; then
+  pythontex3 "$BASENAME"
+else
+  echo "No encuentro 'pythontex' ni 'pythontex3' en PATH."
+  exit 1
+fi
+
+latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
+
+echo "OK: generado $(basename "$BASENAME" .tex).pdf en $WORKDIR"
+#+END_SRC
 
 ** Uso en Binder (bajo demanda)
 

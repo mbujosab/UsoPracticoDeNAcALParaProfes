@@ -11,3 +11,4 @@ latexmk
 perl
 ghostscript
 gnuplot
+python3-pygments

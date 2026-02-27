@@ -25,8 +25,7 @@ pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
 
 # 2) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
 if command -v pythontex >/dev/null 2>&1; then
-  #pythontex "$BASENAME"
-  pythontex --interpreter python:python3 "$BASENAME"
+  pythontex --interpreter python:/srv/conda/bin/python "$BASENAME"
 elif command -v pythontex3 >/dev/null 2>&1; then
   pythontex3 "$BASENAME"
 else
