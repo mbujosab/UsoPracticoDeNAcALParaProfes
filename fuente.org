@@ -62,6 +62,7 @@ texlive-latex-recommended
 texlive-science
 texlive-pictures
 texlive-lang-spanish
+texlive-publishers
 latexmk
 perl
 ghostscript

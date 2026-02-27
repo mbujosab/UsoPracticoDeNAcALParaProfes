@@ -24,7 +24,7 @@ demanda* en un entorno *MyBinder/JupyterLab*, incluyendo:
 https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD
 #+end_example
 
-[[https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD][Enlace al repositorio en  MyBinder]]
+[[https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD][file:https://mybinder.org/badge_logo.svg]] 
 
 2. [@2] Espera a que cargue JupyterLab.
 3. Abre *Terminal* (en JupyterLab: =/File → New → Terminal/=).
