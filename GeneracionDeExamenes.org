@@ -1,0 +1,726 @@
+#+TITLE: Exámenes de Matemáticas II
+# +SUBTITLE: (subtitulo)
+#+LANGUAGE: es
+#+AUTHOR: Marcos Bujosa
+#+OPTIONS: author:nil 
+#+STARTUP: show3levels   
+
+
+* Preámbulo y cabeceras del los exámenes en $\LaTeX{}$
+** Descripción del preámbulo para los ficheros de $\LaTeX{}$
+  :PROPERTIES:
+  :header-args: :tangle tex/aux/PreambuloParaExamenes.tex
+  :END:
+
+*** Primeros paquetes de estilo
+
+#+BEGIN_SRC latex :exports code
+\pagestyle{plain}
+\usepackage[a4paper,hscale=0.77,vscale=0.84,tmargin=2cm,bmargin=2cm]{geometry}
+\usepackage{natbib}
+\usepackage{booktabs}
+\usepackage{paralist}
+\usepackage{multicol}
+
+#+END_SRC
+
+*** Algunos comandos auxiliares y opciones relacionadas con el idioma
+
+#+BEGIN_SRC latex :exports code
+
+\newcommand{\ConRef}{
+  \nocite{Strang:18.06}
+  \bibliography{referencias/referencias}
+  \bibliographystyle{plainnat}
+}
+
+\newcommand{\eng}[2]{{#1}}
+
+\newcommand{\corte}{ 
+  \begin{flushright}
+    \emph{\eng
+      {El examen continúa en la siguiente página}
+      {The exam continues in the next page}}
+      $\rightarrow$
+  \end{flushright}
+  \pagebreak}
+
+\usepackage[spanish]{babel}
+\deactivatetilden
+\decimalpoint 
+\usepackage[spanish]{varioref}
+\renewcommand\shorthandsspanish{}
+
+\usepackage[pdftex,nodirectory,latextoc,spanish]{web}
+#+END_SRC
+
+*** Variantes de los exámenes
+
+#+BEGIN_SRC latex :exports none
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% UNA Y SOLO UNA DE ESTAS TRES LÍNEAS DEBE ESTAR DESCOMENTADA
+%
+% \usepackage[pdftex,forpaper,nohiddensolutions,solutionsafter,spanish]{exerquiz}   % soluciones a continuación de los enunciados
+% \usepackage[pdftex,forpaper,nosolutions,spanish]{exerquiz}                        % sin soluciones (versión de examen para reprografía)
+\usepackage[pdftex,forpaper,spanish]{exerquiz}                                    % soluciones al final del documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% UNA Y SOLO UNA DE ESTAS DOS LÍNEAS DEBE ESTAR DESCOMENTADA
+\newenvironment{procedencia}[1]{\noindent }                                         % se oculta la procedencia del ejercicio
+% \newenvironment{procedencia}[1]{\noindent \emph{#1}}                              % se indica la procedencia si está puesta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#+END_SRC
+
+*** Definición de comandos informativos o de resaltado en el examen
+
+#+BEGIN_SRC latex :exports code
+\newenvironment{pista}{\textbf{Pista:}}{}
+
+\newcommand{\verdaderofalso}{Verdadero o falso
+  (\emph{solo puntuan respuestas correctamente justificadas; una respuesta sin explicación tendrá una calificación de cero puntos}).
+  \smallskip}
+
+
+\newcommand\myquote[2]{%
+  \smallskip
+  
+  \par
+  \hspace{-0.9cm}
+  \begin{minipage}{\textwidth-1.5\parindent\relax}
+    \rule{\textwidth}{.2pt}
+    
+    #1\vspace{-1.2ex} 
+    \rule{\textwidth}{.2pt}
+    \par\vspace{0.5ex}
+  \end{minipage}
+  \par}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Indicador de puntos por pregunta y Contador de puntos totales
+\usepackage{xfp} % Para cálculos con decimales
+
+% Configuración del acumulador global para puntos
+\ExplSyntaxOn
+\fp_new:N \g_puntos_total_fp % Crea un acumulador global para puntos decimales
+
+% Redefinimos el comando \puntos para que haga la cuenta de puntos acumulados
+\NewDocumentCommand{\puntos}{m}{
+  \PTsHook{($\eqPTs^{\text{pts}}$)}\PTs{#1} % Tu comando original
+  \fp_gadd:Nn \g_puntos_total_fp {#1} % Suma los puntos al acumulador global
+}
+
+% Comando para mostrar la suma total de puntos
+\NewDocumentCommand{\totalpuntos}{}{Puntos totales en el examen:\; \fp_use:N \g_puntos_total_fp}
+\ExplSyntaxOff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#+end_src
+
+*** Contador del número de preguntas para el campo de calificación de los quizes
+
+#+BEGIN_SRC latex :exports code
+%%% PARA LA SECCIÓN DE CALIFICACIÓN DE LA CABECERA
+\usepackage{totcount}
+\def\computemycount{}
+\expandafter\ifx\csname computemycount\endcsname\relax
+\usetotcountfile{mycount.aux}
+\newcounter{mycount} % so that increments of this counter don't break
+\else
+\newtotcounter[auxfile=mycount.aux]{mycount}
+\fi
+\regtotcounter{eqexno}
+
+\newcounter{ultimo}
+\newcounter{EjNum}
+\setcounter{EjNum}{1}
+\usepackage{pgffor}
+\newcommand{\contador}[1]{%
+  \def\temp{}%
+  \foreach \i in {1,...,#1}
+    {%
+      \expandafter\gdef\expandafter\temp\expandafter{\temp\noindent\\[5pt]\textbf{\arabic{EjNum}.-} \stepcounter{EjNum}}
+    }%
+  \temp}
+#+end_src
+
+*** Paquetes matemáticos y pythontex
+
+#+BEGIN_SRC latex :exports code
+\usepackage{mathtools}
+\usepackage{systeme}
+
+\usepackage{nacal/nacal}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+\usepackage{tikz-3dplot}
+\usepackage{gnuplot-lua-tikz}
+%\pgfplotsset{compat=1.10}
+\usetikzlibrary{intersections}
+\usetikzlibrary{calc}
+\usepackage{tkz-euclide}
+
+\usepackage[autoprint=false]{pythontex}
+\pythontexcustomc{pyconsole}{from nacal import *}
+\pythontexcustomc{py}{from nacal import *}
+\pythontexcustomc{sympy}{from nacal import *}
+#+END_SRC
+
+*** Cabecera para las preguntas largas y las preguntas cortas de los exámenes finales
+
+#+BEGIN_SRC  latex :exports code
+\newcommand{\PreguntasLargas}{
+  \setcounter{eqexno}{0}
+  \renewcommand\exlabel{Ejercicio}
+}
+
+\newcommand{\PreguntasCortas}{
+  \vspace{.5cm}
+  
+  Conteste a TODOS los apartados de TODOS los \framebox{\textsl{CONJUNTOS DE PREGUNTAS CORTAS}}
+
+  \setcounter{eqexno}{0}
+  \renewcommand\exlabel{Conjunto de preguntas}
+  \vspace{.5cm}
+}
+#+END_SRC
+
+#+begin_src latex :exports code
+\endinput
+#+end_src
+
+
+** Cabecera que uso en los exámenes intermedios (Quizs)
+  :PROPERTIES:
+  :header-args: :tangle tex/aux/InstruccionesQuiz.tex
+  :END:
+
+*** Espacio en la cabecera para poner el nombre y para calificar cada pregunta
+
+#+begin_src latex :exports code
+\thispagestyle{empty}
+
+\setlength{\unitlength}{1cm}
+\begin{picture}(15,2.5)(0,-1.5)
+  % Campo para el nombre
+  \put(0,0.3){\makebox(0,0)[l]{\textsc{Nombre:}
+      \underline{\hspace{11.7cm}}}}
+
+  % Sección de calificación
+  \put(13.5,0){\makebox(0,0)[l]{
+    \begin{tabular}{l}
+    \textbf{Calificación}
+      \contador{\totvalue{eqexno}}\\
+      \rule{3cm}{1pt}
+    \end{tabular}}}
+\end{picture}
+
+#+end_src
+
+*** Instrucciones
+
+#+BEGIN_SRC latex :exports code
+\vspace{-1.5cm}
+\begin{compactitem}
+\item {Puede emplear papel adicional para realizar cálculos o ensayar sus respuestas; pero}%
+  $\ldots{}$
+\item {\textbf{Ponga su nombre en todas las hojas que emplee}}.
+\item {Para puntuar, muestre sus cálculos y explique sus respuestas con claridad}.
+\item {\textbf{Conteste exactamente lo que se le pregunta}}.
+\item {Perderá puntos si añade afirmaciones falsas a un argumento correcto}.
+\item {\textbf{Prohibidos} dispositivos electrónicos, calculadoras, libros o notas de cualquier clase}.
+\end{compactitem}
+\underline{\hspace{14.1cm}}
+\endinput
+
+#+END_SRC
+
+
+** Cabecera que usamos en los exámenes finales
+  :PROPERTIES:
+  :header-args: :tangle tex/aux/InstruccionesExamenFinal.tex
+  :END:
+
+*** Espacio para poner el nombre y el grupo
+
+#+begin_src latex :exports code
+\begin{center}
+  {Examen final}. \fechaExamen
+\end{center}
+\smallskip
+
+{Nombre}: \underline{\qquad\hspace{10cm} \qquad} {Grupo}: \hrulefill
+\vspace{.5cm}
+
+{Nombre del profesor}: \hrulefill
+#+end_src
+
+*** Instrucciones
+
+#+BEGIN_SRC latex :exports code
+\begin{compactitem}
+\item {Ponga su nombre en todas las hojas que emplee}.
+\item {Resuelva \textbf{SOLO DOS} de los tres \textsl{EJERCICIOS LARGOS} y \textbf{TODAS} las \textsl{PREGUNTAS CORTAS}}
+\item {Cada ejercicio largo vale 2.5 puntos. Cada apartado de las preguntas cortas 0.5 puntos}.
+\item {\textbf{Conteste exactamente lo que se le pregunta}}.
+\item {Muestre sus cálculos y explique sus respuestas con claridad}.
+\item {\textbf{Prohibidos} dispositivos electrónicos, calculadoras, libros o notas de cualquier clase}.
+\item {Tiempo total: 2 horas}.
+\end{compactitem}
+\hrulefill
+
+#+END_SRC
+
+#+begin_src latex :exports code
+\endinput
+#+end_src
+
+
+#+latex: \newpage
+
+
+* Examen de ejemplo
+** Fichero principal
+  :PROPERTIES:
+  :header-args: :tangle tex/Quiz1-2025-C.tex
+  :END:
+
+#+BEGIN_SRC latex :exports code
+\documentclass[a4paper]{article}
+
+\input{aux/PreambuloParaExamenes.tex}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+  {Examen intermedio 1 (\large\textbf{Grupo C}). 3 de marzo, 2025}
+\end{center}
+
+\input{aux/InstruccionesQuiz.tex}
+
+\input{preguntas/2025-intermedio1-C.tex}
+
+% \ConRef     % descomentar si se quiere mostrar la referencia a los exámenes del MIT
+\end{document}
+#+END_SRC
+
+
+** Preguntas
+  :PROPERTIES:
+  :header-args: :tangle tex/preguntas/2025-intermedio1-C.tex
+  :END:
+
+*** Pregunta 1
+
+#+begin_src latex :exports code
+\begin{exercise}*
+  
+  \begin{pycode}[2024-Quiz1-GrupoC-6]
+A=Matrix([[1,2,3],[4,5,6],[7,8,9]]) & T((-1,1,3))
+  \end{pycode}
+  
+  Suppose
+  \begin{math}
+    \Mat{A}= \py[2024-Quiz1-GrupoC-6]{latex(A)}
+  \end{math}
+  
+  \begin{parts}
+    
+  \item \puntos{1} Encuentre una combinación lineal de las columnas de \Mat{A} que sea \Vect{0}.
+    \begin{solution}[]
+      Una posible respuesta es
+      \begin{math}
+        \;\Mat{A}\py[2024-Quiz1-GrupoC-6]{latex( (I(A.n) & T(Homogenea(A).pasos[1]))|0 )}=\Vect{0};\;
+      \end{math}
+      puesto que
+      \begin{displaymath}
+        \py[2024-Quiz1-GrupoC-6]{Homogenea(A).tex}
+      \end{displaymath}
+    \end{solution}
+    
+  \item \puntos{1} Explique por qué para cualquier matriz \Mat{B} de orden
+    \begin{math}
+      \py[2024-Quiz1-GrupoC-6]{A.n}\times\py[2024-Quiz1-GrupoC-6]{A.n},
+    \end{math}
+    el producto \Mat{AB} no tiene inversa.
+    \begin{solution}[]
+      Como las columnas de \Mat{A}
+      (de orden $\py[2024-Quiz1-GrupoC-6]{A.n}\times\py[2024-Quiz1-GrupoC-6]{A.n}$)
+      son linealmente independientes,
+      generan un subespacio de dimensión menor que $\py[2024-Quiz1-GrupoC-6]{A.n}$.
+      Y como las columnas de \Mat{AB} son combinaciones lineales de las de \Mat{A},
+      también generan un subespacio de dimensión menor que $\py[2024-Quiz1-GrupoC-6]{A.n}$.
+      Por tanto, \Matdim{AB}{\py[2024-Quiz1-GrupoC-6]{A.n}}{\py[2024-Quiz1-GrupoC-6]{A.n}} es singular.
+      
+      Alternativamente, como \Mat{A} es singular, existe un $\Vect{x}\ne\Vect{0}$ tal que \SELF{x}{A}{0}. Si \Mat{AB} fuera invertible, ello implicaría
+      \begin{math}
+        \Vect{x} = \VM{x}{AB}\InvMatp*{AB} =
+        \Vect{0}\Mat{B}\InvMatp*{AB} = \Vect{0},
+      \end{math}
+      que contradice que $\Vect{x}\ne\Vect{0}$.
+    \end{solution}
+  \end{parts}
+  \procedencia{MIT Course 18.06\quad Exam 1, Spring, 2021}
+\end{exercise}
+#+end_src
+
+*** Pregunta 2
+
+Ejercicio 2 del Quiz 1 del Grupo E curso 14/15
+
+#+BEGIN_SRC latex :exports code
+\begin{exercise}
+  \puntos{0.5}
+  Escriba un ejemplo de matriz de orden $5\times4$ con rango 3.
+  \begin{solution}[]
+    El ejemplo más sencillo es\;
+    \begin{math}
+      \footnotesize
+      \begin{bmatrix}
+        1&0&0&0\\
+        0&1&0&0\\
+        0&0&1&0\\
+        0&0&0&0\\
+        0&0&0&0\\
+      \end{bmatrix}
+    \end{math}
+  \end{solution}
+\end{exercise}
+#+END_SRC
+
+*** Pregunta 3
+  
+#+begin_src latex :exports code
+\begin{exercise}*
+  
+  \begin{pycode}[2025-Quiz1-GrupoH-1]
+A = Matrix([
+[ 1,  1,  1],
+[ 1,  2,  3],
+[ 1,  3,  5]])
+
+B = A.span().cart  
+
+from sympy import symbols
+
+n = 3
+b = Vector(symbols(f'b_1:{n+1}'))
+condicion = -1 * A.amplia(-b) & T(SEL(A,b).pasos[1])|0|0
+
+a = Vector([1,-2, 1])
+c = Vector([2, 0,-2])
+d = Vector([0,2,4,8])
+e = Vector([1,-1,1,-1])
+A_ampliada = A.amplia(c,1).amplia(a,1)
+pasos_ampliada = A_ampliada.elim().pasos
+  \end{pycode}
+  
+  Considere la matriz\;
+  $\Mat{A}= \py[2025-Quiz1-GrupoH-1]{latex(A)}$
+  
+  \begin{parts}
+  \item  \puntos{0.5}
+    ¿Cuál es el rango de \Mat{A}?
+    
+    \begin{solution}[]
+      Aplicando la eliminación vemos que
+      $\rango{\Mat{A}}= \py[2025-Quiz1-GrupoH-1]{A.rango()}$\;
+      {\small(emplear la matriz $[\Mat{A}|-\Vect{b}]$ nos ayudará a responder también al apartado b.)}
+      \begin{displaymath}
+        \footnotesize
+        \py[2025-Quiz1-GrupoH-1]{Elim(A.amplia(-b,1)).tex}
+      \end{displaymath}
+    \end{solution}
+    
+  \item  \puntos{1} 
+    Encuentre una matriz \Mat{B} tal que el espacio columna \cols{A} sea igual al espacio nulo \nulls{B}.
+    
+    \begin{solution}[]
+      \eng
+      De la última fila tras la reducción de $-\Vect{b}$ por eliminción,
+      podemos ver que la condición para que un vector pertenezca al espacio columna de \Mat{A} es \;$\py[2025-Quiz1-GrupoH-1]{latex(condicion)}=0$.\;
+      Así, para \;\fbox{$\Mat{B}=\py[2025-Quiz1-GrupoH-1]{latex(B)}$}\; tenemos
+      \begin{displaymath}
+        \cols{B}=
+        \left\{
+          \Vect{b}\in\R[3]
+          \mid
+          \py[2025-Quiz1-GrupoH-1]{latex(condicion)}=0 
+        \right\}
+        =
+        \left\{
+          \Vect{X}\in\R[3]
+          \, \Big| \,
+          \py[2025-Quiz1-GrupoH-1]{latex(B)}\Vect{x}=\Vect{0}
+        \right\}
+        =
+        \nulls{B}.
+      \end{displaymath}
+    \end{solution}
+    
+  \item  \puntos{1}
+    ¿Cuáles de los siguientes vectores pertennecen al espacio columna \cols{A}:
+    \begin{displaymath}
+      \py[2025-Quiz1-GrupoH-1]{latex(a)},\quad
+      \py[2025-Quiz1-GrupoH-1]{latex(c)},\quad
+      \py[2025-Quiz1-GrupoH-1]{latex(d)},\quad
+      \py[2025-Quiz1-GrupoH-1]{latex(e)}\,?
+    \end{displaymath}
+    
+    \begin{solution}[]
+      \eng
+      Los dos últimos vectores no pertenecen al espacio columna, pues son de \R[4].
+      De la condición obtenida en la parte (b), tenemos que
+      \begin{math}
+        \py[2025-Quiz1-GrupoH-1]{latex(Vector(c,'h'))}
+      \end{math}
+      pertenece a \cols{A}, pues
+      \begin{math}
+        \Mat{B}
+        \py[2025-Quiz1-GrupoH-1]{latex(Vector(c,'h'))}=
+        \py[2025-Quiz1-GrupoH-1]{latex(B*c)}
+      \end{math}
+      pero
+      \begin{math}
+        \py[2025-Quiz1-GrupoH-1]{latex(Vector(a,'h'))}
+      \end{math}
+      no pertence puesto que.
+      \begin{math}
+        \Mat{B}
+        \py[2025-Quiz1-GrupoH-1]{latex(Vector(a,'h'))}=
+        \py[2025-Quiz1-GrupoH-1]{latex(B*a)}.
+      \end{math}
+      Otra forma de verlo es por eliminación:
+      \begin{displaymath}
+        \py[2025-Quiz1-GrupoH-1]{rprElim(A_ampliada, pasos_ampliada)}
+      \end{displaymath}
+    \end{solution}
+  \end{parts}
+  \procedencia{MIT Course 18.06\quad Quiz 1, March 5, 2007}
+\end{exercise}
+#+end_src
+
+*** Pregunta 4
+
+Versión de la pregunta 1 del Quiz 1 del Grupo H curso 11/12
+# pasos = T([(-1, 1, 2), (-2, 1, 3), ( 1, 3, 2), (-2, 2, 1)], rpr='h')
+
+#+BEGIN_SRC latex :exports code
+\begin{exercise}*
+  
+  \begin{pycode}[2025-Quiz1-GrupoH-2]
+pasos = T([(-2,1,3), (1,3,2), (-1,3)], rpr='h')
+E = I(3) & pasos
+  \end{pycode}
+  
+  Sea \Matdim{A}{3}{3} tal que:
+  \begin{math}
+    \TrC[\py[2025-Quiz1-GrupoH-2]{latex(pasos)}]{\Mat{A}}=\Mat{I}.
+  \end{math}
+  
+  \begin{parts}
+  \item \puntos{1}
+    Encuentre \InvMat{A}.
+    
+    \begin{solution}[]
+      Las cuatro operaciones elementales por columnas en el proceso de eliminación Gauss-Jordan son\;
+      \begin{math}
+        \Mat{A}
+        \TrCPE[\py[2025-Quiz1-GrupoH-2]{latex(pasos)}]{\Mat{I}}
+        =\Mat{I};\,
+      \end{math}
+      es decir
+      \begin{displaymath}
+        \small
+        \Mat{A}
+        \py[2025-Quiz1-GrupoH-2]{latex(I(3) & pasos[0])}
+        \py[2025-Quiz1-GrupoH-2]{latex(I(3) & pasos[1])}
+        \py[2025-Quiz1-GrupoH-2]{latex(I(3) & pasos[2])}
+        =
+        \Mat{A}
+        \py[2025-Quiz1-GrupoH-2]{latex(I(3) & pasos[0] & pasos[1])}
+        \py[2025-Quiz1-GrupoH-2]{latex(I(3) & pasos[2])}
+        =
+        \Mat{A}
+        \underbrace{\py[2025-Quiz1-GrupoH-2]{latex(E)}}_{\text{\InvMat{A}}}
+        =\Mat{I}.
+      \end{displaymath}
+    \end{solution}
+
+  \item \puntos{1}
+    Encuentre \Mat{A}?
+    
+    \begin{solution}[]
+      Aplicando sobre \Mat{I} la secuencia inversa de operaciones elementales
+      (operaciones inversas en el orden inverso)
+      podemos calcular la inversa de la matriz \InvMat{A} para obtener \Mat{A}:
+      \begin{displaymath}
+        \begin{bmatrix}
+          \InvMat{A}\\\hline\Mat{I}
+        \end{bmatrix}
+        =
+        \py[2025-Quiz1-GrupoH-2]{latex(E.apila(I(3),1))}
+        \xrightarrow{\py[2025-Quiz1-GrupoH-2]{latex(T(pasos)**(-1))}}
+        \py[2025-Quiz1-GrupoH-2]{latex(E.apila(I(3),1) & T(pasos**(-1)))}
+        =
+        \begin{bmatrix}
+          \Mat{I}
+          \\\hline
+          \Mat{A}
+        \end{bmatrix},
+      \end{displaymath}
+      O,también, calculando el siguiente producto:
+      \begin{math}
+        \;
+        \TrCpE[\py[2025-Quiz1-GrupoH-2]{latex((pasos**-1)[0])}]{\Mat{I}}
+        \TrCpE[\py[2025-Quiz1-GrupoH-2]{latex((pasos**-1)[1])}]{\Mat{I}}
+        \TrCpE[\py[2025-Quiz1-GrupoH-2]{latex((pasos**-1)[2])}]{\Mat{I}}
+        =\Mat{A};
+      \end{math}
+    \end{solution}
+  \end{parts}
+  \procedencia{Basado en MIT Course 18.06\quad Quiz 1, March 10, 1995}
+\end{exercise}
+#+END_SRC
+
+*** Pregunta 5
+
+Versión de la pregunta 1 del Quiz 1 del Grupo H curso 11/12. 
+
+#+BEGIN_SRC latex :exports code
+\begin{exercise}*
+  
+  \begin{pycode}[2025-Quiz1-GrupoH-3]
+L = ~Matrix([[1,2,2,1],[0,0,-4,-2],[0,0,0,0]])
+U = Matrix([[1,0,3],[0,1,1],[0,0,1]])
+A = L*U
+c = sympy.symbols('c')
+b = Vector([1,2,6,c])
+eli = SEL(A,b,1)
+sol = SEL(A,b,1,sust=[(c,3)])
+  \end{pycode}
+  
+   Suponga que la matriz \Mat{A} es el siguiente producto de matrices: 
+   \begin{displaymath}
+     \Mat{A} = \MN{L}{U}=
+     \py[2025-Quiz1-GrupoH-3]{latex(L)}
+     \py[2025-Quiz1-GrupoH-3]{latex(U)};
+     \quad
+     \Parentesis{
+       \text{\eng{así que}{so} }
+       \Mat{A}\InvMatpE*{U}=\Mat{L}}.
+   \end{displaymath}
+ 
+   \begin{parts}
+   \item \puntos{1}
+     Obtenga una base del espacio fila de \Mat{A} y una base del espacio columna de \Mat{A}.
+     
+     \begin{solution}[]
+       Como\;
+       \begin{math}
+         \Mat{A}=\Mat{L}\Mat{U}=
+         \py[2025-Quiz1-GrupoH-3]{latex(L)}
+         \py[2025-Quiz1-GrupoH-3]{latex(U)}
+         =
+         \py[2025-Quiz1-GrupoH-3]{latex(A)},\;
+       \end{math}
+       y como \Mat{L} tiene su primer pivote en la primera fila y el segundo pivote en la tercera fila; entonces
+       \begin{displaymath}
+         \text{\eng{Una base de}{A basis for} \cols{A}}:\;
+         \py[2025-Quiz1-GrupoH-3]{latex((L|(1,2,)).sis())}.
+         \qquad
+         \text{\eng{Una base de}{A basis for} \cols{\MatT{A}}}:\;
+         \py[2025-Quiz1-GrupoH-3]{latex(SubEspacio((~A).sis()).base)}.
+       \end{displaymath}
+     \end{solution}
+     
+   \item \puntos{1} 
+     Describa explícitamente todas las soluciones del sistema \SEL{A}{x}{0}.
+     
+     \begin{solution}[]
+       Como $\VectC{L}{3}=\elemR{\Mat{A}\InvMatpE*{U}}{3}$ es la única columna nula,\; $\big[\elemR{\InvMatpE*{U}}{3};\big]$ es una base de \nulls{A}.
+       Como
+       \begin{displaymath}
+         \Mat{U}\InvMatpE*{U}=
+         \py[2025-Quiz1-GrupoH-3]{latex(U)}
+         \py[2025-Quiz1-GrupoH-3]{latex(InvMat(U))}
+         =\Mat{I};
+         \quad
+         \text{\eng{entonces}{then}}
+         \elemR{\InvMatpE*{U}}{3}=\py[2025-Quiz1-GrupoH-3]{latex(InvMat(U)|3)}.
+       \end{displaymath}
+       Así pues, el conjunto de soluciones del sistema \SEL{A}{x}{0} es\;
+       \begin{math}
+         \nulls{A}=
+         \py[2025-Quiz1-GrupoH-3]{SubEspacio(A).EcParametricas()}.
+       \end{math}
+     \end{solution}
+     
+   \item 
+     \puntos{1}
+     Resuelva (si es posible, y dependiendo de $c$) el sistema
+     \begin{math}
+       \MV{A}{x}=\py[2025-Quiz1-GrupoH-3]{latex(Vector(b,'h'))}.
+     \end{math}
+     
+     \begin{solution}[]
+       $\py[2025-Quiz1-GrupoH-3]{eli.tex}$
+       \medskip
+       
+       Si $c\neq3$ el sistema no tiene solución. 
+       Cuando $c=3$ la solución completa es:
+       \begin{displaymath}
+         \py[2025-Quiz1-GrupoH-3]{latex(sol)}
+       \end{displaymath}
+     \end{solution}
+     
+   \end{parts}
+   \procedencia{Basado en MIT Course 18.06\quad Quiz 1, March 10, 1995}
+\end{exercise}
+#+END_SRC
+
+
+* Referencias
+
+#+BEGIN_SRC latex :tangle tex/referencias/referencias.bib
+@book{Lang:ILA-86,
+  author = {Lang, S.},
+  title = {Introduction to Linear Algebra},
+  publisher = {Springer-Verlag},
+  edition = {second},
+  year = {1986},
+}
+
+@misc{Strang:18.06,
+  author       = {{Massachusetts Institute of Technology}},
+  title        = {18.06 Linear Algebra: Exams},
+  year         = {2010},
+  howpublished = {MIT OpenCourseWare},
+  url          = {https://web.mit.edu/18.06/www/old.shtml},
+  note         = {Collection of midterm and final exams}
+}
+
+@book{Strang:ILA-03,
+  author = {Strang, G.},
+  title = {Introduction to Linear Algebra},
+  publisher = {Wellesley-Cambridge Press},
+  address = {Wellesley, Massachusetts, USA},
+  edition = {third},
+  year = {2003},
+  isbn = {0-9614088-9-8},
+}
+
+@book{Strang:LAA-06,
+  author = {Strang, G.},
+  title = {Linear Algebra and Its Applications},
+  publisher = {Thomson Learning, Inc.},
+  edition = {fourth},
+  year = {2006},
+  isbn = {0-03-010567-6},
+}
+#+END_SRC
+

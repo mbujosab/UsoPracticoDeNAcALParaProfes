@@ -1,0 +1,144 @@
+\pagestyle{plain}
+\usepackage[a4paper,hscale=0.77,vscale=0.84,tmargin=2cm,bmargin=2cm]{geometry}
+\usepackage{natbib}
+\usepackage{booktabs}
+\usepackage{paralist}
+\usepackage{multicol}
+
+\newcommand{\ConRef}{
+  \nocite{Strang:18.06}
+  \bibliography{referencias/referencias}
+  \bibliographystyle{plainnat}
+}
+
+\newcommand{\eng}[2]{{#1}}
+
+\newcommand{\corte}{ 
+  \begin{flushright}
+    \emph{\eng
+      {El examen continúa en la siguiente página}
+      {The exam continues in the next page}}
+      $\rightarrow$
+  \end{flushright}
+  \pagebreak}
+
+\usepackage[spanish]{babel}
+\deactivatetilden
+\decimalpoint 
+\usepackage[spanish]{varioref}
+\renewcommand\shorthandsspanish{}
+
+\usepackage[pdftex,nodirectory,latextoc,spanish]{web}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% UNA Y SOLO UNA DE ESTAS TRES LÍNEAS DEBE ESTAR DESCOMENTADA
+%
+% \usepackage[pdftex,forpaper,nohiddensolutions,solutionsafter,spanish]{exerquiz}   % soluciones a continuación de los enunciados
+% \usepackage[pdftex,forpaper,nosolutions,spanish]{exerquiz}                        % sin soluciones (versión de examen para reprografía)
+\usepackage[pdftex,forpaper,spanish]{exerquiz}                                    % soluciones al final del documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% UNA Y SOLO UNA DE ESTAS DOS LÍNEAS DEBE ESTAR DESCOMENTADA
+\newenvironment{procedencia}[1]{\noindent }                                         % se oculta la procedencia del ejercicio
+% \newenvironment{procedencia}[1]{\noindent \emph{#1}}                              % se indica la procedencia si está puesta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{pista}{\textbf{Pista:}}{}
+
+\newcommand{\verdaderofalso}{Verdadero o falso
+  (\emph{solo puntuan respuestas correctamente justificadas; una respuesta sin explicación tendrá una calificación de cero puntos}).
+  \smallskip}
+
+
+\newcommand\myquote[2]{%
+  \smallskip
+  
+  \par
+  \hspace{-0.9cm}
+  \begin{minipage}{\textwidth-1.5\parindent\relax}
+    \rule{\textwidth}{.2pt}
+    
+    #1\vspace{-1.2ex} 
+    \rule{\textwidth}{.2pt}
+    \par\vspace{0.5ex}
+  \end{minipage}
+  \par}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Indicador de puntos por pregunta y Contador de puntos totales
+\usepackage{xfp} % Para cálculos con decimales
+
+% Configuración del acumulador global para puntos
+\ExplSyntaxOn
+\fp_new:N \g_puntos_total_fp % Crea un acumulador global para puntos decimales
+
+% Redefinimos el comando \puntos para que haga la cuenta de puntos acumulados
+\NewDocumentCommand{\puntos}{m}{
+  \PTsHook{($\eqPTs^{\text{pts}}$)}\PTs{#1} % Tu comando original
+  \fp_gadd:Nn \g_puntos_total_fp {#1} % Suma los puntos al acumulador global
+}
+
+% Comando para mostrar la suma total de puntos
+\NewDocumentCommand{\totalpuntos}{}{Puntos totales en el examen:\; \fp_use:N \g_puntos_total_fp}
+\ExplSyntaxOff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% PARA LA SECCIÓN DE CALIFICACIÓN DE LA CABECERA
+\usepackage{totcount}
+\def\computemycount{}
+\expandafter\ifx\csname computemycount\endcsname\relax
+\usetotcountfile{mycount.aux}
+\newcounter{mycount} % so that increments of this counter don't break
+\else
+\newtotcounter[auxfile=mycount.aux]{mycount}
+\fi
+\regtotcounter{eqexno}
+
+\newcounter{ultimo}
+\newcounter{EjNum}
+\setcounter{EjNum}{1}
+\usepackage{pgffor}
+\newcommand{\contador}[1]{%
+  \def\temp{}%
+  \foreach \i in {1,...,#1}
+    {%
+      \expandafter\gdef\expandafter\temp\expandafter{\temp\noindent\\[5pt]\textbf{\arabic{EjNum}.-} \stepcounter{EjNum}}
+    }%
+  \temp}
+
+\usepackage{mathtools}
+\usepackage{systeme}
+
+\usepackage{nacal/nacal}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+\usepackage{tikz-3dplot}
+\usepackage{gnuplot-lua-tikz}
+%\pgfplotsset{compat=1.10}
+\usetikzlibrary{intersections}
+\usetikzlibrary{calc}
+\usepackage{tkz-euclide}
+
+\usepackage[autoprint=false]{pythontex}
+\pythontexcustomc{pyconsole}{from nacal import *}
+\pythontexcustomc{py}{from nacal import *}
+\pythontexcustomc{sympy}{from nacal import *}
+
+\newcommand{\PreguntasLargas}{
+  \setcounter{eqexno}{0}
+  \renewcommand\exlabel{Ejercicio}
+}
+
+\newcommand{\PreguntasCortas}{
+  \vspace{.5cm}
+  
+  Conteste a TODOS los apartados de TODOS los \framebox{\textsl{CONJUNTOS DE PREGUNTAS CORTAS}}
+
+  \setcounter{eqexno}{0}
+  \renewcommand\exlabel{Conjunto de preguntas}
+  \vspace{.5cm}
+}
+
+\endinput

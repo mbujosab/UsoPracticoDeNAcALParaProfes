@@ -1,0 +1,104 @@
+#+TITLE: LaTeX + PythonTeX + Exerquiz + nacal en MyBinder
+# +SUBTITLE: (subtitulo)
+#+LANGUAGE: es
+#+AUTHOR: Marcos Bujosa
+#+OPTIONS: author:nil 
+#+STARTUP: show3levels   
+
+#+EXPORT_FILE_NAME: index
+
+Este repositorio está pensado para compilar *documentos LaTeX bajo
+demanda* en un entorno *MyBinder/JupyterLab*, incluyendo:
+
+- *PythonTeX*: ejecutar código Python desde LaTeX y reintegrar los resultados en el PDF.
+- *AcroTeX / exerquiz*: escritura de ejercicios y (opcionalmente) *soluciones agrupadas al final*.
+- *nacal.sty*: [[https://github.com/mbujosab/nacal-latex-package][paquete con la notación del curso]] (colocado en =tex/nacal/nacal.sty=), que a su vez usa paquetes como =amsmath=, =amssymb=, =esvect=, =leftidx=, =pict2e=, =stackengine=, =xparse=, =xspace=.
+
+* Abrir en Binder
+   :PROPERTIES:
+   :CUSTOM_ID: abrir-en-binder
+   :END:
+1. Pulsa el badge de Binder (rellena =<OWNER>= y =<REPO>= con tu repo):
+
+#+begin_example
+https://mybinder.org/v2/gh/<OWNER>/<REPO>/HEAD
+#+end_example
+
+2. [@2] Espera a que cargue JupyterLab.
+3. Abre *Terminal* (en JupyterLab: =/File → New → Terminal/=).
+
+* Compilar bajo demanda
+   :PROPERTIES:
+   :CUSTOM_ID: compilar-bajo-demanda
+   :END:
+Para compilar =tex/Quiz1-2025-C.tex=:
+
+#+begin_src sh
+bash scripts/compila.sh tex/Quiz1-2025-C.tex
+#+end_src
+
+o 
+
+#+begin_src sh
+bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
+#+end_src
+
+El PDF resultante quedará en:
+
+- =tex/Quiz1-2025-C.pdf=
+
+y una copia en el directorio raiz
+
+- =Quiz1-2025-C.pdf=
+
+Puedes abrirlo desde el explorador de archivos de JupyterLab.
+
+* Estructura del repo (resumen)
+   :PROPERTIES:
+   :CUSTOM_ID: estructura-del-repo-resumen
+   :END:
+- =binder/apt.txt=: dependencias del sistema (TeX Live, latexmk, etc.)
+- =binder/environment.yml=: entorno Python (para PythonTeX)
+- =binder/postBuild=: ajustes al construir Binder (permisos, etc.)
+- =scripts/compila.sh=: script de compilación (=pdflatex → pythontex → latexmk=)
+- =scripts/build_latex.sh=: script de compilación (=pdflatex → pythontex → latexmk=)
+- =tex/nacal/nacal.sty=: tu paquete con la notación del curso
+- =tex/aux/PreambuloParaExamenes.tex=: preámbulo $\LaTeX{}$ para los examenes
+- =tex/aux/InstruccionesQuiz.tex=: bloque de código $\LaTeX{}$ con las instrucciones de los quizes
+- =tex/aux/InstruccionesExamenFinal.tex=: bloque de código $\LaTeX{}$ con las instrucciones de los exámenes finales
+- =tex/Quiz1-2025-C.tex=: documento principal de ejemplo
+- =tex/preguntas/2025-intermedio1-C.tex=: preguntas usadas en el documento de ejemplo
+
+* Notas sobre PythonTeX
+   :PROPERTIES:
+   :CUSTOM_ID: notas-sobre-pythontex
+   :END:
+El flujo habitual requiere varias pasadas:
+
+1. =pdflatex= genera auxiliares y los ficheros de trabajo de pythontex
+2. =pythontex= ejecuta el código Python y produce resultados intermedios
+3. =latexmk= remata pasadas para referencias/TOC y deja el PDF final
+
+El script =scripts/compila.sh= implementa ese flujo. También el script =scripts/build_latex.sh= (sugerido por copilot de GitHub.
+
+Si al ejecutar el script aparece un error del tipo /"No encuentro pythontex"/, revisa el log del terminal y ajusta =binder/apt.txt= (o dime las últimas ~30 líneas del error y te indico el paquete exacto a añadir).
+
+* Exerquiz: soluciones al final (plantilla)
+   :PROPERTIES:
+   :CUSTOM_ID: exerquiz-soluciones-al-final-plantilla
+   :END:
+Si quieres que las soluciones aparezcan al final del documento, 
+debes editar =tex/nacal/PreambuloParaExamenes.tex= comentando las opciones que no quieres, y descomentando la única opción que quieres
+
+#+begin_src latex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% UNA Y SOLO UNA DE ESTAS TRES LÍNEAS DEBE ESTAR DESCOMENTADA
+%
+% \usepackage[pdftex,forpaper,nohiddensolutions,solutionsafter,spanish]{exerquiz}   % soluciones a continuación de los enunciados
+% \usepackage[pdftex,forpaper,nosolutions,spanish]{exerquiz}                        % sin soluciones (versión de examen para reprografía)
+\usepackage[pdftex,forpaper,spanish]{exerquiz}                                    % soluciones al final del documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#+end_src
+
+- [[file:GeneracionDeExamenes.org][Explicación del código de los exámenes]]
+- [[file:fuente.org][Explicaciones sobre el contenido del repositorio]]

@@ -1,0 +1,220 @@
+#+TITLE: Fuente y explicación de algunos ficheros
+# +SUBTITLE: (subtitulo)
+#+LANGUAGE: es
+#+AUTHOR: Marcos Bujosa
+#+OPTIONS: author:nil 
+#+OPTIONS: toc:nil 
+#+STARTUP: show3levels   
+
+Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la opción más estable en Binder es:
+- Compilar con pdfLaTeX (por compatibilidad).
+- Usar latexmk para automatizar pasadas.
+- Insertar PythonTeX como paso intermedio (=pdflatex → pythontex → latexmk=).
+
+* Repositorio
+** Estructura de carpetas
+
+- binder/
+  - apt.txt
+  - environment.yml
+  - postBuild
+- scripts/
+  - build_latex.sh
+  - compila.sh
+- tex/
+  - Quiz1-2025-C.tex
+  - nacal/
+    - nacal.sty (copiado desde [[https://github.com/mbujosab/nacal-latex-package]].  En el .tex. poner \usepackage{nacal/nacal} (ruta relativa).
+  - referencias/
+    - referencias.bib
+  - aux/
+    - PreambuloParaExamenes.tex
+    - InstruccionesQuiz.tex
+    - InstruccionesExamenFinal.tex
+  - preguntas/
+    - 2025-intermedio1-C.tex
+
+#+BEGIN_SRC emacs-lisp :exports none :results silent :tangle no :eval yes
+(unless (file-directory-p ".binder")
+  (make-directory ".binder"))
+(unless (file-directory-p "scripts")
+  (make-directory "scripts"))
+(unless (file-directory-p "tex")
+  (make-directory "tex"))
+(unless (file-directory-p "tex/aux")
+  (make-directory "tex/aux"))
+(unless (file-directory-p "tex/nacal")
+  (make-directory "tex/nacal"))
+(unless (file-directory-p "tex/referencias")
+  (make-directory "tex/referencias"))
+(unless (file-directory-p "tex/preguntas")
+  (make-directory "tex/preguntas"))
+#+END_SRC
+
+** Paquetes del sistema (TeX Live + herramientas)
+
+Fichero =.binder/apt.txt=
+
+#+BEGIN_SRC :tangle .binder/apt.txt
+texlive
+texlive-latex-extra
+texlive-latex-recommended
+texlive-science
+texlive-pictures
+texlive-lang-spanish
+latexmk
+perl
+ghostscript
+gnuplot
+#+END_SRC
+
+Notas:
+
+- texlive-latex-extra suele cubrir xparse, xspace, stackengine, etc.
+- texlive-science ayuda con ecosistema matemático (aunque amsmath/amssymb suele estar ya incluido).
+- texlive-pictures cubre utilidades de dibujo (incluyendo pict2e en muchas instalaciones).
+- perl es importante para latexmk y para partes de pythontex en algunas distros.
+Si luego al compilar te falta algún .sty, se corrige añadiendo el paquete TeX Live adecuado a apt.txt.
+
+** Entorno Python (para PythonTeX)
+
+#+BEGIN_SRC txt :tangle .binder/environment.yml
+name: latex-pythontex
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pygments
+  - sympy
+  - pip:
+      - nacal
+#+END_SRC
+
+pygments suele ser necesario porque PythonTeX puede usarlo para resaltado/formatos.
+
+** postBuild (ajustes tras construir el entorno)
+
+#+BEGIN_SRC txt :tangle .binder/postBuild
+#!/usr/bin/env bash
+set -euxo pipefail
+
+# Permisos de ejecución para scripts
+chmod +x scripts/build_latex.sh
+
+# (Opcional) Mostrar versiones útiles para depurar en el log de build
+latexmk -v || true
+python --version
+#+END_SRC
+
+Con esto Binder deja listo el script para compilar “bajo demanda”.
+
+** Script de compilación bajo demanda (latexmk + pythontex)
+
+Este es mi script
+
+#+BEGIN_SRC bash :tangle scripts/compila.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "Uso: $0 tex/archivo.tex"
+    exit 1
+fi
+
+TEXFILE="$1"
+WORKDIR="$(cd "$(dirname "$TEXFILE")" && pwd)"
+BASENAME="$(basename "$TEXFILE")"
+
+if [[ ! -f "$TEXFILE" ]]; then
+    echo "Error: no existe el fichero '$TEXFILE'"
+    exit 1
+fi
+
+cd "$WORKDIR"
+
+pdflatex -interaction=batchmode "$BASENAME"
+pythontex --interpreter python:python3 "$BASENAME"
+latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
+
+############# esta variante borra casi todos los ficheros auxiliares
+# latexmk -pdf -interaction=nonstopmode -halt-on-error -c "$BASENAME"
+# rm $(basename "$BASENAME" .tex).{qsl,pytxcode,sol}
+# rm $(basename "$BASENAME" .tex)_xdefs.cut
+# rm exerquiz.djs
+cp $(basename "$BASENAME" .tex).pdf ../
+#+END_SRC
+
+Este es el sugerido por copilot de GitHub
+
+#+BEGIN_SRC bash :tangle scripts/build_latex.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "Uso: $0 tex/main.tex"
+  exit 2
+fi
+
+TEXFILE="$1"
+WORKDIR="$(cd "$(dirname "$TEXFILE")" && pwd)"
+BASENAME="$(basename "$TEXFILE")"
+
+cd "$WORKDIR"
+
+# 1) Primera pasada: genera .aux y archivos pythontex
+pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
+
+# 2) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
+if command -v pythontex >/dev/null 2>&1; then
+  #pythontex "$BASENAME"
+  pythontex --interpreter python:python3 "$BASENAME"
+elif command -v pythontex3 >/dev/null 2>&1; then
+  pythontex3 "$BASENAME"
+else
+  # Fallback: intentar localizar el script pythontex3.py (a veces está en TEXMF)
+  # Si esto falla, habrá que ajustar apt.txt para instalar pythontex desde TeX Live o pip.
+  echo "No encuentro 'pythontex' ni 'pythontex3' en PATH."
+  echo "Sugerencia: verifica instalación de pythontex (TeX Live) o añade un paso de instalación."
+  exit 1
+fi
+
+# 3) Completa compilación (referencias, TOC, etc.)
+latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
+
+echo "OK: generado $(basename "$BASENAME" .tex).pdf en $WORKDIR"
+#+END_SRC
+
+Ventajas:
+
+- Muy fácil de entender.
+- Si PythonTeX no está, falla con mensaje claro.
+- latexmk se encarga de pasadas adicionales.
+
+** Uso en Binder (bajo demanda)
+
+En el README poner el enlace a Binder y explicar:
+
+- Abrir Terminal
+- Ejecutar:
+
+#+BEGIN_SRC bash :eval no
+bash scripts/compila.sh tex/Quiz1-2025-C.tex
+#+END_SRC
+
+o bien
+
+#+BEGIN_SRC bash :eval no
+bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
+#+END_SRC
+
+** Si PythonTeX no aparece en PATH (posible ajuste)
+
+Si al compilar sale “No encuentro pythontex”, hay dos soluciones típicas:
+
+- Instalar el paquete TeX Live que lo trae (depende de la distro; a veces viene con colecciones grandes, a veces no).
+- Añadir en postBuild una instalación adicional (por ejemplo vía tlmgr), pero en Binder suele ser menos recomendable por tiempo/fiabilidad.
+
+Si te pasa, dime el error exacto del terminal en Binder (las últimas ~30 líneas) y te digo qué paquete añadir a binder/apt.txt para que aparezca pythontex.
+
+

@@ -1,0 +1,1931 @@
+%%
+%% This is file `nacal.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% nacal.dtx  (with options: `package')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2023 by Marcos Bujosa <mbujosab@ucm.es>
+%% 
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3 of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3 or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+\ProvidesPackage{nacal}
+    [2023/01/05 v1.0
+    [2023/09/22 v1.3 Notacion Asociativa para un Curso de Álgebra Lineal]
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
+\RequirePackage{xspace}
+\RequirePackage{leftidx}
+\RequirePackage{pict2e}
+\RequirePackage{esvect} %\RequirePackage[b]{esvect} %\RequirePackage[e]{esvect}
+%\RequirePackage{stackengine} % para PSpanNew
+\providecommand{\eng}[2]{#1}
+\DeclareOption{esp}{\renewcommand{\eng}[2]{#1}}
+\DeclareOption{eng}{\renewcommand{\eng}[2]{#2}}
+\DeclareOption*{\PackageWarning{nacal}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Conjuntos de números
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\Nn{     }{\ensuremath{ {\mathbb{N}} }\xspace}
+\NewDocumentCommand\Zz{     }{\ensuremath{ {\mathbb{Z}} }\xspace}
+\NewDocumentCommand\Rr{     }{\ensuremath{ {\mathbb{R}} }\xspace}
+\NewDocumentCommand\Cc{     }{\ensuremath{ {\mathbb{C}} }\xspace}
+\NewDocumentCommand\Kk{     }{\ensuremath{ {\mathbb{K}} }\xspace}
+\NewDocumentCommand\N { O{} }{\ensuremath{ {\Nn}^{#1} }\xspace}
+\NewDocumentCommand\Z { O{} }{\ensuremath{ {\Zz}^{#1} }\xspace}
+\NewDocumentCommand\R { O{} }{\ensuremath{ {\Rr}^{#1} }\xspace}
+\NewDocumentCommand\CC{ O{} }{\ensuremath{ {\Cc}^{#1} }\xspace}
+\NewDocumentCommand\K { O{} }{\ensuremath{ {\Kk}^{#1} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Paréntesis y corchetes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\parentesis{sm}{\ensuremath{\IfBooleanTF#1
+       {     ( #2  )    }
+       { \big( #2  \big)}    }\xspace}
+\NewDocumentCommand\Parentesis{sm}{\ensuremath{\IfBooleanTF#1
+       {\left( #2 \right)}
+       { \Big( #2   \Big)}    }\xspace}
+\NewDocumentCommand\corchetes{sm}{\ensuremath{\IfBooleanTF#1
+       {[#2]}
+       { \big[#2  \big]}    }\xspace}
+\NewDocumentCommand\Corchetes{sm}{\ensuremath{\IfBooleanTF#1
+       {\left[#2\right]}
+       { \Big[#2  \Big]}    }\xspace}
+\NewDocumentCommand\angulos{sm}{\ensuremath{\IfBooleanTF#1
+        {    \langle #2     \rangle}
+        {\big\langle #2 \big\rangle} }\xspace}
+\NewDocumentCommand\Angulos{sm}{\ensuremath{\IfBooleanTF#1
+        {\left\langle #2 \right\rangle}
+        { \Big\langle #2   \Big\rangle} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Algunos operadores (subíndices a derecha e izquierda)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\LRidxE {mmmm}{\ensuremath{\leftidx{_{#2}^{}}{{#1}}{_{#3}^{#4}}}\xspace}
+
+\NewDocumentCommand\LRidxEp {smmmm}{\ensuremath{\IfBooleanTF#1
+                {\LRidxE{\parentesis*{#2}}{#3}{#4}{#5}}
+                {\LRidxE{\parentesis {#2}}{#3}{#4}{#5}}     }\xspace}
+
+\NewDocumentCommand\LRidxEP {smmmm}{\ensuremath{\IfBooleanTF#1
+                {\LRidxE{\Parentesis*{#2}}{#3}{#4}{#5}}
+                {\LRidxE{\Parentesis {#2}}{#3}{#4}{#5}}     }\xspace}
+
+\NewDocumentCommand\LRidxEpE {smmmm}{\ensuremath{\IfBooleanTF#1
+                {\parentesis*{\LRidxE{#2}{#3}{#4}{#5}}}
+                {\parentesis {\LRidxE{#2}{#3}{#4}{#5}}}     }\xspace}
+
+\NewDocumentCommand\LRidxEPE {smmmm}{\ensuremath{\IfBooleanTF#1
+                {\Parentesis*{\LRidxE{#2}{#3}{#4}{#5}}}
+                {\Parentesis {\LRidxE{#2}{#3}{#4}{#5}}}     }\xspace}
+\NewDocumentCommand\LidxE  { mmm}{\ensuremath{{\leftidx{_{#2}^{}}{{#1}}{_{  }^{#3}}}}\xspace}
+
+\NewDocumentCommand\LidxEp {smmm}{\ensuremath{\IfBooleanTF#1
+                {\LidxE{\parentesis*{#2}}{#3}{#4}}
+                {\LidxE{\parentesis {#2}}{#3}{#4}}     }\xspace}
+
+\NewDocumentCommand\LidxEP {smmm}{\ensuremath{\IfBooleanTF#1
+                {\LidxE{\Parentesis*{#2}}{#3}{#4}}
+                {\LidxE{\Parentesis {#2}}{#3}{#4}}     }\xspace}
+
+\NewDocumentCommand\LidxEpE {smmm}{\ensuremath{\IfBooleanTF#1
+                {\parentesis*{\LidxE{#2}{#3}{#4}}}
+                {\parentesis {\LidxE{#2}{#3}{#4}}}     }\xspace}
+
+\NewDocumentCommand\LidxEPE {smmm}{\ensuremath{\IfBooleanTF#1
+                {\Parentesis*{\LidxE{#2}{#3}{#4}}}
+                {\Parentesis {\LidxE{#2}{#3}{#4}}}     }\xspace}
+\NewDocumentCommand\RidxE  { mmm}{\ensuremath{{\leftidx{        }{{#1}}{_{#2}^{#3}}}}\xspace}
+
+\NewDocumentCommand\RidxEp {smmm}{\ensuremath{\IfBooleanTF#1
+                {\RidxE{\parentesis*{#2}}{#3}{#4}}
+                {\RidxE{\parentesis {#2}}{#3}{#4}}     }\xspace}
+
+\NewDocumentCommand\RidxEP {smmm}{\ensuremath{\IfBooleanTF#1
+                {\RidxE{\Parentesis*{#2}}{#3}{#4}}
+                {\RidxE{\Parentesis {#2}}{#3}{#4}}     }\xspace}
+
+\NewDocumentCommand\RidxEpE {smmm}{\ensuremath{\IfBooleanTF#1
+                {\parentesis*{\RidxE{#2}{#3}{#4}}}
+                {\parentesis {\RidxE{#2}{#3}{#4}}}     }\xspace}
+
+\NewDocumentCommand\RidxEPE {smmm}{\ensuremath{\IfBooleanTF#1
+                {\Parentesis*{\RidxE{#2}{#3}{#4}}}
+                {\Parentesis {\RidxE{#2}{#3}{#4}}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\LRidx  { mmm}{\ensuremath{{\LRidxE{#1}{#2}{#3}{}}}\xspace}
+\NewDocumentCommand\LRidxp {smmm}{\ensuremath{\IfBooleanTF#1
+                {\LRidx{\parentesis*{#2}}{#3}{#4}}
+                {\LRidx{\parentesis {#2}}{#3}{#4}}     }\xspace}
+
+\NewDocumentCommand\LRidxP {smmm}{\ensuremath{\IfBooleanTF#1
+                {\LRidx{\Parentesis*{#2}}{#3}{#4}}
+                {\LRidx{\Parentesis {#2}}{#3}{#4}}     }\xspace}
+\NewDocumentCommand\LRidxpE {smmm}{\ensuremath{\IfBooleanTF#1
+                {\parentesis*{\LRidx{#2}{#3}{#4}}}
+                {\parentesis {\LRidx{#2}{#3}{#4}}}     }\xspace}
+
+\NewDocumentCommand\LRidxPE {smmm}{\ensuremath{\IfBooleanTF#1
+                {\Parentesis*{\LRidx{#2}{#3}{#4}}}
+                {\Parentesis {\LRidx{#2}{#3}{#4}}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\Lidx    {  mm}{\ensuremath{\LidxE {#1}{#2}{}    }\xspace}
+\NewDocumentCommand\Lidxp   { smm}{\ensuremath{\IfBooleanTF#1
+                {\Lidx{\parentesis*{#2}}{#3}}
+                {\Lidx{\parentesis {#2}}{#3}}     }\xspace}
+
+\NewDocumentCommand\LidxP   { smm}{\ensuremath{\IfBooleanTF#1
+                {\Lidx{\Parentesis*{#2}}{#3}}
+                {\Lidx{\Parentesis {#2}}{#3}}     }\xspace}
+\NewDocumentCommand\LidxpE   { smm}{\ensuremath{\IfBooleanTF#1
+                {\parentesis*{\Lidx{#2}{#3}}}
+                {\parentesis {\Lidx{#2}{#3}}}     }\xspace}
+
+\NewDocumentCommand\LidxPE   { smm}{\ensuremath{\IfBooleanTF#1
+                {\Parentesis*{\Lidx{#2}{#3}}}
+                {\Parentesis {\Lidx{#2}{#3}}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\Ridx     {  mm}{\ensuremath{\RidxE {#1}{#2}{}    }\xspace}
+\NewDocumentCommand\Ridxp    {smm}{\ensuremath{\IfBooleanTF#1
+                {\Ridx{\parentesis*{#2}}{#3}}
+                {\Ridx{\parentesis {#2}}{#3}}     }\xspace}
+
+\NewDocumentCommand\RidxP    {smm}{\ensuremath{\IfBooleanTF#1
+                {\Ridx{\Parentesis*{#2}}{#3}}
+                {\Ridx{\Parentesis {#2}}{#3}}     }\xspace}
+\NewDocumentCommand\RidxpE {smm}{\ensuremath{\IfBooleanTF#1
+                {\parentesis*{\Ridx{#2}{#3}}}
+                {\parentesis {\Ridx{#2}{#3}}}     }\xspace}
+
+\NewDocumentCommand\RidxPE {smm}{\ensuremath{\IfBooleanTF#1
+                {\Parentesis*{\Ridx{#2}{#3}}}
+                {\Parentesis {\Ridx{#2}{#3}}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- ALGUNOS OPERADORES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Conjugación y concatenación
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\widebar{m}{\mathop{\overline{#1}}}
+\NewDocumentCommand\conj   {m}{\ensuremath{\widebar{#1}}\xspace}
+\newcommand{\concat}{\mathbin{\mathpalette\conc@t\relax}}
+\newcommand{\conc@t}[2]{%
+  \vcenter{\hbox{%
+    \sbox\z@{$\m@th#1-$}%
+    \setlength{\unitlength}{\wd\z@}%
+    \begin{picture}(1,1)
+    \roundcap
+    \put(0.1,0.5){\line(1,0){0.8}}
+    \put(0.35,0.1){\line(0,1){0.8}}
+    \put(0.65,0.1){\line(0,1){0.8}}
+    \end{picture}%
+  }} }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Normas y valor absoluto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\norma{sO{}m}{\ensuremath{\IfBooleanTF#1
+            {{\left\lVert{#3}\right\rVert}_{\scriptstyle{#2}}}
+            {{     \lVert{#3}      \rVert}_{\scriptstyle{#2}}}  }\xspace}
+\NewDocumentCommand\modulus{sm}{\ensuremath{\IfBooleanTF#1
+            {\left|{#2}\right|}
+            {     |{#2}      |}                }\xspace}
+\NewDocumentCommand\abs{sm}{\ensuremath{\IfBooleanTF#1
+            {\left|{#2}\right|}
+            {     |{#2}      |}                }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Transposición
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\T{}{\intercal}
+\NewDocumentCommand\Trans  {sm}{\ensuremath{\IfBooleanTF#1
+        {\RidxE{#2\big.}{}{\T} }
+        {\RidxE{#2}{}{\T}      }                  }\xspace}
+
+\NewDocumentCommand\Transp {sm}{\ensuremath{\IfBooleanTF#1
+       {\Trans{{\parentesis*{#2}}}}
+       {\Trans{{\parentesis {#2}}}}        }\xspace}
+
+\NewDocumentCommand\TransP {sm}{\ensuremath{\IfBooleanTF#1
+       {\Trans{{\Parentesis*{#2}}}}
+       {\Trans{{\Parentesis {#2}}}}        }\xspace}
+
+\NewDocumentCommand\TranspE{sm}{\ensuremath{\IfBooleanTF#1
+       {\parentesis*{\Trans{#2}}}
+       {\parentesis {\Trans{#2}}}          }\xspace}
+
+\NewDocumentCommand\TransPE{sm}{\ensuremath{\IfBooleanTF#1
+       {\Parentesis*{\Trans{#2}}}
+       {\Parentesis {\Trans{#2}}}          }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Algunos operadores (Inversa)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\minus  { }{\hbox{-}}
+\NewDocumentCommand\Inv     {m    }{\ensuremath{ \RidxE{#1}{}{\minus1} }\xspace}
+
+\NewDocumentCommand\Invp    {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Inv{{\parentesis*{#2}}}}
+            {\Inv{{\parentesis {#2}}}}            }\xspace}
+
+\NewDocumentCommand\InvP    {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Inv{{\Parentesis*{#2}}}}
+            {\Inv{{\Parentesis {#2}}}}            }\xspace}
+
+\NewDocumentCommand\InvpE   {sm   }{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\Inv{#2}}}
+            {\parentesis {\Inv{#2}}}            }\xspace}
+
+\NewDocumentCommand\InvPE   {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\Inv{#2}}}
+            {\Parentesis {\Inv{#2}}}            }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- OPERADOR SELECTOR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\getItem { }{\ensuremath{ \boldsymbol{\mid} }\xspace}
+\NewDocumentCommand\getitemL{m}{\ensuremath{ {#1} \getItem }\xspace}
+\NewDocumentCommand\getitemR{m}{\ensuremath{ \getItem {#1} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\elemL   {mm}{\ensuremath{ \Lidx{#1}{\getitemL{#2}} }\xspace}
+
+\NewDocumentCommand\elemLp {smm}{\ensuremath{\IfBooleanTF#1
+      {\elemL{\parentesis*{#2}}{#3}}
+      {\elemL{\parentesis {#2}}{#3}} }\xspace}
+
+\NewDocumentCommand\elemLP {smm}{\ensuremath{\IfBooleanTF#1
+      {\elemL{\Parentesis*{#2}}{#3}}
+      {\elemL{\Parentesis {#2}}{#3}} }\xspace}
+
+\NewDocumentCommand\elemLpE{smm}{\ensuremath{\IfBooleanTF#1
+      {\parentesis*{\elemL{#2}{#3}}}
+      {\parentesis {\elemL{#2}{#3}}} }\xspace}
+
+\NewDocumentCommand\elemLPE{smm}{\ensuremath{\IfBooleanTF#1
+      {\Parentesis*{\elemL{#2}{#3}}}
+      {\Parentesis {\elemL{#2}{#3}}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\elemR   {mm}{\ensuremath{ \Ridx{#1}{\getitemR{#2}} }\xspace}
+
+\NewDocumentCommand\elemRp {smm}{\ensuremath{\IfBooleanTF#1
+      {\elemR{\parentesis*{#2}}{#3}}
+      {\elemR{\parentesis {#2}}{#3}} }\xspace}
+
+\NewDocumentCommand\elemRP {smm}{\ensuremath{\IfBooleanTF#1
+      {\elemR{\Parentesis*{#2}}{#3}}
+      {\elemR{\Parentesis {#2}}{#3}} }\xspace}
+
+\NewDocumentCommand\elemRpE{smm}{\ensuremath{\IfBooleanTF#1
+      {\parentesis*{\elemR{#2}{#3}}}
+      {\parentesis {\elemR{#2}{#3}}} }\xspace}
+
+\NewDocumentCommand\elemRPE{smm}{\ensuremath{\IfBooleanTF#1
+      {\Parentesis*{\elemR{#2}{#3}}}
+      {\Parentesis {\elemR{#2}{#3}}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\elemLR{mmm}{
+    \ensuremath{ \LRidx{#1}{\getitemL{#2}}{\getitemR{#3}} }\xspace}
+
+\NewDocumentCommand\elemLRp {smmm}{\ensuremath{\IfBooleanTF#1
+      {\elemLR{\parentesis*{#2}}{#3}{#4}}
+      {\elemLR{\parentesis {#2}}{#3}{#4}}   }\xspace}
+
+\NewDocumentCommand\elemLRpE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\parentesis*{\elemLR{#2}{#3}{#4}}}
+      {\parentesis {\elemLR{#2}{#3}{#4}}}   }\xspace}
+
+\NewDocumentCommand\elemLRP {smmm}{\ensuremath{\IfBooleanTF#1
+      {\elemLR{\Parentesis*{#2}}{#3}{#4}}
+      {\elemLR{\Parentesis {#2}}{#3}{#4}}   }\xspace}
+
+\NewDocumentCommand\elemLRPE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\Parentesis*{\elemLR{#2}{#3}{#4}}}
+      {\Parentesis {\elemLR{#2}{#3}{#4}}}   }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Operador selector con vectores
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\eleVL{omm}{\ensuremath{\IfNoValueTF{#1}%
+        {\elemL  {\Vect    {#2}}{#3}}
+        {\elemLP*{\Vect[#1]{#2}}{#3}}    }\xspace}
+
+\NewDocumentCommand\eleVLp{somm}{\ensuremath{\IfBooleanTF{#1}%
+        {\elemLp*{\Vect[#2]{#3}}{#4}}
+        {\elemLp {\Vect[#2]{#3}}{#4}}    }\xspace}
+
+\NewDocumentCommand\eleVLP{somm}{\ensuremath{\IfBooleanTF{#1}%
+        {\elemLP*{\Vect[#2]{#3}}{#4}}
+        {\elemLP {\Vect[#2]{#3}}{#4}}    }\xspace}
+
+\NewDocumentCommand\eleVLpE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemLpE*{\IfNoValueTF{#2}
+                  {\Vect      {#3}}
+                  {\Vectp*[#2]{#3}}}{#4}}
+       {\elemLpE {\IfNoValueTF{#2}
+                  {\Vect      {#3}}
+                  {\Vectp*[#2]{#3}}}{#4}} }\xspace}
+
+\NewDocumentCommand\eleVLPE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemLPE*{\IfNoValueTF{#2}
+                  {\Vect      {#3}}
+                  {\VectP*[#2]{#3}}}{#4}}
+       {\elemLPE {\IfNoValueTF{#2}
+                  {\Vect      {#3}}
+                  {\VectP*[#2]{#3}}}{#4}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\eleVR{omm}{\ensuremath{\IfNoValueTF{#1}%
+        {\elemR  {\Vect    {#2}}{#3}}
+        {\elemRP*{\Vect[#1]{#2}}{#3}}    }\xspace}
+
+\NewDocumentCommand\eleVRp{somm}{\ensuremath{\IfBooleanTF{#1}%
+        {\elemRp*{\Vect[#2]{#3}}{#4}}
+        {\elemRp {\Vect[#2]{#3}}{#4}}    }\xspace}
+
+\NewDocumentCommand\eleVRP{somm}{\ensuremath{\IfBooleanTF{#1}%
+        {\elemRP*{\Vect[#2]{#3}}{#4}}
+        {\elemRP {\Vect[#2]{#3}}{#4}}    }\xspace}
+
+\NewDocumentCommand\eleVRpE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemRpE*{\IfNoValueTF{#2}
+                  {\Vect      {#3}}
+                  {\Vectp*[#2]{#3}}}{#4}}
+       {\elemRpE {\IfNoValueTF{#2}
+                  {\Vect      {#3}}
+                  {\Vectp*[#2]{#3}}}{#4}} }\xspace}
+
+\NewDocumentCommand\eleVRPE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemRPE*{\IfNoValueTF{#2}
+                  {\Vect      {#3}}
+                  {\VectP*[#2]{#3}}}{#4}}
+       {\elemRPE {\IfNoValueTF{#2}
+                  {\Vect      {#3}}
+                  {\VectP*[#2]{#3}}}{#4}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Operador selector con matrices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NewDocumentCommand\VectF{omm}{\ensuremath{\IfNoValueTF{#1}%
+        {\elemL  {\Mat    {#2}}{#3}}
+        {\elemLp*{\Mat[#1]{#2}}{#3}}    }\xspace}
+
+\NewDocumentCommand\VectFp{somm}{\ensuremath{\IfBooleanTF#1%%
+        {\elemLp*{\Mat[#2]{#3}}{#4}}
+        {\elemLp {\Mat[#2]{#3}}{#4}}  }\xspace}
+
+\NewDocumentCommand\VectFP{somm}{\ensuremath{\IfBooleanTF#1%%
+        {\elemLP*{\Mat[#2]{#3}}{#4}}
+        {\elemLP {\Mat[#2]{#3}}{#4}}  }\xspace}
+
+\NewDocumentCommand\VectFpE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemLpE*{\IfNoValueTF{#2}
+                  {\Mat      {#3}}
+                  {\MatP*[#2]{#3}}}{#4}}
+       {\elemLpE {\IfNoValueTF{#2}
+                  {\Mat      {#3}}
+                  {\Matp*[#2]{#3}}}{#4}} }\xspace}
+
+\NewDocumentCommand\VectFPE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemLPE*{\IfNoValueTF{#2}
+                  {\Mat      {#3}}
+                  {\MatP*[#2]{#3}}}{#4}}
+       {\elemLPE {\IfNoValueTF{#2}
+                  {\Mat      {#3}}
+                  {\MatP*[#2]{#3}}}{#4}} }\xspace}
+\NewDocumentCommand\VectTF{omm}{\ensuremath{\IfNoValueTF{#1}%
+        {\elemL  {\MatTpE* {#2}}{#3}}
+        {\elemLp*{\MatT[#1]{#2}}{#3}}    }\xspace}
+
+\NewDocumentCommand\VectTFp{somm}{\ensuremath{\IfBooleanTF#1%%
+        {\elemLp*{\MatT[#2]{#3}}{#4}}
+        {\elemLp {\MatT[#2]{#3}}{#4}}  }\xspace}
+
+\NewDocumentCommand\VectTFP{somm}{\ensuremath{\IfBooleanTF#1%%
+        {\elemLP*{\MatT[#2]{#3}}{#4}}
+        {\elemLP {\MatT[#2]{#3}}{#4}}  }\xspace}
+
+\NewDocumentCommand\VectTFpE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemLpE*{\IfNoValueTF{#2}
+                  {\MatTpE*    {#3}}
+                  {\MatTPE*[#2]{#3}}}{#4}}
+       {\elemLpE {\IfNoValueTF{#2}
+                  {\MatTpE*    {#3}}
+                  {\MatTpE*[#2]{#3}}}{#4}} }\xspace}
+
+\NewDocumentCommand\VectTFPE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemLPE*{\IfNoValueTF{#2}
+                  {\MatTpE*    {#3}}
+                  {\MatTPE*[#2]{#3}}}{#4}}
+       {\elemLPE {\IfNoValueTF{#2}
+                  {\MatTpE*    {#3}}
+                  {\MatTPE*[#2]{#3}}}{#4}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\VectC{omm}{\ensuremath{\IfNoValueTF{#1}%
+        {\elemR  {\Mat    {#2}}{#3}}
+        {\elemRp*{\Mat[#1]{#2}}{#3}}    }\xspace}
+
+\NewDocumentCommand\VectCp{somm}{\ensuremath{\IfBooleanTF#1%%
+        {\elemRp*{\Mat[#2]{#3}}{#4}}
+        {\elemRp {\Mat[#2]{#3}}{#4}}  }\xspace}
+
+\NewDocumentCommand\VectCP{somm}{\ensuremath{\IfBooleanTF#1%%
+        {\elemRP*{\Mat[#2]{#3}}{#4}}
+        {\elemRP {\Mat[#2]{#3}}{#4}}  }\xspace}
+
+\NewDocumentCommand\VectCpE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemRpE*{\IfNoValueTF{#2}
+                  {\Mat      {#3}}
+                  {\MatP*[#2]{#3}}}{#4}}
+       {\elemRpE {\IfNoValueTF{#2}
+                  {\Mat      {#3}}
+                  {\Matp*[#2]{#3}}}{#4}} }\xspace}
+
+\NewDocumentCommand\VectCPE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemRPE*{\IfNoValueTF{#2}
+                  {\Mat      {#3}}
+                  {\MatP*[#2]{#3}}}{#4}}
+       {\elemRPE {\IfNoValueTF{#2}
+                  {\Mat      {#3}}
+                  {\MatP*[#2]{#3}}}{#4}} }\xspace}
+\NewDocumentCommand\VectTC{omm}{\ensuremath{\IfNoValueTF{#1}%
+        {\elemR  {\MatTpE* {#2}}{#3}}
+        {\elemRp*{\MatT[#1]{#2}}{#3}}    }\xspace}
+
+\NewDocumentCommand\VectTCp{somm}{\ensuremath{\IfBooleanTF#1%%
+        {\elemRp*{\MatT[#2]{#3}}{#4}}
+        {\elemRp {\MatT[#2]{#3}}{#4}}  }\xspace}
+
+\NewDocumentCommand\VectTCP{somm}{\ensuremath{\IfBooleanTF#1%%
+        {\elemRP*{\MatT[#2]{#3}}{#4}}
+        {\elemRP {\MatT[#2]{#3}}{#4}}  }\xspace}
+
+\NewDocumentCommand\VectTCpE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemRpE*{\IfNoValueTF{#2}
+                  {\MatTpE*    {#3}}
+                  {\MatTPE*[#2]{#3}}}{#4}}
+       {\elemRpE {\IfNoValueTF{#2}
+                  {\MatTpE*    {#3}}
+                  {\MatTpE*[#2]{#3}}}{#4}} }\xspace}
+
+\NewDocumentCommand\VectTCPE{somm}{\ensuremath{\IfBooleanTF#1%
+       {\elemRPE*{\IfNoValueTF{#2}
+                  {\MatTpE*    {#3}}
+                  {\MatTPE*[#2]{#3}}}{#4}}
+       {\elemRPE {\IfNoValueTF{#2}
+                  {\MatTpE*    {#3}}
+                  {\MatTPE*[#2]{#3}}}{#4}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\eleM {ommm}{\ensuremath{\elemLR {\IfNoValueTF{#1}
+                                   {\Mat      {#2}}
+                                   {\MatP*[#1]{#2}}                }{#3}{#4}}\xspace}
+
+\NewDocumentCommand\eleMp  {sommm}{\ensuremath{\IfBooleanTF#1
+                {\elemLRp* {\Mat[#2]{#3}}{#4}{#5}}
+                {\elemLRp  {\Mat[#2]{#3}}{#4}{#5}} }\xspace}
+
+\NewDocumentCommand\eleMP  {sommm}{\ensuremath{\IfBooleanTF#1
+                {\elemLRP* {\Mat[#2]{#3}}{#4}{#5}}
+                {\elemLRP  {\Mat[#2]{#3}}{#4}{#5}} }\xspace}
+
+\NewDocumentCommand\eleMpE{sommm}{\ensuremath{\IfBooleanTF#1
+                {\parentesis*{\IfNoValueTF{#1}
+                                {\eleM    {#3}{#4}{#5}}
+                                {\eleM[#2]{#3}{#4}{#5}}    }}
+                {\parentesis {\IfNoValueTF{#1}
+                                {\eleM    {#3}{#4}{#5}}
+                                {\eleM[#2]{#3}{#4}{#5}}    }}  }\xspace}
+
+\NewDocumentCommand\eleMPE{sommm}{\ensuremath{\IfBooleanTF#1
+                {\Parentesis*{\IfNoValueTF{#1}
+                                {\eleM    {#3}{#4}{#5}}
+                                {\eleM[#2]{#3}{#4}{#5}}    }}
+                {\Parentesis {\IfNoValueTF{#1}
+                                {\eleM    {#3}{#4}{#5}}
+                                {\eleM[#2]{#3}{#4}{#5}}    }}  }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\eleMT{ommm}{\ensuremath{\elemLRP*{\MatT[#1]{#2}}{#3}{#4}}\xspace}
+
+\NewDocumentCommand\eleMTp  {sommm}{\ensuremath{\IfBooleanTF#1
+                {\elemLRp*{\parentesis*{\Mat[#2]{#3}}^\T}{#4}{#5}}
+                {\elemLRp {\parentesis*{\Mat[#2]{#3}}^\T}{#4}{#5}}  }\xspace}
+
+\NewDocumentCommand\eleMTP  {sommm}{\ensuremath{\IfBooleanTF#1
+                {\elemLRP*{\parentesis*{\Mat[#2]{#3}}^\T}{#4}{#5}}
+                {\elemLRP {\parentesis*{\Mat[#2]{#3}}^\T}{#4}{#5}}  }\xspace}
+
+\NewDocumentCommand\eleMTpE{sommm}{\ensuremath{\IfBooleanTF#1
+                {\parentesis*{\IfNoValueTF{#1}
+                                {\eleMT    {#3}{#4}{#5}}
+                                {\eleMT[#2]{#3}{#4}{#5}}    }}
+                {\parentesis {\IfNoValueTF{#1}
+                                {\eleMT    {#3}{#4}{#5}}
+                                {\eleMT[#2]{#3}{#4}{#5}}    }}  }\xspace}
+
+\NewDocumentCommand\eleMTPE{sommm}{\ensuremath{\IfBooleanTF#1
+                {\Parentesis*{\IfNoValueTF{#1}
+                                {\eleMT    {#3}{#4}{#5}}
+                                {\eleMT[#2]{#3}{#4}{#5}}    }}
+                {\Parentesis {\IfNoValueTF{#1}
+                                {\eleMT    {#3}{#4}{#5}}
+                                {\eleMT[#2]{#3}{#4}{#5}}    }}  }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Operaciones elementales y permutaciones
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\TrEl}{\boldsymbol{\tau}}
+\NewDocumentCommand\su{mmm}{\ensuremath{%
+                      \left(#1\right){\boldsymbol{#2}}+{\boldsymbol{#3}}   }\xspace}
+\NewDocumentCommand\pr{mm }{\ensuremath{%
+                      \left(#1\right){\boldsymbol{#2}}                     }\xspace}
+\NewDocumentCommand\pe{mm }{\ensuremath{%
+                     \boldsymbol{#1} \rightleftharpoons \boldsymbol{#2}    }\xspace}
+\NewDocumentCommand\perm{}{\ensuremath{ \mathfrak{S}                       }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\OpE{m}{\ensuremath{\underset{\left[{#1}\right]}{\TrEl}}\xspace}
+\NewDocumentCommand\OEsu {mmm}{\ensuremath{ \OpE{ \su{#1}{#2}{#3} } }\xspace}
+\NewDocumentCommand\OEpr  {mm}{\ensuremath{ \OpE{ \pr{#1}{#2}     } }\xspace}
+\NewDocumentCommand\OEin  {mm}{\ensuremath{ \OpE{ \pe{#1}{#2}     } }\xspace}
+\NewDocumentCommand\OEper   {}{\ensuremath{ \OpE{ \perm           } }\xspace}
+\NewDocumentCommand\EOEsu{mmm}{\ensuremath{ esp\Big(\OEsu{#1}{#2}{#3}\Big)}\xspace}
+\NewDocumentCommand\EOEpr {mm}{\ensuremath{ esp\Big(\OEpr{#1}{#2}    \Big)}\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Operaciones elementales genéricas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand  \OEg{O{}O{}}{\ensuremath{ \RidxE{\TrEl}{\!#1}{#2} }\xspace}
+\NewDocumentCommand \EOEg{O{}O{}}{\ensuremath{ esp( \OEg[#1][#2]      ) }\xspace}
+\NewDocumentCommand \InvOEg{O{} }{\ensuremath{      \OEg[#1][\minus1]   }\xspace}
+\NewDocumentCommand\EInvOEg{O{} }{\ensuremath{ esp( \InvOEg[#1]       ) }\xspace}
+\NewDocumentCommand\SOEg{O{1}O{k}O{}}{\ensuremath{%
+                                       \OEg[#1][#3]\cdots\OEg[#2][#3]  }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\dOEgE  {mm}{\ensuremath{ \RidxE{\TrEl}{\!#1}{#2}    }\xspace}
+\NewDocumentCommand\dOEg    {m}{\ensuremath{     \dOEgE{#1}{}           }\xspace}
+\NewDocumentCommand\dEOEgE {mm}{\ensuremath{ esp(\dOEgE{#1}{#2}     )   }\xspace}
+\NewDocumentCommand\dEOEg   {m}{\ensuremath{ esp(\dOEg {#1}         )   }\xspace}
+\NewDocumentCommand\dInvOEg {m}{\ensuremath{     \dOEgE{#1}{\minus1}    }\xspace}
+\NewDocumentCommand\dEInvOEg{m}{\ensuremath{ esp(\dInvOEg{#1} )         }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Sucesión de operaciones elementales genéricas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\dSOEgE{mmm}{\ensuremath{\dOEgE{#1}{#3}\cdots\dOEgE{#2}{#3}}\xspace}
+\NewDocumentCommand\dSOEg  {mm}{\ensuremath{\dOEg {#1}    \cdots\dOEg {#2}    }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Transformaciones elementales y permutaciones
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Transf. elemental aplicada la izquierda o derecha de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Tipo I - Fil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TESF  {mmmm}{\ensuremath{\Lidx{#4}{  \OEsu{#1}{#2}{#3}\!}}\xspace}
+\NewDocumentCommand\TESFp {smmmm}{\ensuremath{\IfBooleanTF#1
+  {\Lidxp* {#5}{\OEsu{#2}{#3}{#4}\!\!}} {\Lidxp {#5}{\OEsu{#2}{#3}{#4}\!\!}} }\xspace}
+\NewDocumentCommand\TESFP {smmmm}{\ensuremath{\IfBooleanTF#1
+  {\LidxP* {#5}{\OEsu{#2}{#3}{#4}\!\!}} {\LidxP {#5}{\OEsu{#2}{#3}{#4}\!\!}} }\xspace}
+\NewDocumentCommand\TESFpE{smmmm}{\ensuremath{\IfBooleanTF#1
+  {\LidxpE*{#5}{\OEsu{#2}{#3}{#4}\!  }} {\LidxpE{#5}{\OEsu{#2}{#3}{#4}\!  }} }\xspace}
+\NewDocumentCommand\TESFPE{smmmm}{\ensuremath{\IfBooleanTF#1
+  {\LidxPE*{#5}{\OEsu{#2}{#3}{#4}\!  }} {\LidxPE{#5}{\OEsu{#2}{#3}{#4}\!  }} }\xspace}
+%%%%%%%%%%%% Tipo I - Col %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TESC  {mmmm}{\ensuremath{\Ridx{#4}{\!\OEsu{#1}{#2}{#3}  }}\xspace}
+\NewDocumentCommand\TESCp {smmmm}{\ensuremath{\IfBooleanTF#1
+  {\Ridxp* {#5}{\!\!\OEsu{#2}{#3}{#4}}} {\Ridxp {#5}{\!\!\OEsu{#2}{#3}{#4}}} }\xspace}
+\NewDocumentCommand\TESCP {smmmm}{\ensuremath{\IfBooleanTF#1
+  {\RidxP* {#5}{\!\!\OEsu{#2}{#3}{#4}}} {\RidxP {#5}{\!\!\OEsu{#2}{#3}{#4}}} }\xspace}
+\NewDocumentCommand\TESCpE{smmmm}{\ensuremath{\IfBooleanTF#1
+  {\RidxpE*{#5}{\!  \OEsu{#2}{#3}{#4}}} {\RidxpE{#5}{\!  \OEsu{#2}{#3}{#4}}} }\xspace}
+\NewDocumentCommand\TESCPE{smmmm}{\ensuremath{\IfBooleanTF#1
+  {\RidxPE*{#5}{\!  \OEsu{#2}{#3}{#4}}} {\RidxPE{#5}{\!  \OEsu{#2}{#3}{#4}}} }\xspace}
+%%%%%%%%%%%% Tipo II - Fil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TEPF   {mmm}{\ensuremath{\Lidx{#3}{  \OEpr{#1}{#2}\!} }\xspace}
+\NewDocumentCommand\TEPFp {smmm}{\ensuremath{\IfBooleanTF#1
+      {\Lidxp* {#4}{\OEpr{#2}{#3}\!\!}} {\Lidxp {#4}{\OEpr{#2}{#3}\!\!} } }\xspace}
+\NewDocumentCommand\TEPFP {smmm}{\ensuremath{\IfBooleanTF#1
+      {\LidxP* {#4}{\OEpr{#2}{#3}\!\!}} {\LidxP {#4}{\OEpr{#2}{#3}\!\!} } }\xspace}
+\NewDocumentCommand\TEPFpE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\LidxpE*{#4}{\OEpr{#2}{#3}\!  }} {\LidxpE{#4}{\OEpr{#2}{#3}\!}   } }\xspace}
+\NewDocumentCommand\TEPFPE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\LidxPE*{#4}{\OEpr{#2}{#3}\!  }} {\LidxPE{#4}{\OEpr{#2}{#3}\!}   } }\xspace}
+%%%%%%%%%%%% Tipo II - Col %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TEPC   {mmm}{\ensuremath{\Ridx{#3}{\!\OEpr{#1}{#2}  } }\xspace}
+\NewDocumentCommand\TEPCp {smmm}{\ensuremath{\IfBooleanTF#1
+      {\Ridxp* {#4}{\!\!\OEpr{#2}{#3}}} {\Ridxp {#4}{\!\!\OEpr{#2}{#3}} } }\xspace}
+\NewDocumentCommand\TEPCP {smmm}{\ensuremath{\IfBooleanTF#1
+      {\RidxP* {#4}{\!\!\OEpr{#2}{#3}}} {\RidxP {#4}{\!\!\OEpr{#2}{#3}} } }\xspace}
+\NewDocumentCommand\TEPCpE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\RidxpE*{#4}{\!  \OEpr{#2}{#3}}} {\RidxpE{#4}{\!\OEpr{#2}{#3}}   } }\xspace}
+\NewDocumentCommand\TEPCPE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\RidxPE*{#4}{\!  \OEpr{#2}{#3}}} {\RidxPE{#4}{\!\OEpr{#2}{#3}}   } }\xspace}
+%%%%%%%%%%%% Intercambio - Fil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TEIF   {mmm}{\ensuremath{\Lidx{#3}{  \OEin{#1}{#2}\!} }\xspace}
+\NewDocumentCommand\TEIFp {smmm}{\ensuremath{\IfBooleanTF#1
+      {\Lidxp* {#4}{\OEin{#2}{#3}\!\!}} {\Lidxp {#4}{\OEin{#2}{#3}\!\!} } }\xspace}
+\NewDocumentCommand\TEIFP {smmm}{\ensuremath{\IfBooleanTF#1
+      {\LidxP* {#4}{\OEin{#2}{#3}\!\!}} {\LidxP {#4}{\OEin{#2}{#3}\!\!} } }\xspace}
+\NewDocumentCommand\TEIFpE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\LidxpE*{#4}{\OEin{#2}{#3}\!  }} {\LidxpE{#4}{\OEin{#2}{#3}\!}   } }\xspace}
+\NewDocumentCommand\TEIFPE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\LidxPE*{#4}{\OEin{#2}{#3}\!  }} {\LidxPE{#4}{\OEin{#2}{#3}\!}   } }\xspace}
+%%%%%%%%%%%% Intercambio - Col %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TEIC   {mmm}{\ensuremath{\Ridx{#3}{\!\OEin{#1}{#2}  } }\xspace}
+\NewDocumentCommand\TEICp {smmm}{\ensuremath{\IfBooleanTF#1
+      {\Ridxp* {#4}{\!\!\OEin{#2}{#3}}} {\Ridxp {#4}{\!\!\OEin{#2}{#3}} } }\xspace}
+\NewDocumentCommand\TEICP {smmm}{\ensuremath{\IfBooleanTF#1
+      {\RidxP* {#4}{\!\!\OEin{#2}{#3}}} {\RidxP {#4}{\!\!\OEin{#2}{#3}} } }\xspace}
+\NewDocumentCommand\TEICpE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\RidxpE*{#4}{\!  \OEin{#2}{#3}}} {\RidxpE{#4}{\!\OEin{#2}{#3}}   } }\xspace}
+\NewDocumentCommand\TEICPE{smmm}{\ensuremath{\IfBooleanTF#1
+      {\RidxPE*{#4}{\!  \OEin{#2}{#3}}} {\RidxPE{#4}{\!\OEin{#2}{#3}}   } }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\Mint {mm}{\ensuremath{ \TEIC{#1}{#2}{\Mat{I}} }\xspace}
+\NewDocumentCommand\MintT{mm}{\ensuremath{ \TEIF{#1}{#2}{\Mat{I}} }\xspace}
+\NewDocumentCommand\PF    {m}{\ensuremath{ \Lidx{#1}{  \OEper\! } }\xspace}
+\NewDocumentCommand\PC    {m}{\ensuremath{ \Ridx{#1}{\!\OEper   } }\xspace}
+\NewDocumentCommand\MP     {}{\ensuremath{ \PC  {\Mat{I}}         }\xspace}
+\NewDocumentCommand\MPT    {}{\ensuremath{ \PF  {\Mat{I}}         }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Sucesiones indiciadas de Transf. elementales
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\SITEF  {mmm}{\ensuremath{ \Lidx{#3}{\dSOEg{#1}{#2}}    }\xspace}
+
+\NewDocumentCommand\SITEFp{smmm}{\ensuremath{\IfBooleanTF#1
+            {\SITEF  {#2}{#3}{\parentesis*{#4}}}
+            {\SITEF  {#2}{#3}{\parentesis {#4}}}                       }\xspace}
+
+\NewDocumentCommand\SITEFP{smmm}{\ensuremath{\IfBooleanTF#1
+            {\SITEF  {#2}{#3}{\Parentesis*{#4}}}
+            {\SITEF  {#2}{#3}{\Parentesis {#4}}}                       }\xspace}
+
+\NewDocumentCommand\SITEFpE{smmm}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\SITEF {#2}{#3}{#4}}}
+            {\parentesis {\SITEF {#2}{#3}{#4}}}                        }\xspace}
+
+\NewDocumentCommand\SITEFPE{smmm}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\SITEF {#2}{#3}{#4}}}
+            {\Parentesis {\SITEF {#2}{#3}{#4}}}                        }\xspace}
+\NewDocumentCommand\SITEC  {mmm}{\ensuremath{ \Ridx{#3}{\dSOEg{#1}{#2}}    }\xspace}
+
+\NewDocumentCommand\SITECp{smmm}{\ensuremath{\IfBooleanTF#1
+            {\SITEC  {#2}{#3}{\parentesis*{#4}}}
+            {\SITEC  {#2}{#3}{\parentesis {#4}}}                       }\xspace}
+
+\NewDocumentCommand\SITECP{smmm}{\ensuremath{\IfBooleanTF#1
+            {\SITEC  {#2}{#3}{\Parentesis*{#4}}}
+            {\SITEC  {#2}{#3}{\Parentesis {#4}}}                       }\xspace}
+
+\NewDocumentCommand\SITECpE{smmm}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\SITEC {#2}{#3}{#4}}}
+            {\parentesis {\SITEC {#2}{#3}{#4}}}                        }\xspace}
+
+\NewDocumentCommand\SITECPE{smmm}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\SITEC {#2}{#3}{#4}}}
+            {\Parentesis {\SITEC {#2}{#3}{#4}}}                        }\xspace}
+\NewDocumentCommand\SITEFC{mmm}{\ensuremath{
+                            {\LRidx{#3}{\dSOEg{#2}{#1}}{\dSOEg{#1}{#2}}}   }\xspace}                   \NewDocumentCommand\SITEFCp{smmm}{\ensuremath{\IfBooleanTF#1
+            {\SITEFC {#2}{#3}{\parentesis*{#4}}}
+            {\SITEFC {#2}{#3}{\parentesis {#4}}}                       }\xspace}
+\NewDocumentCommand\SITEFCP{smmm}{\ensuremath{\IfBooleanTF#1
+            {\SITEFC {#2}{#3}{\Parentesis*{#4}}}
+            {\SITEFC {#2}{#3}{\Parentesis {#4}}}                       }\xspace}
+\NewDocumentCommand\SITEFCpE{smmm}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\SITEFC {#2}{#3}{#4}}}
+            {\parentesis {\SITEFC {#2}{#3}{#4}}}                      }\xspace}
+\NewDocumentCommand\SITEFCPE{smmm}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\SITEFC {#2}{#3}{#4}}}
+            {\Parentesis {\SITEFC {#2}{#3}{#4}}}                      }\xspace}
+\NewDocumentCommand\SITEFCR{mmm}{\ensuremath{
+                            {\LRidx{#3}{\dSOEg{#1}{#2}}{\dSOEg{#1}{#2}}}   }\xspace}                   \NewDocumentCommand\SITEFCRp{smmm}{\ensuremath{\IfBooleanTF#1
+            {\SITEFC {#2}{#3}{\parentesis*{#4}}}
+            {\SITEFC {#2}{#3}{\parentesis {#4}}}                       }\xspace}
+\NewDocumentCommand\SITEFCRP{smmm}{\ensuremath{\IfBooleanTF#1
+            {\SITEFC {#2}{#3}{\Parentesis*{#4}}}
+            {\SITEFC {#2}{#3}{\Parentesis {#4}}}                       }\xspace}
+\NewDocumentCommand\SITEFCRpE{smmm}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\SITEFC {#2}{#3}{#4}}}
+            {\parentesis {\SITEFC {#2}{#3}{#4}}}                      }\xspace}
+\NewDocumentCommand\SITEFCRPE{smmm}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\SITEFC {#2}{#3}{#4}}}
+            {\Parentesis {\SITEFC {#2}{#3}{#4}}}                      }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TrF  { O{\SOEg} m }{\ensuremath{ \Lidx{#2}{#1} }\xspace}
+
+\NewDocumentCommand\TrFp {s O{\SOEg} m}{\ensuremath{\IfBooleanTF#1
+                       {\TrF[#2]{\parentesis*{#3}}}
+                       {\TrF[#2]{\parentesis {#3}}}               }\xspace}
+
+\NewDocumentCommand\TrFP {s O{\SOEg} m}{\ensuremath{\IfBooleanTF#1
+                       {\TrF[#2]{\Parentesis*{#3}}}
+                       {\TrF[#2]{\Parentesis {#3}}}               }\xspace}
+
+\NewDocumentCommand\TrFpE{s O{\SOEg} m}{\ensuremath{\IfBooleanTF#1
+                       {\parentesis*{\TrF[#2]{#3}}}
+       {\parentesis {\TrF[#2]{#3}}}               }\xspace}
+
+\NewDocumentCommand\TrFPE{s O{\SOEg} m}{\ensuremath{\IfBooleanTF#1
+                       {\Parentesis*{\TrF[#2]{#3}}}
+       {\Parentesis {\TrF[#2]{#3}}}               }\xspace}
+
+\NewDocumentCommand\TrC  { O{\SOEg} m }{\ensuremath{ \Ridx{#2}{#1} }\xspace}
+
+\NewDocumentCommand\TrCp {s O{\SOEg} m}{\ensuremath{\IfBooleanTF#1
+                       {\TrC[#2]{\parentesis*{#3}}}
+                       {\TrC[#2]{\parentesis {#3}}}               }\xspace}
+
+\NewDocumentCommand\TrCP {s O{\SOEg} m}{\ensuremath{\IfBooleanTF#1
+                       {\TrC[#2]{\Parentesis*{#3}}}
+                       {\TrC[#2]{\Parentesis {#3}}}               }\xspace}
+
+\NewDocumentCommand\TrCpE{s O{\SOEg} m}{\ensuremath{\IfBooleanTF#1
+                       {\parentesis*{\TrC[#2]{#3}}}
+       {\parentesis {\TrC[#2]{#3}}}               }\xspace}
+
+\NewDocumentCommand\TrCPE{s O{\SOEg} m}{\ensuremath{\IfBooleanTF#1
+                       {\Parentesis*{\TrC[#2]{#3}}}
+       {\Parentesis {\TrC[#2]{#3}}}               }\xspace}
+
+\NewDocumentCommand\TrFC{ O{\SOEg} O{\SOEg[(k+1)][p]} m }{\ensuremath{ \LRidx{#3}{#1}{#2} }\xspace}
+
+\NewDocumentCommand\TrFCp {s O{\SOEg} O{\SOEg[(k+1)][p]} m}{\ensuremath{\IfBooleanTF#1
+                       {\TrFC[#2][#3]{\parentesis*{#4}}}
+                       {\TrFC[#2][#3]{\parentesis {#4}}}               }\xspace}
+
+\NewDocumentCommand\TrFCP {s O{\SOEg} O{\SOEg[(k+1)][p]} m}{\ensuremath{\IfBooleanTF#1
+                       {\TrFC[#2][#3]{\Parentesis*{#4}}}
+                       {\TrFC[#2][#3]{\Parentesis {#4}}}               }\xspace}
+
+\NewDocumentCommand\TrFCpE{s O{\SOEg} O{\SOEg[(k+1)][p]} m}{\ensuremath{\IfBooleanTF#1
+                       {\parentesis*{\TrFC[#2][#3]{#4}}}
+       {\parentesis {\TrFC[#2][#3]{#4}}}               }\xspace}
+
+\NewDocumentCommand\TrFCPE{s O{\SOEg} O{\SOEg[(k+1)][p]} m}{\ensuremath{\IfBooleanTF#1
+                       {\Parentesis*{\TrFC[#2][#3]{#4}}}
+       {\Parentesis {\TrFC[#2][#3]{#4}}}               }\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Transformaciones elementales genéricas aplicadas a la izquierda de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TEF{O{}O{}m}{\ensuremath{ \Lidx{#3}{\OEg[#1\!][#2\!]} }\xspace}
+
+\NewDocumentCommand\TEFp {sO{}O{\,}m}{\ensuremath{\IfBooleanTF#1
+    {\Lidxp* {#4}{\OEg[#2][#3]\!}} {\Lidxp {#4}{\OEg[#2][#3]\!\!}}   }\xspace}
+
+\NewDocumentCommand\TEFP {sO{}O{\,}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxP* {#4}{\OEg[#2][#3]\!}} {\LidxP {#4}{\OEg[#2][#3]\!\!}} }\xspace}
+
+\NewDocumentCommand\TEFpE{sO{}O{\,}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxpE*{#4}{\OEg[#2][#3]\!}} {\LidxpE{#4}{\OEg[#2][#3]\!}}     }\xspace}
+
+\NewDocumentCommand\TEFPE{sO{}O{\,}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxPE*{#4}{\OEg[#2][#3]\!}} {\LidxPE{#4}{\OEg[#2][#3]\!}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Transformaciones elementales genéricas aplicadas a la derecha de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TEC{O{}O{}m}{\ensuremath{ \Ridx{#3}{\OEg[#1\!][#2\!]} }\xspace}
+
+\NewDocumentCommand\TECp {sO{}O{  }m}{\ensuremath{\IfBooleanTF#1
+    {\Ridxp* {#4}{\OEg[#2][#3]}}   {\Ridxp {#4}{\!\OEg[#2][#3]}}     }\xspace}
+
+\NewDocumentCommand\TECP {sO{}O{  }m}{\ensuremath{\IfBooleanTF#1
+    {\RidxP* {#4}{\OEg[#2][#3]}}   {\RidxP {#4}{\!\OEg[#2][#3]}}     }\xspace}
+
+\NewDocumentCommand\TECpE{sO{}O{  }m}{\ensuremath{\IfBooleanTF#1
+    {\RidxpE*{#4}{\OEg[#2][#3]}}   {\RidxpE{#4}{\OEg[#2][#3]}}       }\xspace}
+
+\NewDocumentCommand\TECPE{sO{}O{  }m}{\ensuremath{\IfBooleanTF#1
+    {\RidxPE*{#4}{\OEg[#2][#3]}}   {\RidxPE{#4}{\OEg[#2][#3]}}       }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Espejo de transformaciones elementales genéricas aplicadas a la izquierda de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\ETEF{O{}O{}m}{\ensuremath{ \Lidx{#3}{\EOEg[#1][#2]} }\xspace}
+
+\NewDocumentCommand\ETEFp {sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\Lidxp* {#4}{\EOEg[#2][#3]}} {\Lidxp {#4}{\EOEg[#2][#3]}} }\xspace}
+
+\NewDocumentCommand\ETEFP {sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxP* {#4}{\EOEg[#2][#3]}} {\LidxP {#4}{\EOEg[#2][#3]}} }\xspace}
+
+\NewDocumentCommand\ETEFpE{sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxpE*{#4}{\EOEg[#2][#3]}} {\LidxpE{#4}{\EOEg[#2][#3]}}     }\xspace}
+
+\NewDocumentCommand\ETEFPE{sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxPE*{#4}{\EOEg[#2][#3]}} {\LidxPE{#4}{\EOEg[#2][#3]}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Espejo de transformaciones elementales genéricas aplicadas a la derecha de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\ETEC{O{}O{}m}{\ensuremath{ \Ridx{#3}{\EOEg[#1][#2]} }\xspace}
+
+\NewDocumentCommand\ETECp {sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\Ridxp* {#4}{\EOEg[#2][#3]}} {\Ridxp {#4}{\EOEg[#2][#3]}} }\xspace}
+
+\NewDocumentCommand\ETECP {sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxP* {#4}{\EOEg[#2][#3]}} {\RidxP {#4}{\EOEg[#2][#3]}} }\xspace}
+
+\NewDocumentCommand\ETECpE{sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxpE*{#4}{\EOEg[#2][#3]}} {\RidxpE{#4}{\EOEg[#2][#3]}}     }\xspace}
+
+\NewDocumentCommand\ETECPE{sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxPE*{#4}{\EOEg[#2][#3]}} {\RidxPE{#4}{\EOEg[#2][#3]}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Inversa de transformaciones elementales genéricas aplicadas a la izquierda de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\InvTEF{O{}m}{\ensuremath{ \Lidx{#2}{\InvOEg[#1]} }\xspace}
+
+\NewDocumentCommand\InvTEFp {sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\Lidxp* {#3}{\InvOEg[#2]}} {\Lidxp {#3}{\InvOEg[#2]}} }\xspace}
+
+\NewDocumentCommand\InvTEFP {sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxP* {#3}{\InvOEg[#2]}} {\LidxP {#3}{\InvOEg[#2]}} }\xspace}
+
+\NewDocumentCommand\InvTEFpE{sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxpE*{#3}{\InvOEg[#2]}} {\LidxpE{#3}{\InvOEg[#2]}}     }\xspace}
+
+\NewDocumentCommand\InvTEFPE{sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxPE*{#3}{\InvOEg[#2]}} {\LidxPE{#3}{\InvOEg[#2]}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Inversa de transformaciones elementales genéricas aplicadas a la derecha de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\InvTEC{O{}m}{\ensuremath{ \Ridx{#2}{\InvOEg[#1]} }\xspace}
+
+\NewDocumentCommand\InvTECp {sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\Ridxp* {#3}{\InvOEg[#2]}} {\Ridxp {#3}{\InvOEg[#2]}} }\xspace}
+
+\NewDocumentCommand\InvTECP {sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxP* {#3}{\InvOEg[#2]}} {\RidxP {#3}{\InvOEg[#2]}} }\xspace}
+
+\NewDocumentCommand\InvTECpE{sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxpE*{#3}{\InvOEg[#2]}} {\RidxpE{#3}{\InvOEg[#2]}}     }\xspace}
+
+\NewDocumentCommand\InvTECPE{sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxPE*{#3}{\InvOEg[#2]}} {\RidxPE{#3}{\InvOEg[#2]}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Espejo de la inversa de transformaciones elementales genéricas aplicadas a la izquierda de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\EInvTEF{O{}m}{\ensuremath{ \Lidx{#2}{\EInvOEg[#1]} }\xspace}
+
+\NewDocumentCommand\EInvTEFp {sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\Lidxp* {#3}{\EInvOEg[#2]}} {\Lidxp {#3}{\EInvOEg[#2]}} }\xspace}
+
+\NewDocumentCommand\EInvTEFP {sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxP* {#3}{\EInvOEg[#2]}} {\LidxP {#3}{\EInvOEg[#2]}} }\xspace}
+
+\NewDocumentCommand\EInvTEFpE{sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxpE*{#3}{\EInvOEg[#2]}} {\LidxpE{#3}{\EInvOEg[#2]}}     }\xspace}
+
+\NewDocumentCommand\EInvTEFPE{sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\LidxPE*{#3}{\EInvOEg[#2]}} {\LidxPE{#3}{\EInvOEg[#2]}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Espejo de la inversa de transformaciones elementales genéricas aplicadas a la derecha de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\EInvTEC{O{}m}{\ensuremath{ \Ridx{#2}{\EInvOEg[#1]} }\xspace}
+
+\NewDocumentCommand\EInvTECp {sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\Ridxp* {#3}{\EInvOEg[#2]}} {\Ridxp {#3}{\EInvOEg[#2]}} }\xspace}
+
+\NewDocumentCommand\EInvTECP {sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxP* {#3}{\EInvOEg[#2]}} {\RidxP {#3}{\EInvOEg[#2]}} }\xspace}
+
+\NewDocumentCommand\EInvTECpE{sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxpE*{#3}{\EInvOEg[#2]}} {\RidxpE{#3}{\EInvOEg[#2]}}     }\xspace}
+
+\NewDocumentCommand\EInvTECPE{sO{}m}{\ensuremath{\IfBooleanTF#1
+    {\RidxPE*{#3}{\EInvOEg[#2]}} {\RidxPE{#3}{\EInvOEg[#2]}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- (Duplicado para Moodle) Transformaciones elementales genéricas aplicadas a la izquierda de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\dTEEF   {mmm}{\ensuremath{ \Lidx  {#3}{\dOEgE{#1}{#2\!}} }\xspace}
+\NewDocumentCommand\dTEEFp  {mmm}{\ensuremath{ \Lidxp {#3}{\dOEgE{#1}{#2\!}}}\xspace}
+\NewDocumentCommand\dTEEFP  {mmm}{\ensuremath{ \LidxP {#3}{\dOEgE{#1}{#2\!}}}\xspace}
+\NewDocumentCommand\dTEEFpE {mmm}{\ensuremath{ \LidxpE{#3}{\dOEgE{#1}{#2\!}}}\xspace}
+\NewDocumentCommand\dTEEFPE {mmm}{\ensuremath{ \LidxPE{#3}{\dOEgE{#1}{#2\!}}}\xspace}
+\NewDocumentCommand\dTEF  {mm}{\ensuremath{ \Lidx  {#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dTEFp {mm}{\ensuremath{ \Lidxp {#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dTEFP {mm}{\ensuremath{ \LidxP {#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dTEFpE{mm}{\ensuremath{ \LidxpE{#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dTEFPE{mm}{\ensuremath{ \LidxPE{#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETEF  {mm}{\ensuremath{ \Lidx  {#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETEFp {mm}{\ensuremath{ \Lidxp {#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETEFP {mm}{\ensuremath{ \LidxP {#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETEFpE{mm}{\ensuremath{ \LidxpE{#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETEFPE{mm}{\ensuremath{ \LidxPE{#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTEF  {mm}{\ensuremath{ \Lidx  {#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTEFp {mm}{\ensuremath{ \Lidxp {#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTEFP {mm}{\ensuremath{ \LidxP {#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTEFpE{mm}{\ensuremath{ \LidxpE{#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTEFPE{mm}{\ensuremath{ \LidxPE{#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTEF  {mm}{\ensuremath{ \Lidx  {#2}{{\dEInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTEFp {mm}{\ensuremath{ \Lidxp {#2}{{\dEInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTEFP {mm}{\ensuremath{ \LidxP {#2}{{\dEInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTEFpE{mm}{\ensuremath{ \LidxpE{#2}{{\dEInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTEFPE{mm}{\ensuremath{ \LidxPE{#2}{{\dEInvOEg{#1}}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- (Duplicado para Moodle) Transformaciones elementales genéricas aplicadas a la izquierda de un objeto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\dTEEC   {mmm}{\ensuremath{ \Ridx  {#3}{\dOEgE{#1}{#2}} }\xspace}
+\NewDocumentCommand\dTEECp  {mmm}{\ensuremath{ \Ridxp {#3}{\dOEgE{#1}{#2}}}\xspace}
+\NewDocumentCommand\dTEECP  {mmm}{\ensuremath{ \RidxP {#3}{\dOEgE{#1}{#2}}}\xspace}
+\NewDocumentCommand\dTEECpE {mmm}{\ensuremath{ \RidxpE{#3}{\dOEgE{#1}{#2}}}\xspace}
+\NewDocumentCommand\dTEECPE {mmm}{\ensuremath{ \RidxPE{#3}{\dOEgE{#1}{#2}}}\xspace}
+\NewDocumentCommand\dTEC  {mm}{\ensuremath{ \Ridx  {#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dTECp {mm}{\ensuremath{ \Ridxp {#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dTECP {mm}{\ensuremath{ \RidxP {#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dTECpE{mm}{\ensuremath{ \RidxpE{#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dTECPE{mm}{\ensuremath{ \RidxPE{#2}{{    \dOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETEC  {mm}{\ensuremath{ \Ridx  {#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETECp {mm}{\ensuremath{ \Ridxp {#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETECP {mm}{\ensuremath{ \RidxP {#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETECpE{mm}{\ensuremath{ \RidxpE{#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dETECPE{mm}{\ensuremath{ \RidxPE{#2}{{   \dEOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTEC  {mm}{\ensuremath{ \Ridx  {#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTECp {mm}{\ensuremath{ \Ridxp {#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTECP {mm}{\ensuremath{ \RidxP {#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTECpE{mm}{\ensuremath{ \RidxpE{#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dInvTECPE{mm}{\ensuremath{ \RidxPE{#2}{{ \dInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTEC  {mm}{\ensuremath{ \Ridx  {#2}{{\dEInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTECp {mm}{\ensuremath{ \Ridxp {#2}{{\dEInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTECP {mm}{\ensuremath{ \RidxP {#2}{{\dEInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTECpE{mm}{\ensuremath{ \RidxpE{#2}{{\dEInvOEg{#1}}} }\xspace}
+\NewDocumentCommand\dEInvTECPE{mm}{\ensuremath{ \RidxPE{#2}{{\dEInvOEg{#1}}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Transformaciones elementales particulares
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\dTrF  {mm}{\ensuremath{ \Lidx{#2}{#1}              }\xspace}
+\NewDocumentCommand\dTrFp {mm}{\ensuremath{ \dTrF{#1}{\parentesis{#2}} }\xspace}
+\NewDocumentCommand\dTrFP {mm}{\ensuremath{ \dTrF{#1}{\Parentesis{#2}} }\xspace}
+\NewDocumentCommand\dTrFpE{mm}{\ensuremath{ \parentesis{\dTrF{#1}{#2}} }\xspace}
+\NewDocumentCommand\dTrFPE{mm}{\ensuremath{ \Parentesis{\dTrF{#1}{#2}} }\xspace}
+\NewDocumentCommand\dTrC  {mm}{\ensuremath{ \Ridx{#2}{#1}              }\xspace}
+\NewDocumentCommand\dTrCp {mm}{\ensuremath{ \dTrC{#1}{\parentesis{#2}} }\xspace}
+\NewDocumentCommand\dTrCP {mm}{\ensuremath{ \dTrC{#1}{\Parentesis{#2}} }\xspace}
+\NewDocumentCommand\dTrCpE{mm}{\ensuremath{ \parentesis{\dTrC{#1}{#2}} }\xspace}
+\NewDocumentCommand\dTrCPE{mm}{\ensuremath{ \Parentesis{\dTrC{#1}{#2}} }\xspace}
+\NewDocumentCommand\dTrFC  {mmm}{\ensuremath{ \LRidx{#3}{#1}{#2}              }\xspace}
+\NewDocumentCommand\dTrFCp {mmm}{\ensuremath{ \dTrFC{#1}{#2}{\parentesis{#3}} }\xspace}
+\NewDocumentCommand\dTrFCP {mmm}{\ensuremath{ \dTrFC{#1}{#2}{\Parentesis{#3}} }\xspace}
+\NewDocumentCommand\dTrFCpE{mmm}{\ensuremath{ \parentesis{\dTrFC{#1}{#2}{#3}} }\xspace}
+\NewDocumentCommand\dTrFCPE{mmm}{\ensuremath{ \Parentesis{\dTrFC{#1}{#2}{#3}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- OPERADOR QUE QUITA UN ELEMENTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\fueraitemL{m}{ \leftidx{_{}}{#1}{^{\!\Lsh  }} }
+\NewDocumentCommand\fueraitemR{m}{ \leftidx{^{\Rsh\!\!}}{#1}{_{}} }
+\NewDocumentCommand\quitaLR{mmm}{\ensuremath{
+                          \leftidx {^{\fueraitemL{#2}\!}} {{#1}} {^{\!\fueraitemR{#3}}} }\xspace}
+\NewDocumentCommand\quitaL{mm}{\ensuremath{ \leftidx{^{\fueraitemL{#2}\!}}{{#1}}{^{}} }\xspace}
+\NewDocumentCommand\quitaR{mm}{\ensuremath{ \leftidx{^{}}{{#1}}{^{\!\fueraitemR{#2}}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Selección de elementos sin emplear el operador selector
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\elemUUU {mm}{\ensuremath{\textrm{elem}_{#2}\Parentesis*{#1}}\xspace}
+\NewDocumentCommand\VectCCC {mm}{\ensuremath{\textrm{col}_{#2}\MatP*  {#1}}\xspace}
+\NewDocumentCommand\VectCCCT{mm}{\ensuremath{\textrm{col}_{#2}\MatTPE*{#1}}\xspace}
+\NewDocumentCommand\VectFFF {mm}{\ensuremath{\textrm{\eng{fila}{row}}_{#2}\MatP*  {#1}}\xspace}
+\NewDocumentCommand\VectFFFT{mm}{\ensuremath{\textrm{\eng{fila}{row}}_{#2}\MatTPE*{#1}}\xspace}
+\NewDocumentCommand\eleVVV {mm}{\ensuremath{\textrm{elem}_{#2}{\VectP*  {#1}}}\xspace}
+\NewDocumentCommand\eleVV  {mm}{\ensuremath{\MakeLowercase{#1}_{{#2}}        }\xspace}
+\NewDocumentCommand\eleMMM {mmm}{\ensuremath{\textrm{elem}_{#2#3}{\MatP*  {#1}}}\xspace}
+\NewDocumentCommand\eleMMMT{mmm}{\ensuremath{\textrm{elem}_{#2#3}{\MatTPE*{#1}}}\xspace}
+\NewDocumentCommand\eleMM  {mmm}{\ensuremath{\MakeLowercase{#1}_{{#2}{#3}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Sistemas genéricos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\SV{O{}m}{\ensuremath{\mathsf{\MakeUppercase{#2}}_{#1}}\xspace}
+\NewDocumentCommand\concatSV{mm}{\ensuremath{{#1}\concat{#2}}\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Notación matricial
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\vect     {om}{\ensuremath{\IfNoValueTF{#1}
+           { \vv {\MakeLowercase{#2}}       }
+           { \vv*{\MakeLowercase{#2}}{\!#1} }                   }\xspace}
+
+\NewDocumentCommand\vectp {som}{\ensuremath{\IfBooleanTF#1
+    {\parentesis*{\IfNoValueTF{#2}{\vect{#3}}{\vect[#2]{#3}}}}
+    {\parentesis {\IfNoValueTF{#2}{\vect{#3}}{\vect[#2]{#3}}}}  }\xspace}
+
+\NewDocumentCommand\vectP {som}{\ensuremath{\IfBooleanTF#1
+    {\Parentesis*{\IfNoValueTF{#2}{\vect{#3}}{\vect[#2]{#3}}}}
+    {\Parentesis {\IfNoValueTF{#2}{\vect{#3}}{\vect[#2]{#3}}}}  }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\Vect   {O{}O{}m}{\ensuremath{%
+                       \RidxE{\boldsymbol{\MakeLowercase{#3}}}{#1}{\boldsymbol{#2}}   }\xspace}
+
+\NewDocumentCommand\Vectp {sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\parentesis*{\Vect[#2][#3]{#4}}}
+    {\parentesis {\Vect[#2][#3]{#4}}} }\xspace}
+
+\NewDocumentCommand\VectP {sO{}O{}m}{\ensuremath{\IfBooleanTF#1
+    {\Parentesis*{\Vect[#2][#3]{#4}}}
+    {\Parentesis {\Vect[#2][#3]{#4}}} }\xspace}
+
+\NewDocumentCommand\VectpKK {som}{\ensuremath{\IfBooleanTF#1
+    {\parentesis*{\IfNoValueTF{#2}{\Vect{#3}}{\Vect[#2]{#3}}}}
+    {\parentesis {\IfNoValueTF{#2}{\Vect{#3}}{\Vect[#2]{#3}}}} }\xspace}
+
+\NewDocumentCommand\VectPKK {som}{\ensuremath{\IfBooleanTF#1
+    {\Parentesis*{\IfNoValueTF{#2}{\Vect{#3}}{\Vect[#2]{#3}}}}
+    {\Parentesis {\IfNoValueTF{#2}{\Vect{#3}}{\Vect[#2]{#3}}}} }\xspace}
+\NewDocumentCommand\irvec{O{1}O{n}m}{\ensuremath{\Vect[#1]{#3},\ldots,\Vect[#2]{#3} }\xspace}
+\NewDocumentCommand\irvecC{O{1}O{n}m}{\ensuremath{\VectC{#3}{#1},\ldots,\VectC{#3}{#2} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\Mat    {O{}m}{\ensuremath{%
+                       \Ridx{\boldsymbol{\mathsf{\MakeUppercase{#2}}}}{#1}   }\xspace}
+
+\NewDocumentCommand\Matp  {som}{\ensuremath{\IfBooleanTF#1
+    {\parentesis*{\IfNoValueTF{#2}{\Mat{#3}}{\Mat[#2]{#3}}}}
+    {\parentesis {\IfNoValueTF{#2}{\Mat{#3}}{\Mat[#2]{#3}}}}   }\xspace}
+
+\NewDocumentCommand\MatP  {som}{\ensuremath{\IfBooleanTF#1
+    {\Parentesis*{\IfNoValueTF{#2}{\Mat{#3}}{\Mat[#2]{#3}}}}
+    {\Parentesis {\IfNoValueTF{#2}{\Mat{#3}}{\Mat[#2]{#3}}}}   }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\MatT{O{}m}{\ensuremath{\RidxE{\Mat{#2}}{#1}{\T}}\xspace}
+
+\NewDocumentCommand\MatTp  {som}{\ensuremath{\IfBooleanTF#1
+       {\Transp* {\Mat[#2]{#3}}}
+       {\Transp  {\Mat[#2]{#3}}}            }\xspace}
+
+\NewDocumentCommand\MatTP  {som}{\ensuremath{\IfBooleanTF#1
+       {\TransP* {\Mat[#2]{#3}}}
+       {\TransP  {\Mat[#2]{#3}}}            }\xspace}
+
+\NewDocumentCommand\MatTpE {sO{}m}{\ensuremath{\IfBooleanTF#1
+       {\RidxEpE*{\Mat{#3}}{#2}{\T}}
+       {\RidxEpE*{\Mat{#3}}{#2}{\T}}     }\xspace}
+
+\NewDocumentCommand\MatTPE {sO{}m}{\ensuremath{\IfBooleanTF#1
+       {\RidxEPE*{\Mat{#3}}{#2}{\T}}
+       {\RidxEPE*{\Mat{#3}}{#2}{\T}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\MatTT  {som}{\ensuremath{\IfBooleanTF#1
+       {\TransP*{\MatT[#2]{#3}}}
+       {\Transp {\MatT[#2]{#3}}}           }\xspace}
+
+\NewDocumentCommand\MatTTPE{som}{\ensuremath{\IfBooleanTF#1
+       {\Parentesis*{\MatTT*[#2]{#3}}}
+       {\Parentesis {\MatTT [#2]{#3}}}     }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\MVect{som}{\ensuremath{\IfBooleanTF#1
+              {\left[\Vect[#2]{#3}\vphantom{\Big.}\right]}
+              { \big[\Vect[#2]{#3}                \big  ]}   }\xspace}
+\NewDocumentCommand\MVectT{som}{\ensuremath{\IfBooleanTF#1
+              {\Trans{\MVect*[#2]{#3}} }
+              {\Trans{\MVect [#2]{#3}} }                     }\xspace}
+\NewDocumentCommand\MVectF{somm}{\ensuremath{\IfBooleanTF#1
+              {\left[\VectF[#2]{#3}{#4}\vphantom{\Big.}\right]}
+              { \big[\VectF[#2]{#3}{#4}                \big  ]}   }\xspace}
+\NewDocumentCommand\MVectC{somm}{\ensuremath{\IfBooleanTF#1
+              {\left[\VectC[#2]{#3}{#4}\vphantom{\Big.}\right]}
+              { \big[\VectC[#2]{#3}{#4}                \big  ]}   }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\MVectFT{somm}{\ensuremath{\IfBooleanTF#1
+            {\Trans{\left[\VectF[#2]{#3}{#4}\vphantom{\Big.}\right]}}
+            {\Trans{ \big[\VectF[#2]{#3}{#4}                  \big]}}  }\xspace}
+\NewDocumentCommand\MVectCT{somm}{\ensuremath{\IfBooleanTF#1
+            {\Trans{\left[\VectC[#2]{#3}{#4}\vphantom{\Big.}\right]}}
+            {\Trans{ \big[\VectC[#2]{#3}{#4}                  \big]}}  }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Miscelánea matrices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\Traza}{tr}
+\DeclareMathOperator{\rg}{rg}
+\NewDocumentCommand\traza  {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Traza{\Parentesis*{#2}}}
+            {\Traza{\parentesis {#2}}}         }\xspace}
+\NewDocumentCommand\rango  {sm   }{\ensuremath{\IfBooleanTF#1
+            {\rg{\Parentesis*{#2}}}
+            {\rg{\parentesis {#2}}}            }\xspace}
+\DeclareMathOperator{\cof}{cof}
+\DeclareMathOperator{\adj}{Adj}
+\NewDocumentCommand\determinante{sm}{\ensuremath{\IfBooleanTF#1
+            {\modulus*{#2}}
+            {\modulus {#2}}                     }\xspace}
+\NewDocumentCommand\detp{sm}{\ensuremath{\IfBooleanTF#1
+            {\det\parentesis*{#2}}
+            {\det\parentesis {#2}}                     }\xspace}
+\NewDocumentCommand\detP{sm}{\ensuremath{\IfBooleanTF#1
+            {\det\Parentesis*{#2}}
+            {\det\Parentesis {#2}}                     }\xspace}
+\NewDocumentCommand\subMat{mmm}{\ensuremath{
+        \quitaLR{\Mat{#1}}{#2}{#3}             }\xspace}
+\NewDocumentCommand\Menor {mmm}{\ensuremath{
+        \det\parentesis{\subMat{#1}{#2}{#3}}   }\xspace}
+
+\NewDocumentCommand\MenoR {mmm}{\ensuremath{
+               \big|{\subMat{#1}{#2}{#3}}\big| }\xspace}
+\NewDocumentCommand\Cof{smmm}{\ensuremath{\IfBooleanTF#1
+            {\cof_{{#3}{#4}}\Parentesis*{\Mat{#2}}}
+            {\cof_{{#3}{#4}}\parentesis {\Mat{#2}}}  }\xspace}
+\NewDocumentCommand\Dim{mmm}{\ensuremath{
+       \mathop{#1}\limits_{\scriptscriptstyle #2\times#3}  }\xspace}
+
+\NewDocumentCommand\Dimp{smmm}{\ensuremath{\IfBooleanTF#1
+       {\Dim{\parentesis*{#2}}{#3}{#4}}
+       {\Dim{\parentesis {#2}}{#3}{#4}}      }\xspace}
+
+\NewDocumentCommand\DimP     {smmm}{\ensuremath{\IfBooleanTF#1
+       {\Dim{\Parentesis*{#2}}{#3}{#4}}
+       {\Dim{\Parentesis {#2}}{#3}{#4}}      }\xspace}
+
+\NewDocumentCommand\DimpE    {smmm}{\ensuremath{\IfBooleanTF#1
+       {\parentesis*{\Dim{#2}{#3}{#4}}}
+       {\parentesis {\Dim{#2}{#3}{#4}}}      }\xspace}
+
+\NewDocumentCommand\DimPE    {smmm}{\ensuremath{\IfBooleanTF#1
+       {\Parentesis*{\Dim{#2}{#3}{#4}}}
+       {\Parentesis {\Dim{#2}{#3}{#4}}}      }\xspace}
+\NewDocumentCommand\Matdim{ommm}{\ensuremath{ \Dim{\Mat[#1]{#2}}{#3}{#4} }\xspace}
+
+\NewDocumentCommand\Matdimp {sommm}{\ensuremath{\IfBooleanTF#1
+       {\Dimp*{\Mat[#2]{#3}}{#4}{#5}}
+       {\Dimp {\Mat[#2]{#3}}{#4}{#5}}        }\xspace}
+
+\NewDocumentCommand\MatdimP {sommm}{\ensuremath{\IfBooleanTF#1
+       {\DimP*{\Mat[#2]{#3}}{#4}{#5}}
+       {\DimP {\Mat[#2]{#3}}{#4}{#5}}        }\xspace}
+
+\NewDocumentCommand\MatdimpE{sommm}{\ensuremath{\IfBooleanTF#1
+       {\DimpE*{\Mat[#2]{#3}}{#4}{#5}}
+       {\DimpE {\Mat[#2]{#3}}{#4}{#5}}       }\xspace}
+
+\NewDocumentCommand\MatdimPE{sommm}{\ensuremath{\IfBooleanTF#1
+       {\DimPE*{\Mat[#2]{#3}}{#4}{#5}}
+       {\DimPE {\Mat[#2]{#3}}{#4}{#5}}       }\xspace}
+\NewDocumentCommand\MatTdim{ommm}{\ensuremath{ \Dim{\MatT[#1]{#2}}{#3}{#4} }\xspace}
+
+\NewDocumentCommand\MatTdimp {sommm}{\ensuremath{\IfBooleanTF#1
+       {\Dimp*{\MatT[#2]{#3}}{#4}{#5}}
+       {\Dimp {\MatT[#2]{#3}}{#4}{#5}}        }\xspace}
+
+\NewDocumentCommand\MatTdimP {sommm}{\ensuremath{\IfBooleanTF#1
+       {\DimP*{\MatT[#2]{#3}}{#4}{#5}}
+       {\DimP {\MatT[#2]{#3}}{#4}{#5}}        }\xspace}
+
+\NewDocumentCommand\MatTdimpE{sommm}{\ensuremath{\IfBooleanTF#1
+       {\DimpE*{\MatT[#2]{#3}}{#4}{#5}}
+       {\DimpE {\MatT[#2]{#3}}{#4}{#5}}       }\xspace}
+
+\NewDocumentCommand\MatTdimPE{sommm}{\ensuremath{\IfBooleanTF#1
+       {\DimPE*{\MatTpE*[#2]{#3}}{#4}{#5}}
+       {\DimPE {\MatTpE*[#2]{#3}}{#4}{#5}}       }\xspace}
+\def\MDaV{D}
+\NewDocumentCommand\UMat{O{}m}{\ensuremath{ \Mat[#1]{\Dot{#2}} }\xspace}
+\NewDocumentCommand\InvUMat{O{}m}{\ensuremath{\RidxE{\Mat{\Dot{#2}}}{#1}{\minus1} }\xspace}
+
+\NewDocumentCommand\UMatT{O{}m}{\ensuremath{\RidxE{\Mat{\Dot{#2}}}{#1}{\T} }\xspace}
+\NewDocumentCommand\MatGC   {m}{\ensuremath{       \UMat[#1\triangleright]{G}           }\xspace}
+\NewDocumentCommand\InvMatGC{m}{\ensuremath{\RidxE{\UMat{G}}{#1\triangleright}{\minus1} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Productos entre vectores
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\eSc{sO{}mm}{\ensuremath{\IfBooleanTF#1
+    {\Ridx{\Angulos*{\left.#3 \right| #4}}{\!#2}}
+    {\Ridx{\angulos {      #3   \big| #4}}{\!#2}}     }\xspace}
+\NewDocumentCommand\eSckk{sO{}mm}{\ensuremath{{\IfBooleanTF#1
+             {\left< {#3} , {#4} \right>}
+             {\big\langle{{#3} , {#4}\big\rangle}}}_{\!#2}  }\xspace}
+\NewDocumentCommand\esc{sO{}mm}{\ensuremath{{\IfBooleanTF#1
+            {\eSc*{\vect{#3}}{\vect{#4}}}
+            {\eSc {\vect{#3}}{\vect{#4}}}}_{\!#2}         }\xspace}
+\NewDocumentCommand\dotProd{mm}{\ensuremath{{#1}\cdot{#2}}\xspace}
+
+\NewDocumentCommand\dotProdp{smm}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{{#2}\cdot{#3}}}
+            {\parentesis {{#2}\cdot{#3}}}              }\xspace}
+
+\NewDocumentCommand\dotProdP{smm}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{{#2}\cdot{#3}}}
+            {\Parentesis {{#2}\cdot{#3}}}              }\xspace}
+\NewDocumentCommand\dotprod{O{}mO{}m}{\ensuremath{\dotProd{\Vect[#1]{#2}}{\Vect[#3]{#4}}}\xspace}
+
+\NewDocumentCommand\dotprodp{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\dotprod[#2]{#3}[#4]{#5}}}
+            {\parentesis {\dotprod[#2]{#3}[#4]{#5}}}           }\xspace}
+
+\NewDocumentCommand\dotprodP{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\dotprod[#2]{#3}[#4]{#5}}}
+            {\Parentesis {\dotprod[#2]{#3}[#4]{#5}}}           }\xspace}
+\NewDocumentCommand\prodH{mm}{\ensuremath{ {#1}\odot{#2} }\xspace}
+
+\NewDocumentCommand\prodHp{smm}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\prodH{#2}{#3}}}
+            {\parentesis {\prodH{#2}{#3}}}           }\xspace}
+
+\NewDocumentCommand\prodHP{smm}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\prodH{#2}{#3}}}
+            {\Parentesis {\prodH{#2}{#3}}}           }\xspace}
+\NewDocumentCommand\prodh{O{}mO{}m}{\ensuremath{
+            \prodH{\Vect[#1]{#2}}{\Vect[#3]{#4}} }\xspace}
+
+\NewDocumentCommand\prodhp{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\prodh[#2]{#3}[#4]{#5}}}
+            {\parentesis {\prodh[#2]{#3}[#4]{#5}}}           }\xspace}
+
+\NewDocumentCommand\prodhP{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\prodh[#2]{#3}[#4]{#5}}}
+            {\Parentesis {\prodh[#2]{#3}[#4]{#5}}}           }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Matriz por vector y vector por matriz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\MV { O{}mO{}m}{\ensuremath{ \Mat[#1]{#2}\Vect[#3]{#4} }\xspace}
+
+\NewDocumentCommand\MVpE{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\MV[#2]{#3}[#4]{#5}}}
+            {\parentesis {\MV[#2]{#3}[#4]{#5}}}   }\xspace}
+
+\NewDocumentCommand\MVPE{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\MV[#2]{#3}[#4]{#5}}}
+            {\Parentesis {\MV[#2]{#3}[#4]{#5}}}   }\xspace}
+\NewDocumentCommand\VM { O{}mO{}m}{\ensuremath{ \Vect[#1]{#2}\Mat[#3]{#4} }\xspace}
+
+\NewDocumentCommand\VMpE{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\VM[#2]{#3}[#4]{#5}}}
+            {\parentesis {\VM[#2]{#3}[#4]{#5}}}   }\xspace}
+
+\NewDocumentCommand\VMPE{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\VM[#2]{#3}[#4]{#5}}}
+            {\Parentesis {\VM[#2]{#3}[#4]{#5}}}   }\xspace}
+\NewDocumentCommand\MTV{ O{}mO{}m}{\ensuremath{ \MatT[#1]{#2}\Vect[#3]{#4} }\xspace}
+
+\NewDocumentCommand\MTVp{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\MatTpE*[#2]{#3}\Vect[#4]{#5}}
+            {\MatTpE [#2]{#3}\Vect[#4]{#5}}  }\xspace}
+
+\NewDocumentCommand\MTVP{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\MatTPE*[#2]{#3}\Vect[#4]{#5}}
+            {\MatTPE [#2]{#3}\Vect[#4]{#5}}  }\xspace}
+\NewDocumentCommand\VMT{ O{}mO{}m}{\ensuremath{ \Vect[#1]{#2}\MatT[#3]{#4} }\xspace}
+
+\NewDocumentCommand\VMTp{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\Vect[#2]{#3}\MatTpE*[#4]{#5}}
+            {\Vect[#2]{#3}\MatTpE [#4]{#5}}        }\xspace}
+
+\NewDocumentCommand\VMTP{sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\Vect[#2]{#3}\MatTPE*[#4]{#5}}
+            {\Vect[#2]{#3}\MatTPE [#4]{#5}}        }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Matriz por matriz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\MN  {O{}mO{}m}{\ensuremath{ \Mat[#1]{#2}\Mat[#3]{#4} }\xspace}
+\NewDocumentCommand\MTN {O{}mO{}m}{\ensuremath{ \MatT[#1]{#2}\Mat[#3]{#4} }\xspace}
+
+\NewDocumentCommand\MTNp {sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\MatTpE*[#2]{#3}\Mat[#4]{#5}}
+            {\MatTpE [#2]{#3}\Mat[#4]{#5}}                         }\xspace}
+
+\NewDocumentCommand\MTNP {sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\MatTPE*[#2]{#3}\Mat[#4]{#5}}
+            {\MatTPE [#2]{#3}\Mat[#4]{#5}}                         }\xspace}
+\NewDocumentCommand\MNT {O{}mO{}m}{\ensuremath{ \Mat[#1]{#2}\MatT[#3]{#4} }\xspace}
+
+\NewDocumentCommand\MNTp {sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\Mat[#2]{#3}\MatTpE*[#4]{#5}}
+            {\Mat[#2]{#3}\MatTpE [#4]{#5}}                         }\xspace}
+
+\NewDocumentCommand\MNTP {sO{}mO{}m}{\ensuremath{\IfBooleanTF#1
+            {\Mat[#2]{#3}\MatTPE*[#4]{#5}}
+            {\Mat[#2]{#3}\MatTPE [#4]{#5}}                         }\xspace}
+\NewDocumentCommand\MTM {O{}m }{\ensuremath{ \MTN[#1]{#2}[#1]{#2}    }\xspace}
+
+\NewDocumentCommand\MTMp{som}{\ensuremath{\IfBooleanTF#1
+                             {\MTNp*[#2]{#3}[#2]{#3}}
+                             {\MTNp [#2]{#3}[#2]{#3}}              }\xspace}
+
+\NewDocumentCommand\MTMP{som}{\ensuremath{\IfBooleanTF#1
+                             {\MTNP*[#2]{#3}[#2]{#3}}
+                             {\MTNP [#2]{#3}[#2]{#3}}              }\xspace}
+\NewDocumentCommand\MMT {O{}m }{\ensuremath{ \MNT[#1]{#2}[#1]{#2}    }\xspace}
+
+\NewDocumentCommand\MMTp{som}{\ensuremath{\IfBooleanTF#1
+                             {\MNTp*[#2]{#3}[#2]{#3}}
+                             {\MNTp [#2]{#3}[#2]{#3}}              }\xspace}
+
+\NewDocumentCommand\MMTP{som}{\ensuremath{\IfBooleanTF#1
+                             {\MNTP*[#2]{#3}[#2]{#3}}
+                             {\MNTP [#2]{#3}[#2]{#3}}              }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\MNMT{O{}mO{}m}{\ensuremath{ \MN[#1]{#2}[#3]{#4}\MatT[#1]{#2} }\xspace}
+
+\NewDocumentCommand\MNMTp{somom}{\ensuremath{\IfBooleanTF#1
+                             {\MN[#2]{#3}[#4]{#5}\MatTpE*[#2]{#3}}
+                             {\MN[#2]{#3}[#4]{#5}\MatTpE [#2]{#3}} }\xspace}
+
+\NewDocumentCommand\MNMTP{somom}{\ensuremath{\IfBooleanTF#1
+                             {\MN[#2]{#3}[#4]{#5}\MatTPE*[#2]{#3}}
+                             {\MN[#2]{#3}[#4]{#5}\MatTPE [#2]{#3}} }\xspace}
+\NewDocumentCommand\MTNM{O{}mO{}m}{\ensuremath{ \MTN[#1]{#2}[#3]{#4}\Mat[#1]{#2} }\xspace}
+
+\NewDocumentCommand\MTNMp{somom}{\ensuremath{\IfBooleanTF#1
+                             {\MTNp*[#2]{#3}[#4]{#5}\Mat[#2]{#3}}
+                             {\MTNp [#2]{#3}[#4]{#5}\Mat[#2]{#3}}              }\xspace}
+
+\NewDocumentCommand\MTNMP{somom}{\ensuremath{\IfBooleanTF#1
+                             {\MTNP*[#2]{#3}[#4]{#5}\Mat[#2]{#3}}
+                             {\MTNP [#2]{#3}[#4]{#5}\Mat[#2]{#3}}              }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Matriz inversa
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\InvMat  { O{}m}{\ensuremath{\RidxE{\Mat{#2}}{#1}{\minus1} }\xspace}
+
+\NewDocumentCommand\InvMatp {som}{\ensuremath{\IfBooleanTF#1
+            {\Invp*{\Mat[#2]{#3}}}
+            {\Invp {\Mat[#2]{#3}}}              }\xspace}
+
+\NewDocumentCommand\InvMatP {som}{\ensuremath{\IfBooleanTF#1
+            {\InvP*{\Mat[#2]{#3}}}
+            {\InvP {\Mat[#2]{#3}}}              }\xspace}
+
+\NewDocumentCommand\InvMatpE{sO{}m}{\ensuremath{\IfBooleanTF#1
+            {\RidxEpE*{\Mat{#3}}{#2}{\minus1}}
+            {\RidxEpE*{\Mat{#3}}{#2}{\minus1}}  }\xspace}
+
+\NewDocumentCommand\InvMatPE{sO{}m}{\ensuremath{\IfBooleanTF#1
+            {\RidxEPE*{\Mat{#3}}{#2}{\minus1}}
+            {\RidxEPE*{\Mat{#3}}{#2}{\minus1}}  }\xspace}
+
+\NewDocumentCommand\InvMatT {som }{\ensuremath{\IfBooleanTF#1
+            {\InvP*{ \MatT[#2]{#3} }}
+            {\Invp { \MatT[#2]{#3} }}                        }\xspace}
+
+\NewDocumentCommand\InvMatTpE{som }{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{\InvP*{ \MatT[#2]{#3} }}}
+            {\parentesis {\Invp*{ \MatT[#2]{#3} }}}          }\xspace}
+
+\NewDocumentCommand\InvMatTPE{som }{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\InvP*{ \MatT[#2]{#3} }}}
+            {\Parentesis {\Invp { \MatT[#2]{#3} }}}          }\xspace}
+\NewDocumentCommand\TInvMat {som }{\ensuremath{\IfBooleanTF#1
+            {\Trans{\left.\InvMatpE*[#2]{#3}\!\right.}}
+            {\Trans{      \InvMatpE [#2]{#3}}}           }\xspace}
+
+\NewDocumentCommand\TInvMatpE {som }{\ensuremath{\IfBooleanTF#1
+            {\parentesis*{  \TInvMat*[#2]{#3}}}
+            {\parentesis {\!\TInvMat*[#2]{#3}}}          }\xspace}
+
+\NewDocumentCommand\TInvMatPE {som }{\ensuremath{\IfBooleanTF#1
+            {\Parentesis*{\TInvMat*[#2]{#3}}}
+            {\Parentesis {\TInvMat [#2]{#3}}}            }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Otros productos entre matrices y vectores
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\MTMV { mm }{\ensuremath{ \MTN {#1}{#1}\Vect{#2} }\xspace}
+
+\NewDocumentCommand\MTMVp{smm}{\ensuremath{\IfBooleanTF#1
+            {\MTNp*{#2}{#2}\Vect{#3}}
+            {\MTNp {#2}{#2}\Vect{#3}}      }\xspace}
+
+\NewDocumentCommand\MTMVP{smm}{\ensuremath{\IfBooleanTF#1
+            {\MTNP*{#2}{#2}\Vect{#3}}
+            {\MTNP {#2}{#2}\Vect{#3}}      }\xspace}
+\NewDocumentCommand\VMW  { mmm}{\ensuremath{ \VM  {#1}{#2}\Vect{#3} }\xspace}
+\NewDocumentCommand\VMV  { mm }{\ensuremath{ \VMW {#1}{#2}{#1}      }\xspace}
+\NewDocumentCommand\VMTW { mmm}{\ensuremath{ \VMT {#1}{#2}\Vect{#3} }\xspace}
+
+\NewDocumentCommand\VMTWp{smmm}{\ensuremath{\IfBooleanTF#1
+            {\VMTp*{#2}{#3}\Vect{#4}}
+            {\VMTp {#2}{#3}\Vect{#4}}      }\xspace}
+
+\NewDocumentCommand\VMTWP{smmm}{\ensuremath{\IfBooleanTF#1
+            {\VMTP*{#2}{#3}\Vect{#4}}
+            {\VMTP {#2}{#3}\Vect{#4}}      }\xspace}
+\NewDocumentCommand\VMTV { mm }{\ensuremath{ \VMTW{#1}{#2}{#1}      }\xspace}
+
+\NewDocumentCommand\VMTVp{smm}{\ensuremath{\IfBooleanTF#1
+            {\VMTp*{#2}{#3}\Vect{#2}}
+            {\VMTp {#2}{#3}\Vect{#2}}      }\xspace}
+
+\NewDocumentCommand\VMTVP{smm}{\ensuremath{\IfBooleanTF#1
+            {\VMTP*{#2}{#3}\Vect{#2}}
+            {\VMTP {#2}{#3}\Vect{#2}}      }\xspace}
+\NewDocumentCommand\InvMTM  {som }{\ensuremath{\IfBooleanTF#1
+            {\InvP*{ \MTM[#2]{#3} }}
+            {\Invp { \MTM[#2]{#3} }}                }\xspace}
+\NewDocumentCommand\InvXTX{}{\ensuremath{\InvMTM{X}}\xspace}
+\NewDocumentCommand\MInvMTMMT{sO{}m}{\ensuremath{\IfBooleanTF#1
+            {\MVect[#2]{#3}\Invp{\VTV[#2]{#3}}\MVectT[#2]{#3}}
+            {\Mat[#2]{#3}\InvMTM[#2]{#3}\MatT[#2]{#3}}         }\xspace}
+
+\NewDocumentCommand\MInvMTMMTkk{sO{}m}{\ensuremath{\Mat[#1]{#2}\InvMTM[#1]{#2}\MatT[#1]{#2}}\xspace}
+\NewDocumentCommand\VTW{omom}{\ensuremath{\MVectT[#1]{#2}\!\MVect[#3]{#4}}\xspace}
+\NewDocumentCommand\VTV{om}{\ensuremath{\MVectT[#1]{#2}\!\MVect[#1]{#2}}\xspace}
+\NewDocumentCommand\VWT{omom}{\ensuremath{\MVect[#1]{#2}\!\MVectT[#3]{#4}}\xspace}
+\NewDocumentCommand\VVT{om}{\ensuremath{\MVect[#1]{#2}\!\MVectT[#1]{#2}}\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Sistemas de ecuaciones
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\SEL  {mmm}{\ensuremath{\MV   {#1}{#2}=\Vect{#3}}\xspace}
+\NewDocumentCommand\SELT {mmm}{\ensuremath{\MTV  {#1}{#2}=\Vect{#3}}\xspace}
+\NewDocumentCommand\SELTP{mmm}{\ensuremath{\MTVP*{#1}{#2}=\Vect{#3}}\xspace}
+\NewDocumentCommand\SELF {mmm}{\ensuremath{\VM   {#1}{#2}=\Vect{#3}}\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Espacios vectoriales
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\EV{O{}O{}m}{\ensuremath{\RidxE{\mathcal{#3}}{\scriptstyle{#1}}{#2}}\xspace}
+\DeclareMathOperator{\EspacioNul}{\EV{N}}
+\DeclareMathOperator{\EspacioCol}{\EV{C}}
+\NewDocumentCommand\Nulls{sm}{\ensuremath{\IfBooleanTF#1
+    {\EspacioNul\Parentesis*{#2}}
+    {\EspacioNul\parentesis {#2}}        }\xspace}
+\NewDocumentCommand\nulls{sm}{\ensuremath{\IfBooleanTF#1
+    {\Nulls*{\Mat{#2}}}
+    {\Nulls {\Mat{#2}}}                     }\xspace}
+\NewDocumentCommand\Cols{sm}{\ensuremath{\IfBooleanTF#1
+    {\EspacioCol\Parentesis*{#2}}
+    {\EspacioCol\parentesis {#2}}        }\xspace}
+\NewDocumentCommand\cols{sm}{\ensuremath{\IfBooleanTF#1
+    {\Cols*{\Mat{#2}}}
+    {\Cols {\Mat{#2}}}                     }\xspace}
+\NewDocumentCommand\Span{sm}{\ensuremath{\IfBooleanTF#1
+        {\EV{L}\Parentesis*{#2}}
+        {\EV{L}\parentesis {#2}}             }\xspace}
+\NewDocumentCommand\PSpanNew{sm}{\ensuremath{\,\IfBooleanTF#1
+        {\topinset{\tiny\EV{P}}{\EV{L}}{2pt}{2pt}\Parentesis*{#2}}
+        {\topinset{\tiny\EV{P}}{\EV{L}}{2pt}{2pt}\parentesis {#2}} }\xspace}
+\NewDocumentCommand\coord  {m m}{\ensuremath{
+        \Ridx{#1}{\!\Ridx{\mathbin{/}}{\!#2}} }\xspace}
+
+\NewDocumentCommand\coordP  {smm}{\ensuremath{\IfBooleanTF#1
+        {\coord{\Parentesis*{#2}}{#3}}
+        {\coord{\parentesis {#2}}{#3}}        }\xspace}
+
+\NewDocumentCommand\coordPE {smm}{\ensuremath{\IfBooleanTF#1
+        {\Parentesis*{\coord{#2}{#3}}}
+        {\parentesis {\coord{#2}{#3}}}        }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Notación funcional
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\imagen}{imag}
+\NewDocumentCommand\mifun {smmm}{\ensuremath{\IfBooleanTF#1
+        {#3\xrightarrow{#2}#4}
+        {#2 \colon #3 \to  #4}        }\xspace}
+\NewDocumentCommand\deffun {m m m m m}{
+  \ensuremath{
+    \begingroup
+    {\setlength{\arraycolsep}{0pt}
+      \begin{array}[t]{r@{\,}c@{\,}c@{\,}l}
+        #1\colon & #2 & \longrightarrow & #3\\
+                 & #4 & \longmapsto & #5
+      \end{array}}
+    \endgroup}\xspace}
+\NewDocumentCommand\imrec {mm}{\ensuremath{%
+    \RidxE{#1}{}{{\lfloor{\scriptscriptstyle\!#2}}} }\xspace}
+\DeclareMathOperator{\sproy}{Prj}
+\NewDocumentCommand\proy{sO{}m}{\ensuremath{\IfBooleanTF#1
+                         {\Ridx{\sproy}{#2}\!\Parentesis*{#3}} {\Ridx{\sproy}{#2}\!\parentesis{#3}}
+                            }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Probabilidad
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathAlphabet{\mymathbb}{U}{BOONDOX-ds}{m}{n}
+\NewDocumentCommand\Cero{}{\ensuremath{\mymathbb{0}}\xspace}
+\NewDocumentCommand\Uno{}{\ensuremath{\mymathbb{1}}\xspace}
+\NewDocumentCommand\indCero{}{\ensuremath{\Cero}\xspace}
+\NewDocumentCommand\indUno{} {\ensuremath{\Uno}\xspace}
+\NewDocumentCommand\ind{m}{\ensuremath{{\Uno}_{{#1}}}\xspace}
+\NewDocumentCommand\Ind{} {\ensuremath{\Uno}\xspace}
+\NewDocumentCommand\sspi{O{}O{}}{\ensuremath{\RidxE{\eta}{\scriptstyle{#1}}{#2}}\xspace}
+\NewDocumentCommand\SPI{sO{}O{}mm}{\ensuremath{\IfBooleanTF#1
+    {\Ridx{\Angulos*{\left.#4 \right| #5}}{\!\sspi[#2][#3]}}
+    {\Ridx{\angulos {      #4   \big| #5}}{\!\sspi[#2][#3]}}     }\xspace}
+\NewDocumentCommand\sesp{O{}}{\ensuremath{\Ridx{\mathbb{S}}{{#1\!}}}\xspace}
+\NewDocumentCommand\ESP{sO{}m}{\ensuremath{\IfBooleanTF#1
+                        {\sesp[#2\!]\Parentesis*{#3}} {\sesp[#2]\parentesis{#3}}
+                          } \xspace}
+\NewDocumentCommand\domesp{m}{\ensuremath{\Ridx{L}{\scriptstyle#1}}\xspace}
+\NewDocumentCommand\spro{O{}}{\ensuremath{\Ridx{\mathbb{P}}{{\!#1}}}\xspace}
+\NewDocumentCommand\PRO{sO{}m}{\ensuremath{\IfBooleanTF#1
+                         {\spro[#2]\Parentesis*{#3}} {\spro[#2]\parentesis{#3}}
+                            }\xspace}
+\NewDocumentCommand\PRObh{smm}{\ensuremath{\IfBooleanTF#1
+                         {\spro[_{#3}\!]\Parentesis*{#2}} {\spro[_{#3}\!]\parentesis{#2}}
+                            }\xspace}
+\newcommand{\pindep}{\mathbin{\mathpalette\PindeP@t\relax}}
+\newcommand{\PindeP@t}[2]{%
+  \vcenter{\hbox{%
+    \sbox\z@{$\m@th#1-$}%
+    \setlength{\unitlength}{\wd\z@}%
+    \begin{picture}(.7,1)
+    \roundcap
+    \put(0.1,0.2){\line(5,0){0.5}}
+    \put(0.4,0.6){\line(5,0){0.3}}
+    \put(0.1,0.2){\line(0,1){0.7}}
+    \put(0.4,0.6){\line(0,1){0.5}}
+    \put(0.1,0.2){\line(5,6.5){0.3}}
+    \end{picture}%
+  }} }
+\newcommand{\dperp}{\mathbin{\mathpalette\Dperp@t\relax}}
+\newcommand{\Dperp@t}[2]{%
+  \vcenter{\hbox{%
+    \sbox\z@{$\m@th#1-$}%
+    \setlength{\unitlength}{\wd\z@}%
+    \begin{picture}(1,1)
+    \roundcap
+    \put(0.1,0.2){\line(1,0){0.8}}
+    \put(0.40,0.2){\line(0,1){0.8}}
+    \put(0.60,0.2){\line(0,1){0.8}}
+    \end{picture}%
+  }} }
+\newcommand{\ndperp}{\mathbin{\mathpalette\nDperp@t\relax}}
+\newcommand{\nDperp@t}[2]{%
+  \vcenter{\hbox{%
+    \sbox\z@{$\m@th#1-$}%
+    \setlength{\unitlength}{\wd\z@}%
+    \begin{picture}(1,1)
+    \roundcap
+    \put(0.1,0.2){\line(1,0){0.8}}
+    \put(0.40,0.2){\line(0,1){0.8}}
+    \put(0.60,0.2){\line(0,1){0.8}}
+    \put(0.2,-.05){\line(0.6,1.15){0.65}}
+    \end{picture}%
+  }} }
+\NewDocumentCommand\PSpan{sm}{\ensuremath{\,\IfBooleanTF#1
+        {\EV{L{\!\!{\scriptstyle{{}^\mathbb{_P}}}}}\Parentesis*{#2}}
+        {\EV{L{\!\!{\scriptstyle{{}^\mathbb{_P}}}}}\parentesis {#2}} }\xspace}
+\DeclareFontFamily{U}{matha}{\hyphenchar\font45}
+\DeclareFontShape{U}{matha}{m}{n}{ <-6> matha5 <6-7> matha6 <7-8>
+matha7 <8-9> matha8 <9-10> matha9 <10-12> matha10 <12-> matha12 }{}
+\DeclareSymbolFont{matha}{U}{matha}{m}{n}
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{ <-6> mathx5 <6-7> mathx6 <7-8>
+mathx7 <8-9> mathx8 <9-10> mathx9 <10-12> mathx10 <12-> mathx12 }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathDelimiter{\ldbrack} {4}{matha}{"76}{mathx}{"30}
+\DeclareMathDelimiter{\rdbrack} {5}{matha}{"77}{mathx}{"38}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathSymbol{\bigtimes}{\mathop}{mathx}{"91}
+\NewDocumentCommand\Clase {m}{\ensuremath{ \ldbrack #1 \rdbrack }\xspace}
+\NewDocumentCommand\Media {m}{\ensuremath{ \widebar{#1} }\xspace}
+
+\NewDocumentCommand\Mediap{sm}{\ensuremath{\IfBooleanTF#1
+                             {\Media{\parentesis*{#2}}}
+                             {\Media{\parentesis {#2}}} }\xspace}
+
+\NewDocumentCommand\MediaP{sm}{\ensuremath{\IfBooleanTF#1
+                             {\Media{\Parentesis*{#2}}}
+                             {\Media{\Parentesis {#2}}} }\xspace}
+\NewDocumentCommand\Smedia {}{\mu}
+\NewDocumentCommand\SmediaM {}{m}
+\NewDocumentCommand\Scov   {}{\sigma}
+\NewDocumentCommand\ScovM  {}{s}
+\NewDocumentCommand\Svar   {}{\Scov^2}
+\NewDocumentCommand\SvarM  {}{\ScovM^2}
+\NewDocumentCommand\ScvarM  {}{\mathfrak{s}^2}
+\NewDocumentCommand\Scorr   {}{\rho}
+\NewDocumentCommand\ScorrM   {}{r}
+\NewDocumentCommand\media {m}{\ensuremath{\IfNoValueTF{#1}%
+     {  \Smedia       }
+     { {\Smedia}_{#1} } }\xspace}
+
+\NewDocumentCommand\mediap{sm}{\ensuremath{\IfBooleanTF#1
+                     {\media{\parentesis*{#2}}}
+                     {\media{\parentesis {#2}}} }\xspace}
+
+\NewDocumentCommand\mediaP{sm}{\ensuremath{\IfBooleanTF#1
+                     {\media{\Parentesis*{#2}}}
+                     {\media{\Parentesis {#2}}} }\xspace}
+\NewDocumentCommand\mediaM {m}{\ensuremath{\IfNoValueTF{#1}%
+     {  \SmediaM       }
+     { {\SmediaM}_{#1} } }\xspace}
+
+\NewDocumentCommand\mediaMp{sm}{\ensuremath{\IfBooleanTF#1
+                     {\mediaM{\parentesis*{#2}}}
+                     {\mediaM{\parentesis {#2}}} }\xspace}
+
+\NewDocumentCommand\mediaMP{sm}{\ensuremath{\IfBooleanTF#1
+                     {\mediaM{\Parentesis*{#2}}}
+                     {\mediaM{\Parentesis {#2}}} }\xspace}
+\NewDocumentCommand\dt {m}{\ensuremath{\IfNoValueTF{#1}%
+     {  \Scov       }
+     { {\Scov_{#1}} } }\xspace}
+
+\NewDocumentCommand\dtp{sm}{\ensuremath{\IfBooleanTF#1
+                     {\dt{\parentesis*{#2}}}
+                     {\dt{\parentesis {#2}}} }\xspace}
+
+\NewDocumentCommand\dtP{sm}{\ensuremath{\IfBooleanTF#1
+                     {\dt{\Parentesis*{#2}}}
+                     {\dt{\Parentesis {#2}}} }\xspace}
+\NewDocumentCommand\dtM {m}{\ensuremath{\IfNoValueTF{#1}%
+     {  \ScovM       }
+     { {\ScovM_{#1}} } }\xspace}
+
+\NewDocumentCommand\dtMp{sm}{\ensuremath{\IfBooleanTF#1
+                     {\dtM{\parentesis*{#2}}}
+                     {\dtM{\parentesis {#2}}} }\xspace}
+
+\NewDocumentCommand\dtMP{sm}{\ensuremath{\IfBooleanTF#1
+                     {\dtM{\Parentesis*{#2}}}
+                     {\dtM{\Parentesis {#2}}} }\xspace}
+\NewDocumentCommand\var {m}{\ensuremath{\IfNoValueTF{#1}%
+     {  \Svar       }
+     { {\Svar_{#1}} } }\xspace}
+
+\NewDocumentCommand\varp{sm}{\ensuremath{\IfBooleanTF#1
+                     {\var{\parentesis*{#2}}}
+                     {\var{\parentesis {#2}}} }\xspace}
+
+\NewDocumentCommand\varP{sm}{\ensuremath{\IfBooleanTF#1
+                     {\var{\Parentesis*{#2}}}
+                     {\var{\Parentesis {#2}}} }\xspace}
+\NewDocumentCommand\varM {m}{\ensuremath{\IfNoValueTF{#1}%
+     {  \SvarM       }
+     { {\SvarM_{#1}} } }\xspace}
+
+\NewDocumentCommand\varMp{sm}{\ensuremath{\IfBooleanTF#1
+                     {\varM{\parentesis*{#2}}}
+                     {\varM{\parentesis {#2}}} }\xspace}
+
+\NewDocumentCommand\varMP{sm}{\ensuremath{\IfBooleanTF#1
+                     {\varM{\Parentesis*{#2}}}
+                     {\varM{\Parentesis {#2}}} }\xspace}
+\NewDocumentCommand\cvarM {m}{\ensuremath{\IfNoValueTF{#1}%
+     {  \ScvarM       }
+     { {\ScvarM_{#1}} } }\xspace}
+
+\NewDocumentCommand\cvarMp{sm}{\ensuremath{\IfBooleanTF#1
+                     {\cvarM{\parentesis*{#2}}}
+                     {\cvarM{\parentesis {#2}}} }\xspace}
+
+\NewDocumentCommand\cvarMP{sm}{\ensuremath{\IfBooleanTF#1
+                     {\cvarM{\Parentesis*{#2}}}
+                     {\cvarM{\Parentesis {#2}}} }\xspace}
+\NewDocumentCommand\cov {mm}{\ensuremath{\IfNoValueTF{#1}%
+     {  \Scov       }
+     { {\Scov_{#1#2}} } }\xspace}
+
+\NewDocumentCommand\covp{smm}{\ensuremath{\IfBooleanTF#1
+                     {\cov{\parentesis*{#2#3}}}
+                     {\cov{\parentesis {#2#3}}} }\xspace}
+
+\NewDocumentCommand\covP{smm}{\ensuremath{\IfBooleanTF#1
+                     {\cov{\Parentesis*{#2#3}}}
+                     {\cov{\Parentesis {#2#3}}} }\xspace}
+\NewDocumentCommand\covM {mm}{\ensuremath{\IfNoValueTF{#1}%
+     {  \ScovM       }
+     { {\ScovM_{#1#2}} } }\xspace}
+
+\NewDocumentCommand\covMp{smm}{\ensuremath{\IfBooleanTF#1
+                     {\covM{\parentesis*{#2#3}}}
+                     {\covM{\parentesis {#2#3}}} }\xspace}
+
+\NewDocumentCommand\covMP{smm}{\ensuremath{\IfBooleanTF#1
+                     {\covM{\Parentesis*{#2#3}}}
+                     {\covM{\Parentesis {#2#3}}} }\xspace}
+\NewDocumentCommand\corr {mm}{\ensuremath{\IfNoValueTF{#1}%
+     {  \Scorr       }
+     { {\Scorr_{#1#2}} } }\xspace}
+
+\NewDocumentCommand\corrp{smm}{\ensuremath{\IfBooleanTF#1
+                     {\corr{\parentesis*{#2#3}}}
+                     {\corr{\parentesis {#2#3}}} }\xspace}
+
+\NewDocumentCommand\corrP{smm}{\ensuremath{\IfBooleanTF#1
+                     {\corr{\Parentesis*{#2#3}}}
+                     {\corr{\Parentesis {#2#3}}} }\xspace}
+\NewDocumentCommand\corrM {mm}{\ensuremath{\IfNoValueTF{#1}%
+     {  \ScorrM       }
+     { {\ScorrM_{#1#2}} } }\xspace}
+
+\NewDocumentCommand\corrMp{smm}{\ensuremath{\IfBooleanTF#1
+                     {\corrM{\parentesis*{#2#3}}}
+                     {\corrM{\parentesis {#2#3}}} }\xspace}
+
+\NewDocumentCommand\corrMP{smm}{\ensuremath{\IfBooleanTF#1
+                     {\corrM{\Parentesis*{#2#3}}}
+                     {\corrM{\Parentesis {#2#3}}} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Econometría
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\TM{} {\ensuremath{N}\xspace}
+\NewDocumentCommand\Serror{} {\ensuremath{e}\xspace}
+\NewDocumentCommand\resi{m} {\ensuremath{ \Estmc{\Serror}_{#1} }\xspace}
+\NewDocumentCommand\res{} {\ensuremath{ \Estmc{\Vect{\Serror}} }\xspace}
+\NewDocumentCommand\SRC{} {\ensuremath{ \dotprod{\res}{\res} }\xspace}
+\NewDocumentCommand\ColorA {m}{\ensuremath{ {\color{violet}{#1}} }\xspace}
+\NewDocumentCommand\VColorA {m}{\ensuremath{ \Vect{\ColorA{#1}} }\xspace}
+\NewDocumentCommand\VAn{mm}{\ensuremath{ \ColorA{\MakeUppercase{#1}_{#2}} }\xspace}
+\NewDocumentCommand\VAi{O{}m}{\ensuremath{ \VAn{#2}{#1} }\xspace}
+\NewDocumentCommand\VA{O{}m}{\ensuremath{ \VAn{#2}{#1} }\xspace}
+\NewDocumentCommand\VAind{m}{\ensuremath{ \VAn{\indUno}{#1} }\xspace}
+\NewDocumentCommand\VAindCero{}{\ensuremath{\ColorA{\indCero} }\xspace}
+\NewDocumentCommand\VAindUno{}{\ensuremath{\ColorA{\indUno} }\xspace}
+\NewDocumentCommand\cteVA{m}{\ensuremath{ \VA{{\mathit{#1}}} }\xspace}
+\NewDocumentCommand\VVA{O{} m}{\ensuremath{ \Vect[\ColorA{#1}]{\VA{#2}} }\xspace}
+\NewDocumentCommand\MVA    {O{}m}{\ensuremath{ %
+              \ColorA{\Ridx{\mathbf{\MakeUppercase{#2}}}{#1}}  }\xspace}
+
+\NewDocumentCommand\MVAp  {som}{\ensuremath{\IfBooleanTF#1
+    {\parentesis*{\IfNoValueTF{#2}{\MVA{#3}}{\MVA[#2]{#3}}}}
+    {\parentesis {\IfNoValueTF{#2}{\MVA{#3}}{\MVA[#2]{#3}}}}   }\xspace}
+
+\NewDocumentCommand\MVAP  {som}{\ensuremath{\IfBooleanTF#1
+    {\Parentesis*{\IfNoValueTF{#2}{\MVA{#3}}{\MVA[#2]{#3}}}}
+    {\Parentesis {\IfNoValueTF{#2}{\MVA{#3}}{\MVA[#2]{#3}}}}   }\xspace}
+\NewDocumentCommand\MVAT{O{\vphantom{k}}m}{\ensuremath{\RidxE{\MVA{#2}}{\ColorA{#1}}{\T}}\xspace}
+
+\NewDocumentCommand\MVATp  {som}{\ensuremath{\IfBooleanTF#1
+       {\Transp* {\MVA[#2]{#3}}}
+       {\Transp  {\MVA[#2]{#3}}}            }\xspace}
+
+\NewDocumentCommand\MVATP  {som}{\ensuremath{\IfBooleanTF#1
+       {\TransP* {\MVA[#2]{#3}}}
+       {\TransP  {\MVA[#2]{#3}}}            }\xspace}
+
+\NewDocumentCommand\MVATpE {sO{}m}{\ensuremath{\IfBooleanTF#1
+       {\RidxEpE*{\MVA{#3}}{\ColorA{#2}}{\T}}
+       {\RidxEpE*{\MVA{#3}}{\ColorA{#2}}{\T}}     }\xspace}
+
+\NewDocumentCommand\MVATPE {sO{}m}{\ensuremath{\IfBooleanTF#1
+       {\RidxEPE*{\MVA{#3}}{\ColorA{#2}}{\T}}
+       {\RidxEPE*{\MVA{#3}}{\ColorA{#2}}{\T}}     }\xspace}
+\NewDocumentCommand\VVAKK{O{} m}{\ensuremath{ \VA{\Vect[{\MakeLowercase {#1}}]{#2}} }\xspace}
+\NewDocumentCommand\MVAKK{O{} m}{\ensuremath{ \VA{\Mat[{\MakeLowercase {#1}}]{#2}} }\xspace}
+\NewDocumentCommand\SVA{O{}m}{\ensuremath{ \ColorA{\MakeUppercase{\mathsf{#2}}_{#1}} }\xspace}
+\NewDocumentCommand\SVAT{O{}m}{\ensuremath{ \Trans{{\SVA[#1]{#2}}} }\xspace}
+\def\perturbacion{\MakeUppercase{u}}
+\NewDocumentCommand\per{}{\ensuremath{\VA{\perturbacion}}\xspace}
+\NewDocumentCommand\peri{O{n}}{\ensuremath{\VAi[#1]{\perturbacion}}\xspace}
+\NewDocumentCommand\Vper{}{\ensuremath{\VVA{\perturbacion}}\xspace}
+\DeclareMathOperator{\esperanza}{E}
+\NewDocumentCommand\E{sm}{\ensuremath{\IfBooleanTF#1
+                        {\esperanza\Parentesis*{#2}} {\esperanza\parentesis{#2}}
+                          } \xspace}
+\DeclareMathOperator{\desviaciontipica}{Dt}
+\NewDocumentCommand\Dt{sm}{\ensuremath{\IfBooleanTF#1
+                        {\desviaciontipica\Parentesis*{#2}} {\desviaciontipica\parentesis{#2}}
+                          } \xspace}
+\DeclareMathOperator{\varianza}{Var}
+\NewDocumentCommand\Var{sm}{\ensuremath{\IfBooleanTF#1
+                        {\varianza\Parentesis*{#2}} {\varianza\parentesis{#2}}
+                          } \xspace}
+\DeclareMathOperator{\covarianza}{Cov}
+\NewDocumentCommand\Cov{smm}{\ensuremath{\IfBooleanTF#1
+                        {\covarianza\Parentesis*{#2,#3}} {\covarianza\parentesis{#2,#3}}
+                          } \xspace}
+\DeclareMathOperator{\correlacion}{Corr}
+\NewDocumentCommand\Corr{smm}{\ensuremath{\IfBooleanTF#1
+                        {\correlacion\Parentesis*{#2,#3}} {\correlacion\parentesis{#2,#3}}
+                          } \xspace}
+\NewDocumentCommand\ECond{smm}{\ensuremath{ \ColorA{\mathbb{E}} \IfBooleanTF#1
+                     {\Parentesis*{\left.#2\,\right|#3}}
+                     {\parentesis {#2 \mid   #3       }} }\xspace}
+\NewDocumentCommand\ECondYX{smm}{\ensuremath{ \IfBooleanTF#1
+                     {\ECond*{#2}{\SVA{#3}}}
+                     {\ECond {#2}{\SVA{#3}}} }\xspace}
+\NewDocumentCommand\DtCond{smm}{\ensuremath{ \ColorA{\mathbb{D}t} \IfBooleanTF#1
+                     {\Parentesis*{#2\left|\,#3\right.}}
+                     {\parentesis {#2 \mid   #3       }} }\xspace}
+\NewDocumentCommand\VarCond{smm}{\ensuremath{ \ColorA{\mathbb{V}\!ar} \IfBooleanTF#1
+                     {\Parentesis*{#2\left|\,#3\right.}}
+                     {\parentesis {#2 \mid   #3       }} }\xspace}
+\NewDocumentCommand\VarCondYX{smm}{\ensuremath{ \IfBooleanTF#1
+                     {\VarCond*{#2}{\SVA{#3}}}
+                     {\VarCond {#2}{\SVA{#3}}} }\xspace}
+\NewDocumentCommand\CovCond{smmm}{\ensuremath{ \ColorA{\mathbb{C}\!ov} \IfBooleanTF#1
+                     {\Parentesis*{#2,#3\left|\,#4\right.}}
+                     {\parentesis {#2,#3 \mid   #4       }} }\xspace}
+\NewDocumentCommand\CovCondXYZ{smmm}{\ensuremath{ \IfBooleanTF#1
+                     {\CovCond*{#2}{#3}{\SVA{#4}}}
+                     {\CovCond {#2}{#3}{\SVA{#4}}} }\xspace}
+\NewDocumentCommand\Estmc {m}{\ensuremath{ \widehat{#1}      }\xspace}
+\NewDocumentCommand\VEstmc{O{}m}{\ensuremath{ \Estmc{\Vect[#1]{#2}} }\xspace}
+\NewDocumentCommand\Estmd {m}{\ensuremath{ \ColorA{\Estmc{#1}} }\xspace}
+\NewDocumentCommand\VEstmd{O{}m}{\ensuremath{ \Estmd{\Vect[#1]{#2}}   }\xspace}
+\NewDocumentCommand\MCO{mm}{\ensuremath{ \InvMTM*{#2}\MTV{#2}{#1} }\xspace}
+\NewDocumentCommand\MCOc{}{\ensuremath{ \MCO{y}{X} }\xspace}
+\NewDocumentCommand\MCOd{}{\ensuremath{ \MCO{\VVA{y}}{\MVA{X}} }\xspace}
+\NewDocumentCommand\MLT{}{\ensuremath{ \VA{Y} = \beta_1\VAindUno + \VA{U} }\xspace}
+\NewDocumentCommand\MLS{}{\ensuremath{ \VA{Y} = \beta_1\VAindUno + \beta_2\VA{X} + \VA{U} }\xspace}
+\NewDocumentCommand\MLG{}{\ensuremath{ \VA{Y} = \SVA{X}\Vect{\beta} + \VA{U} }\xspace}
+\NewDocumentCommand\masMLT{}{\ensuremath{ \VVA{Y} = \beta_1\VVA{1} + \VVA{U} }\xspace}
+\NewDocumentCommand\masMLS{}{\ensuremath{ \VVA{Y} = \beta_1\VVA{1} + \beta_2\VVA{X} + \VVA{U} }\xspace}
+\NewDocumentCommand\masMLG{}{\ensuremath{ \VVA{Y} = \MVA{X}\Vect{\beta} + \VVA{U} }\xspace}
+\NewDocumentCommand\ajusteMLT{}{\ensuremath{ \Vect{y} = \Estmc{\beta}\Vect{1} + \res }\xspace}
+\NewDocumentCommand\ajusteMLS{}{\ensuremath{ \Vect{y} = \Estmc{\beta_1}\Vect{1} + \Estmc{\beta_2}\Vect{x} + \res }\xspace}
+\NewDocumentCommand\ajusteMLG{}{\ensuremath{ \Vect{y} = \MV{x}{\Estmc{\beta}} + \res }\xspace}
+\NewDocumentCommand\SupI{}{\ensuremath{ \MLG }\xspace}
+\NewDocumentCommand\SupII{}{\ensuremath{ \ECondYX*{\per}{X}=\VAindCero }\xspace}
+\NewDocumentCommand\SupIII{}{\ensuremath{ \ECondYX*{\per^2}{X}=\sigma^2\VAindUno }\xspace}
+\NewDocumentCommand\SupIV{}{\ensuremath{ \E*{\SVAT{X}\SVA{X}} \textrm{ es invertible} }\xspace}
+\NewDocumentCommand\SupIImas{}{\ensuremath{ \ECond*{\VVA{\per}}{\MVA{X}}=\VVA{0} }\xspace}
+\NewDocumentCommand\SupIIImas{}{\ensuremath{ \VarCond*{\VVA{\per}}{\MVA{X}}=\sigma^2\MVA{I} }\xspace}
+\NewDocumentCommand\SupIVmas{}{\ensuremath{ \E*{\MVAT{X}\MVA{X}} \textrm{ es invertible} }\xspace}
+\NewDocumentCommand\SupVmas{}{\ensuremath{ \VVA{\per}\sim\Normal{\Vect{0}}{\sigma^2\Mat{I}} }\xspace}
+\NewDocumentCommand\MVAR{m}{\ensuremath{ {\pmb{\Sigma}}_{\scriptscriptstyle\Mat{#1#1}} }\xspace}
+\NewDocumentCommand\VCOV{mm}{\ensuremath{ {\pmb{\sigma}}_{\scriptscriptstyle\MV{#1}{#2}} }\xspace}
+\NewDocumentCommand\MVARM{m}{\ensuremath{ \Mat[_{\Mat{#1#1}}]{S} }\xspace}
+\NewDocumentCommand\VCOVM{mm}{\ensuremath{ \Vect[_{\MV{#1}{#2}}]{s} }\xspace}
+\DeclareMathOperator{\normal}{\it N\/}
+\DeclareMathOperator{\tstudent}{\it t\/}
+\DeclareMathOperator{\fsnedecor}{\it F\/}
+\NewDocumentCommand\Normal{mm}{\ensuremath{ \normal\left(#1,\,#2\right) }\xspace}
+\NewDocumentCommand\TStudent{m}{\ensuremath{ \tstudent_{#1} }\xspace}
+\NewDocumentCommand\FSnedecor{mm}{\ensuremath{ \fsnedecor_{\!{#1,#2}} }\xspace}
+\NewDocumentCommand\ChiCuadrado{m}{\ensuremath{ {\chi^2_{#1}} }\xspace}
+\NewDocumentCommand\ValorC{mmm}{\ensuremath{ {\it #1\/}_{_{#2}}^{\langle#3\rangle} }\xspace}
+\NewDocumentCommand\EstmcE  {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\esperanza}\Parentesis*{#2}}
+            {\Estmc{\esperanza}\parentesis {#2}}            }\xspace}
+\NewDocumentCommand\EstmdE  {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\esperanza}\Parentesis*{#2}}
+            {\Estmd{\esperanza}\parentesis {#2}}            }\xspace}
+\NewDocumentCommand\EstmcECond  {smm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\esperanza}\Parentesis*{#2\left|\,#3\right.}}
+            {\Estmc{\esperanza}\parentesis {#2 \mid   #3       }}            }\xspace}
+\NewDocumentCommand\EstmdECond  {smm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\esperanza}\Parentesis*{#2\left|\,#3\right.}}
+            {\Estmd{\esperanza}\parentesis {#2 \mid   #3       }}            }\xspace}
+\NewDocumentCommand\EstmcDt  {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\desviaciontipica}\Parentesis*{#2}}
+            {\Estmc{\desviaciontipica}\parentesis {#2}}            }\xspace}
+\NewDocumentCommand\EstmdDt  {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\desviaciontipica}\Parentesis*{#2}}
+            {\Estmd{\desviaciontipica}\parentesis {#2}}            }\xspace}
+\NewDocumentCommand\EstmcDtCond  {smm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\desviaciontipica}\Parentesis*{#2\left|\,#3\right.}}
+            {\Estmc{\desviaciontipica}\parentesis {#2 \mid   #3       }}            }\xspace}
+\NewDocumentCommand\EstmdDtCond  {smm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\desviaciontipica}\Parentesis*{#2\left|\,#3\right.}}
+            {\Estmd{\desviaciontipica}\parentesis {#2 \mid   #3       }}            }\xspace}
+\NewDocumentCommand\EstmcVar  {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\varianza}\Parentesis*{#2}}
+            {\Estmc{\varianza}\parentesis {#2}}            }\xspace}
+\NewDocumentCommand\EstmdVar  {sm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\varianza}\Parentesis*{#2}}
+            {\Estmd{\varianza}\parentesis {#2}}            }\xspace}
+\NewDocumentCommand\EstmcVarCond  {smm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\varianza}\Parentesis*{#2\left|\,#3\right.}}
+            {\Estmc{\varianza}\parentesis {#2 \mid   #3       }}            }\xspace}
+\NewDocumentCommand\EstmdVarCond  {smm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\varianza}\Parentesis*{#2\left|\,#3\right.}}
+            {\Estmd{\varianza}\parentesis {#2 \mid   #3       }}            }\xspace}
+\NewDocumentCommand\EstmcCov  {smm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\covarianza}\Parentesis*{#2,#3}}
+            {\Estmc{\covarianza}\parentesis {#2,#3}}            }\xspace}
+\NewDocumentCommand\EstmdCov  {smm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\covarianza}\Parentesis*{#2,#3}}
+            {\Estmd{\covarianza}\parentesis {#2,#3}}            }\xspace}
+\NewDocumentCommand\EstmcCovCond  {smmm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\covarianza}\Parentesis*{#2,#3\left|\,#4\right.}}
+            {\Estmc{\covarianza}\parentesis {#2,#3 \mid   #4       }}            }\xspace}
+\NewDocumentCommand\EstmdCovCond  {smmm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\covarianza}\Parentesis*{#2,#3\left|\,#4\right.}}
+            {\Estmd{\covarianza}\parentesis {#2,#3 \mid   #4       }}            }\xspace}
+\NewDocumentCommand\EstmcCorr  {smm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\correlacion}\Parentesis*{#2,#3}}
+            {\Estmc{\correlacion}\parentesis {#2,#3}}            }\xspace}
+\NewDocumentCommand\EstmdCorr  {smm   }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\correlacion}\Parentesis*{#2,#3}}
+            {\Estmd{\correlacion}\parentesis {#2,#3}}            }\xspace}
+\NewDocumentCommand\EstmcCorrCond  {smmm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmc{\correlacion}\Parentesis*{#2,#3\left|\,#4\right.}}
+            {\Estmc{\correlacion}\parentesis {#2,#3 \mid   #4       }}            }\xspace}
+\NewDocumentCommand\EstmdCorrCond  {smmm  }{\ensuremath{\IfBooleanTF#1
+            {\Estmd{\correlacion}\Parentesis*{#2,#3\left|\,#4\right.}}
+            {\Estmd{\correlacion}\parentesis {#2,#3 \mid   #4       }}            }\xspace}
+\NewDocumentCommand\estimEcond{mm}{\ensuremath{ \EstmcE{#1 \mid #2} }\xspace}
+\NewDocumentCommand\Hnula   {}{\ensuremath{ H_0 }\xspace}
+\NewDocumentCommand\Halt    {}{\ensuremath{ H_1 }\xspace}
+\NewDocumentCommand\Rcritica{}{\ensuremath{ RC  }\xspace}
+\NewDocumentCommand\Racept  {}{\ensuremath{ RA  }\xspace}
+\NewDocumentCommand\fdppar{O{\theta}m}{\ensuremath{ f_{\VA{#2}}(\MakeLowercase{#2};\Vect{#1}) }\xspace}
+\NewDocumentCommand\testad{}{\ensuremath{ \mathcal{T} }\xspace}
+\NewDocumentCommand\testadistico{}{\ensuremath{ \Estmc{\testad} }\xspace}
+\NewDocumentCommand\Testadistico{}{\ensuremath{ \ColorA{\testad} }\xspace}
+\NewDocumentCommand\festad{}{\ensuremath{ \mathcal{F} }\xspace}
+\NewDocumentCommand\festadistico{}{\ensuremath{ \Estmc{\festad} }\xspace}
+\NewDocumentCommand\Festadistico{}{\ensuremath{ \ColorA{\festad} }\xspace}
+\NewDocumentCommand\simBajoCond{m}{\ensuremath{ \mathop{\sim}\limits_{#1}}\xspace}
+\NewDocumentCommand\simnula{ }{\ensuremath{ \simBajoCond{\Hnula}         }\xspace}
+\NewDocumentCommand\simNula{m}{\ensuremath{ \simBajoCond{\Hnula:\, #1}     }\xspace}
+\NewDocumentCommand\IConfc{mm}{\ensuremath{ \Estmc{\text{IC}}_{#1}^{#2} }\xspace}
+\NewDocumentCommand\IConfd{mm}{\ensuremath{ \Estmd{\text{IC}}_{#1}^{#2} }\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Sucesiones
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NewDocumentCommand\suc {sO{n}O{\N}m }{\ensuremath{\IfBooleanTF#1
+                         {{\{\esuc*[#2]{#4}\}}_{#2\in#3}} {\boldsymbol{\ddot{#4}}}
+                           }\xspace}
+\NewDocumentCommand\esuc{sO{n}m      }{\ensuremath{\IfBooleanTF#1
+                         {{#3}_{#2}} {\elemR{\boldsymbol{\ddot{#3}}}{#2}}
+                           }\xspace}
+\endinput
+%%
+%% End of file `nacal.sty'.

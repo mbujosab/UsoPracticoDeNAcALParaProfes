@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2026-02-27 vie 11:27 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exámenes de Matemáticas II</title>
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Exámenes de Matemáticas II</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd2de572">1. Preámbulo y cabeceras del los exámenes en \(\LaTeX{}\)</a>
+<ul>
+<li><a href="#org318489b">1.1. Descripción del preámbulo para los ficheros de \(\LaTeX{}\)</a>
+<ul>
+<li><a href="#orgd1e3734">1.1.1. Primeros paquetes de estilo</a></li>
+<li><a href="#orgd47572d">1.1.2. Algunos comandos auxiliares y opciones relacionadas con el idioma</a></li>
+<li><a href="#org5eb1a53">1.1.3. Variantes de los exámenes</a></li>
+<li><a href="#orge7db976">1.1.4. Definición de comandos informativos o de resaltado en el examen</a></li>
+<li><a href="#org87fdd16">1.1.5. Contador del número de preguntas para el campo de calificación de los quizes</a></li>
+<li><a href="#org3e13dd5">1.1.6. Paquetes matemáticos y pythontex</a></li>
+<li><a href="#org810397c">1.1.7. Cabecera para las preguntas largas y las preguntas cortas de los exámenes finales</a></li>
+</ul>
+</li>
+<li><a href="#org558fa13">1.2. Cabecera que uso en los exámenes intermedios (Quizs)</a>
+<ul>
+<li><a href="#orgce5eeff">1.2.1. Espacio en la cabecera para poner el nombre y para calificar cada pregunta</a></li>
+<li><a href="#org42a070e">1.2.2. Instrucciones</a></li>
+</ul>
+</li>
+<li><a href="#orgaee7077">1.3. Cabecera que usamos en los exámenes finales</a>
+<ul>
+<li><a href="#org039d167">1.3.1. Espacio para poner el nombre y el grupo</a></li>
+<li><a href="#org3cef3a8">1.3.2. Instrucciones</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org02fccee">2. Examen de ejemplo</a>
+<ul>
+<li><a href="#orgbb95790">2.1. Fichero principal</a></li>
+<li><a href="#org789b0b8">2.2. Preguntas</a>
+<ul>
+<li><a href="#org2fb512b">2.2.1. Pregunta 1</a></li>
+<li><a href="#orgfbf5f8a">2.2.2. Pregunta 2</a></li>
+<li><a href="#org006a786">2.2.3. Pregunta 3</a></li>
+<li><a href="#org49b60a6">2.2.4. Pregunta 4</a></li>
+<li><a href="#org78b193d">2.2.5. Pregunta 5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgb8bdf69">3. Referencias</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd2de572" class="outline-2">
+<h2 id="orgd2de572"><span class="section-number-2">1.</span> Preámbulo y cabeceras del los exámenes en \(\LaTeX{}\)</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org318489b" class="outline-3">
+<h3 id="org318489b"><span class="section-number-3">1.1.</span> Descripción del preámbulo para los ficheros de \(\LaTeX{}\)</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-orgd1e3734" class="outline-4">
+<h4 id="orgd1e3734"><span class="section-number-4">1.1.1.</span> Primeros paquetes de estilo</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\pagestyle</span>{<span style="color: #006699;">plain</span>}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>[<span style="color: #BA36A5;">a4paper,hscale=0.77,vscale=0.84,tmargin=2cm,bmargin=2cm</span>]{<span style="color: #006699;">geometry</span>}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">natbib</span>}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">booktabs</span>}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">paralist</span>}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">multicol</span>}
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd47572d" class="outline-4">
+<h4 id="orgd47572d"><span class="section-number-4">1.1.2.</span> Algunos comandos auxiliares y opciones relacionadas con el idioma</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="org-src-container">
+<pre class="src src-latex">
+<span style="color: #0000FF; font-weight: bold;">\newcommand</span>{<span style="color: #006699;">\ConRef</span>}{<span style="color: #006699;">
+  </span><span style="color: #0000FF; font-weight: bold;">\nocite</span><span style="color: #006699;">{</span><span style="color: #D0372D;">Strang:18.06</span><span style="color: #006699;">}
+  </span><span style="color: #0000FF; font-weight: bold;">\bibliography</span><span style="color: #006699;">{</span><span style="color: #D0372D;">referencias/referencias</span><span style="color: #006699;">}
+  </span><span style="color: #006699;">\bibliographystyle</span><span style="color: #006699;">{plainnat}
+</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\newcommand</span>{<span style="color: #006699;">\eng</span>}[<span style="color: #BA36A5;">2</span>]{<span style="color: #006699;">{#1}</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\newcommand</span>{<span style="color: #006699;">\corte</span>}{<span style="color: #006699;"> 
+  </span><span style="color: #006699;">\begin</span><span style="color: #006699;">{flushright}
+    </span><span style="color: #006699; font-weight: bold;">\emph</span><span style="color: #006699;">{</span><span style="color: #006699; font-style: italic;">\eng</span><span style="color: #006699; font-style: italic;">
+      {El examen contin&#250;a en la siguiente p&#225;gina}
+      {The exam continues in the next page}</span><span style="color: #006699;">}
+      </span><span style="color: #0000ff;">$</span><span style="color: #0000ff;">\rightarrow</span><span style="color: #0000ff;">$</span><span style="color: #006699;">
+  </span><span style="color: #006699;">\end</span><span style="color: #006699;">{flushright}
+  </span><span style="color: #ff0000; font-weight: bold;">\pagebreak</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>[<span style="color: #BA36A5;">spanish</span>]{<span style="color: #006699;">babel</span>}
+<span style="color: #FF5500;">\deactivatetilden</span>
+<span style="color: #FF5500;">\decimalpoint</span> 
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>[<span style="color: #BA36A5;">spanish</span>]{<span style="color: #006699;">varioref</span>}
+<span style="color: #0000FF; font-weight: bold;">\renewcommand</span><span style="color: #006699;">\shorthandsspanish</span>{}
+
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>[<span style="color: #BA36A5;">pdftex,nodirectory,latextoc,spanish</span>]{<span style="color: #006699;">web</span>}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5eb1a53" class="outline-4">
+<h4 id="org5eb1a53"><span class="section-number-4">1.1.3.</span> Variantes de los exámenes</h4>
+</div>
+
+<div id="outline-container-orge7db976" class="outline-4">
+<h4 id="orge7db976"><span class="section-number-4">1.1.4.</span> Definición de comandos informativos o de resaltado en el examen</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\newenvironment</span>{<span style="color: #006699;">pista</span>}{<span style="color: #006699; font-weight: bold;">\textbf</span><span style="color: #006699;">{</span><span style="color: #006699; font-weight: bold;">Pista:</span><span style="color: #006699;">}</span>}{}
+
+<span style="color: #0000FF; font-weight: bold;">\newcommand</span>{<span style="color: #006699;">\verdaderofalso</span>}{<span style="color: #006699;">Verdadero o falso
+  (</span><span style="color: #006699; font-weight: bold;">\emph</span><span style="color: #006699;">{</span><span style="color: #006699; font-style: italic;">solo puntuan respuestas correctamente justificadas; una respuesta sin explicaci&#243;n tendr&#225; una calificaci&#243;n de cero puntos</span><span style="color: #006699;">}).
+  </span><span style="color: #006699;">\smallskip</span>}
+
+
+<span style="color: #0000FF; font-weight: bold;">\newcommand</span><span style="color: #006699;">\myquote</span>[<span style="color: #BA36A5;">2</span>]{<span style="color: #8D8D84; font-style: italic;">%
+</span><span style="color: #006699;">  </span><span style="color: #006699;">\smallskip</span><span style="color: #006699;">
+  
+  </span><span style="color: #006699;">\par</span><span style="color: #006699;">
+  </span><span style="color: #006699;">\hspace</span><span style="color: #006699;">{-0.9cm}
+  </span><span style="color: #006699;">\begin</span><span style="color: #006699;">{minipage}{</span><span style="color: #006699;">\textwidth</span><span style="color: #006699;">-1.5</span><span style="color: #006699;">\parindent\relax</span><span style="color: #006699;">}
+    </span><span style="color: #006699;">\rule</span><span style="color: #006699;">{</span><span style="color: #006699;">\textwidth</span><span style="color: #006699;">}{.2pt}
+    
+    #1</span><span style="color: #006699;">\vspace</span><span style="color: #006699;">{-1.2ex} 
+    </span><span style="color: #006699;">\rule</span><span style="color: #006699;">{</span><span style="color: #006699;">\textwidth</span><span style="color: #006699;">}{.2pt}
+    </span><span style="color: #006699;">\par\vspace</span><span style="color: #006699;">{0.5ex}
+  </span><span style="color: #006699;">\end</span><span style="color: #006699;">{minipage}
+  </span><span style="color: #006699;">\par</span>}
+
+<span style="color: #8D8D84;">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span><span style="color: #8D8D84; font-style: italic;">
+</span><span style="color: #8D8D84;">%%%% </span><span style="color: #8D8D84; font-style: italic;">Indicador de puntos por pregunta y Contador de puntos totales
+</span><span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">xfp</span>} <span style="color: #8D8D84; font-style: italic;">% Para c&#225;lculos con decimales
+</span>
+<span style="color: #8D8D84;">% </span><span style="color: #8D8D84; font-style: italic;">Configuraci&#243;n del acumulador global para puntos
+</span><span style="color: #FF5500;">\ExplSyntaxOn</span>
+<span style="color: #FF5500;">\fp</span>_new:N <span style="color: #FF5500;">\g</span>_puntos_total_fp <span style="color: #8D8D84; font-style: italic;">% Crea un acumulador global para puntos decimales
+</span>
+<span style="color: #8D8D84;">% </span><span style="color: #8D8D84; font-style: italic;">Redefinimos el comando </span><span style="color: #8D8D84; font-style: italic;">\puntos</span><span style="color: #8D8D84; font-style: italic;"> para que haga la cuenta de puntos acumulados
+</span><span style="color: #FF5500;">\NewDocumentCommand</span>{<span style="color: #FF5500;">\puntos</span>}{m}{
+  <span style="color: #FF5500;">\PTsHook</span>{(<span style="color: #0000ff;">$</span><span style="color: #0000ff;">\eqPTs</span><span style="color: #0000ff;">^{\text{pts}}$</span>)}<span style="color: #FF5500;">\PTs</span>{#1} <span style="color: #8D8D84; font-style: italic;">% Tu comando original
+</span>  <span style="color: #FF5500;">\fp</span>_gadd:Nn <span style="color: #FF5500;">\g</span>_puntos_total_fp {#1} <span style="color: #8D8D84; font-style: italic;">% Suma los puntos al acumulador global
+</span>}
+
+<span style="color: #8D8D84;">% </span><span style="color: #8D8D84; font-style: italic;">Comando para mostrar la suma total de puntos
+</span><span style="color: #FF5500;">\NewDocumentCommand</span>{<span style="color: #FF5500;">\totalpuntos</span>}{}{Puntos totales en el examen:<span style="color: #FF5500;">\;</span> <span style="color: #FF5500;">\fp</span>_use:N <span style="color: #FF5500;">\g</span>_puntos_total_fp}
+<span style="color: #FF5500;">\ExplSyntaxOff</span>
+<span style="color: #8D8D84;">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span><span style="color: #8D8D84; font-style: italic;">
+</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org87fdd16" class="outline-4">
+<h4 id="org87fdd16"><span class="section-number-4">1.1.5.</span> Contador del número de preguntas para el campo de calificación de los quizes</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #8D8D84;">%%% </span><span style="color: #8D8D84; font-style: italic;">PARA LA SECCI&#211;N DE CALIFICACI&#211;N DE LA CABECERA
+</span><span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">totcount</span>}
+<span style="color: #FF5500;">\def\computemycount</span>{}
+<span style="color: #FF5500;">\expandafter\ifx\csname</span> computemycount<span style="color: #FF5500;">\endcsname\relax</span>
+<span style="color: #FF5500;">\usetotcountfile</span>{mycount.aux}
+<span style="color: #0000FF; font-weight: bold;">\newcounter</span>{<span style="color: #006699;">mycount</span>} <span style="color: #8D8D84; font-style: italic;">% so that increments of this counter don't break
+</span><span style="color: #FF5500;">\else</span>
+<span style="color: #FF5500;">\newtotcounter</span>[auxfile=mycount.aux]{mycount}
+<span style="color: #FF5500;">\fi</span>
+<span style="color: #FF5500;">\regtotcounter</span>{eqexno}
+
+<span style="color: #0000FF; font-weight: bold;">\newcounter</span>{<span style="color: #006699;">ultimo</span>}
+<span style="color: #0000FF; font-weight: bold;">\newcounter</span>{<span style="color: #006699;">EjNum</span>}
+<span style="color: #0000FF; font-weight: bold;">\setcounter</span>{<span style="color: #BA36A5;">EjNum</span>}{<span style="color: #BA36A5;">1</span>}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">pgffor</span>}
+<span style="color: #0000FF; font-weight: bold;">\newcommand</span>{<span style="color: #006699;">\contador</span>}[<span style="color: #BA36A5;">1</span>]{<span style="color: #8D8D84; font-style: italic;">%
+</span><span style="color: #006699;">  </span><span style="color: #006699;">\def\temp</span><span style="color: #006699;">{}</span><span style="color: #8D8D84; font-style: italic;">%
+</span><span style="color: #006699;">  </span><span style="color: #006699;">\foreach</span><span style="color: #006699;"> </span><span style="color: #006699;">\i</span><span style="color: #006699;"> in {1,...,#1}
+    {</span><span style="color: #8D8D84; font-style: italic;">%
+</span><span style="color: #006699;">      </span><span style="color: #006699;">\expandafter\gdef\expandafter\temp\expandafter</span><span style="color: #006699;">{</span><span style="color: #006699;">\temp\noindent</span><span style="color: #ff0000; font-weight: bold;">\\</span><span style="color: #006699;">[5pt]</span><span style="color: #006699; font-weight: bold;">\textbf</span><span style="color: #006699;">{</span><span style="color: #0000FF; font-weight: bold;">\arabic</span><span style="color: #006699; font-weight: bold;">{</span><span style="color: #BA36A5; font-weight: bold;">EjNum</span><span style="color: #006699; font-weight: bold;">}.-</span><span style="color: #006699;">} </span><span style="color: #0000FF; font-weight: bold;">\stepcounter</span><span style="color: #006699;">{</span><span style="color: #BA36A5;">EjNum</span><span style="color: #006699;">}}
+    }</span><span style="color: #8D8D84; font-style: italic;">%
+</span><span style="color: #006699;">  </span><span style="color: #006699;">\temp</span>}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3e13dd5" class="outline-4">
+<h4 id="org3e13dd5"><span class="section-number-4">1.1.6.</span> Paquetes matemáticos y pythontex</h4>
+<div class="outline-text-4" id="text-1-1-6">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">mathtools</span>}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">systeme</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">nacal/nacal</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">tikz</span>}
+<span style="color: #FF5500;">\usetikzlibrary</span>{arrows,positioning}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">tikz-3dplot</span>}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">gnuplot-lua-tikz</span>}
+<span style="color: #8D8D84;">%</span><span style="color: #8D8D84; font-style: italic;">\pgfplotsset</span><span style="color: #8D8D84; font-style: italic;">{compat=1.10}
+</span><span style="color: #FF5500;">\usetikzlibrary</span>{intersections}
+<span style="color: #FF5500;">\usetikzlibrary</span>{calc}
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>{<span style="color: #006699;">tkz-euclide</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\usepackage</span>[<span style="color: #BA36A5;">autoprint=false</span>]{<span style="color: #006699;">pythontex</span>}
+<span style="color: #FF5500;">\pythontexcustomc</span>{pyconsole}{from nacal import *}
+<span style="color: #FF5500;">\pythontexcustomc</span>{py}{from nacal import *}
+<span style="color: #FF5500;">\pythontexcustomc</span>{sympy}{from nacal import *}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org810397c" class="outline-4">
+<h4 id="org810397c"><span class="section-number-4">1.1.7.</span> Cabecera para las preguntas largas y las preguntas cortas de los exámenes finales</h4>
+<div class="outline-text-4" id="text-1-1-7">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\newcommand</span>{<span style="color: #006699;">\PreguntasLargas</span>}{<span style="color: #006699;">
+  </span><span style="color: #0000FF; font-weight: bold;">\setcounter</span><span style="color: #006699;">{</span><span style="color: #BA36A5;">eqexno</span><span style="color: #006699;">}{</span><span style="color: #BA36A5;">0</span><span style="color: #006699;">}
+  </span><span style="color: #006699;">\renewcommand\exlabel</span><span style="color: #006699;">{Ejercicio}
+</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\newcommand</span>{<span style="color: #006699;">\PreguntasCortas</span>}{<span style="color: #006699;">
+  </span><span style="color: #006699;">\vspace</span><span style="color: #006699;">{.5cm}
+  
+  Conteste a TODOS los apartados de TODOS los </span><span style="color: #006699;">\framebox</span><span style="color: #006699;">{</span><span style="color: #006699; font-weight: bold;">\textsl</span><span style="color: #006699;">{</span><span style="color: #006699; font-style: italic;">CONJUNTOS DE PREGUNTAS CORTAS</span><span style="color: #006699;">}}
+
+  </span><span style="color: #0000FF; font-weight: bold;">\setcounter</span><span style="color: #006699;">{</span><span style="color: #BA36A5;">eqexno</span><span style="color: #006699;">}{</span><span style="color: #BA36A5;">0</span><span style="color: #006699;">}
+  </span><span style="color: #006699;">\renewcommand\exlabel</span><span style="color: #006699;">{Conjunto de preguntas}
+  </span><span style="color: #006699;">\vspace</span><span style="color: #006699;">{.5cm}
+</span>}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #FF5500;">\endinput</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org558fa13" class="outline-3">
+<h3 id="org558fa13"><span class="section-number-3">1.2.</span> Cabecera que uso en los exámenes intermedios (Quizs)</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-orgce5eeff" class="outline-4">
+<h4 id="orgce5eeff"><span class="section-number-4">1.2.1.</span> Espacio en la cabecera para poner el nombre y para calificar cada pregunta</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\thispagestyle</span>{<span style="color: #006699;">empty</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\setlength</span>{<span style="color: #BA36A5;">\unitlength</span>}{<span style="color: #BA36A5;">1cm</span>}
+<span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">picture</span>}(15,2.5)(0,-1.5)
+  <span style="color: #8D8D84; font-style: italic;">% Campo para el nombre
+</span>  <span style="color: #FF5500;">\put</span>(0,0.3){<span style="color: #FF5500;">\makebox</span>(0,0)[l]{<span style="color: #0000FF; font-weight: bold;">\textsc</span>{<span style="color: #000000; font-weight: bold;">Nombre:</span>}
+      <span style="color: #FF5500;">\underline</span>{<span style="color: #0000FF; font-weight: bold;">\hspace</span>{<span style="color: #006699;">11.7cm</span>}}}}
+
+  <span style="color: #8D8D84; font-style: italic;">% Secci&#243;n de calificaci&#243;n
+</span>  <span style="color: #FF5500;">\put</span>(13.5,0){<span style="color: #FF5500;">\makebox</span>(0,0)[l]{
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">tabular</span>}{l}
+    <span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">Calificaci&#243;n</span>}
+      <span style="color: #FF5500;">\contador</span>{<span style="color: #FF5500;">\totvalue</span>{eqexno}}<span style="color: #ff0000; font-weight: bold;">\\</span>
+      <span style="color: #0000FF; font-weight: bold;">\rule</span>{<span style="color: #006699;">3cm</span>}{<span style="color: #006699;">1pt</span>}
+    <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">tabular</span>}}}
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">picture</span>}
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org42a070e" class="outline-4">
+<h4 id="org42a070e"><span class="section-number-4">1.2.2.</span> Instrucciones</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\vspace</span>{<span style="color: #006699;">-1.5cm</span>}
+<span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">compactitem</span>}
+<span style="color: #0000FF; font-weight: bold;">\item</span> {Puede emplear papel adicional para realizar c&#225;lculos o ensayar sus respuestas; pero}<span style="color: #8D8D84; font-style: italic;">%
+</span>  <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\ldots</span><span style="color: #0000ff;">{}$</span>
+<span style="color: #0000FF; font-weight: bold;">\item</span> {<span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">Ponga su nombre en todas las hojas que emplee</span>}}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {Para puntuar, muestre sus c&#225;lculos y explique sus respuestas con claridad}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {<span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">Conteste exactamente lo que se le pregunta</span>}}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {Perder&#225; puntos si a&#241;ade afirmaciones falsas a un argumento correcto}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {<span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">Prohibidos</span>} dispositivos electr&#243;nicos, calculadoras, libros o notas de cualquier clase}.
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">compactitem</span>}
+<span style="color: #FF5500;">\underline</span>{<span style="color: #0000FF; font-weight: bold;">\hspace</span>{<span style="color: #006699;">14.1cm</span>}}
+<span style="color: #FF5500;">\endinput</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaee7077" class="outline-3">
+<h3 id="orgaee7077"><span class="section-number-3">1.3.</span> Cabecera que usamos en los exámenes finales</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org039d167" class="outline-4">
+<h4 id="org039d167"><span class="section-number-4">1.3.1.</span> Espacio para poner el nombre y el grupo</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">center</span>}
+  {Examen final}. <span style="color: #FF5500;">\fechaExamen</span>
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">center</span>}
+<span style="color: #FF5500;">\smallskip</span>
+
+{Nombre}: <span style="color: #FF5500;">\underline</span>{<span style="color: #0000FF; font-weight: bold;">\qquad\hspace</span>{<span style="color: #006699;">10cm</span>} <span style="color: #0000FF; font-weight: bold;">\qquad</span>} {Grupo}: <span style="color: #FF5500;">\hrulefill</span>
+<span style="color: #0000FF; font-weight: bold;">\vspace</span>{<span style="color: #006699;">.5cm</span>}
+
+{Nombre del profesor}: <span style="color: #FF5500;">\hrulefill</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3cef3a8" class="outline-4">
+<h4 id="org3cef3a8"><span class="section-number-4">1.3.2.</span> Instrucciones</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">compactitem</span>}
+<span style="color: #0000FF; font-weight: bold;">\item</span> {Ponga su nombre en todas las hojas que emplee}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {Resuelva <span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">SOLO DOS</span>} de los tres <span style="color: #0000FF; font-weight: bold;">\textsl</span>{<span style="color: #1A1A1A; font-style: italic;">EJERCICIOS LARGOS</span>} y <span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">TODAS</span>} las <span style="color: #0000FF; font-weight: bold;">\textsl</span>{<span style="color: #1A1A1A; font-style: italic;">PREGUNTAS CORTAS</span>}}
+<span style="color: #0000FF; font-weight: bold;">\item</span> {Cada ejercicio largo vale 2.5 puntos. Cada apartado de las preguntas cortas 0.5 puntos}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {<span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">Conteste exactamente lo que se le pregunta</span>}}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {Muestre sus c&#225;lculos y explique sus respuestas con claridad}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {<span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">Prohibidos</span>} dispositivos electr&#243;nicos, calculadoras, libros o notas de cualquier clase}.
+<span style="color: #0000FF; font-weight: bold;">\item</span> {Tiempo total: 2 horas}.
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">compactitem</span>}
+<span style="color: #FF5500;">\hrulefill</span>
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #FF5500;">\endinput</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org02fccee" class="outline-2">
+<h2 id="org02fccee"><span class="section-number-2">2.</span> Examen de ejemplo</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgbb95790" class="outline-3">
+<h3 id="orgbb95790"><span class="section-number-3">2.1.</span> Fichero principal</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\documentclass</span>[<span style="color: #BA36A5;">a4paper</span>]{<span style="color: #006699;">article</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\input</span>{<span style="color: #D0372D;">aux/PreambuloParaExamenes.tex</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">document</span>}
+<span style="color: #0000FF; font-weight: bold;">\thispagestyle</span>{<span style="color: #006699;">empty</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">center</span>}
+  {Examen intermedio 1 (<span style="color: #6434A3;">\large</span><span style="color: #0000FF; font-weight: bold;">\textbf</span>{<span style="color: #000000; font-weight: bold;">Grupo C</span>}). 3 de marzo, 2025}
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">center</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\input</span>{<span style="color: #D0372D;">aux/InstruccionesQuiz.tex</span>}
+
+<span style="color: #0000FF; font-weight: bold;">\input</span>{<span style="color: #D0372D;">preguntas/2025-intermedio1-C.tex</span>}
+
+<span style="color: #8D8D84;">% </span><span style="color: #8D8D84; font-style: italic;">\ConRef</span><span style="color: #8D8D84; font-style: italic;">     % descomentar si se quiere mostrar la referencia a los ex&#225;menes del MIT
+</span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">document</span>}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org789b0b8" class="outline-3">
+<h3 id="org789b0b8"><span class="section-number-3">2.2.</span> Preguntas</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-org2fb512b" class="outline-4">
+<h4 id="org2fb512b"><span class="section-number-4">2.2.1.</span> Pregunta 1</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">exercise</span>}*
+  
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">pycode</span>}[2024-Quiz1-GrupoC-6]
+A=Matrix([[1,2,3],[4,5,6],[7,8,9]]) <span style="color: #ff0000; font-weight: bold;">&amp;</span> T((-1,1,3))
+  <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">pycode</span>}
+  
+  Suppose
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+    </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}= </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{latex(A)}
+  </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+  
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">parts</span>}
+    
+  <span style="color: #0000FF; font-weight: bold;">\item</span> <span style="color: #FF5500;">\puntos</span>{1} Encuentre una combinaci&#243;n lineal de las columnas de <span style="color: #FF5500;">\Mat</span>{A} que sea <span style="color: #FF5500;">\Vect</span>{0}.
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+      Una posible respuesta es
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\;\Mat</span><span style="color: #0000ff;">{A}</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{latex( (I(A.n) </span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;"> T(Homogenea(A).pasos[1]))|0 )}=</span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{0};</span><span style="color: #0000ff;">\;</span><span style="color: #0000ff;">
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+      puesto que
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{Homogenea(A).tex}
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+    <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+    
+  <span style="color: #0000FF; font-weight: bold;">\item</span> <span style="color: #FF5500;">\puntos</span>{1} Explique por qu&#233; para cualquier matriz <span style="color: #FF5500;">\Mat</span>{B} de orden
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+      </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{A.n}</span><span style="color: #0000ff;">\times\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{A.n},
+    </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+    el producto <span style="color: #FF5500;">\Mat</span>{AB} no tiene inversa.
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+      Como las columnas de <span style="color: #FF5500;">\Mat</span>{A}
+      (de orden <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{A.n}</span><span style="color: #0000ff;">\times\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{A.n}$</span>)
+      son linealmente independientes,
+      generan un subespacio de dimensi&#243;n menor que <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{A.n}$</span>.
+      Y como las columnas de <span style="color: #FF5500;">\Mat</span>{AB} son combinaciones lineales de las de <span style="color: #FF5500;">\Mat</span>{A},
+      tambi&#233;n generan un subespacio de dimensi&#243;n menor que <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2024-Quiz1-GrupoC-6]{A.n}$</span>.
+      Por tanto, <span style="color: #FF5500;">\Matdim</span>{AB}{<span style="color: #FF5500;">\py</span>[2024-Quiz1-GrupoC-6]{A.n}}{<span style="color: #FF5500;">\py</span>[2024-Quiz1-GrupoC-6]{A.n}} es singular.
+      
+      Alternativamente, como <span style="color: #FF5500;">\Mat</span>{A} es singular, existe un <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{x}</span><span style="color: #0000ff;">\ne\Vect</span><span style="color: #0000ff;">{0}$</span> tal que <span style="color: #FF5500;">\SELF</span>{x}{A}{0}. Si <span style="color: #FF5500;">\Mat</span>{AB} fuera invertible, ello implicar&#237;a
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{x} = </span><span style="color: #0000ff;">\VM</span><span style="color: #0000ff;">{x}{AB}</span><span style="color: #0000ff;">\InvMatp</span><span style="color: #0000ff;">*{AB} =
+        </span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{0}</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{B}</span><span style="color: #0000ff;">\InvMatp</span><span style="color: #0000ff;">*{AB} = </span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{0},
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+      que contradice que <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{x}</span><span style="color: #0000ff;">\ne\Vect</span><span style="color: #0000ff;">{0}$</span>.
+    <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+  <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">parts</span>}
+  <span style="color: #FF5500;">\procedencia</span>{MIT Course 18.06<span style="color: #0000FF; font-weight: bold;">\quad</span> Exam 1, Spring, 2021}
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">exercise</span>}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfbf5f8a" class="outline-4">
+<h4 id="orgfbf5f8a"><span class="section-number-4">2.2.2.</span> Pregunta 2</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+Ejercicio 2 del Quiz 1 del Grupo E curso 14/15
+</p>
+
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">exercise</span>}
+  <span style="color: #FF5500;">\puntos</span>{0.5}
+  Escriba un ejemplo de matriz de orden <span style="color: #0000ff;">$5</span><span style="color: #0000ff;">\times</span><span style="color: #0000ff;">4$</span> con rango 3.
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+    El ejemplo m&#225;s sencillo es<span style="color: #FF5500;">\;</span>
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+      </span><span style="color: #6434A3;">\footnotesize</span><span style="color: #0000ff;">
+      </span><span style="color: #0000FF; font-weight: bold;">\begin</span><span style="color: #0000ff;">{</span><span style="color: #006699;">bmatrix</span><span style="color: #0000ff;">}
+        1</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">\\</span><span style="color: #0000ff;">
+        0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">1</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">\\</span><span style="color: #0000ff;">
+        0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">1</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">\\</span><span style="color: #0000ff;">
+        0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">\\</span><span style="color: #0000ff;">
+        0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;">0</span><span style="color: #ff0000; font-weight: bold;">\\</span><span style="color: #0000ff;">
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span><span style="color: #0000ff;">{</span><span style="color: #006699;">bmatrix</span><span style="color: #0000ff;">}
+    </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+  <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">exercise</span>}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org006a786" class="outline-4">
+<h4 id="org006a786"><span class="section-number-4">2.2.3.</span> Pregunta 3</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">exercise</span>}*
+  
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">pycode</span>}[2025-Quiz1-GrupoH-1]
+A = Matrix([
+[ 1,  1,  1],
+[ 1,  2,  3],
+[ 1,  3,  5]])
+
+B = A.span().cart  
+
+from sympy import symbols
+
+n = 3
+b = Vector(symbols(f'b_1:{n+1}'))
+condicion = -1 * A.amplia(-b) <span style="color: #ff0000; font-weight: bold;">&amp;</span> T(SEL(A,b).pasos[1])|0|0
+
+a = Vector([1,-2, 1])
+c = Vector([2, 0,-2])
+d = Vector([0,2,4,8])
+e = Vector([1,-1,1,-1])
+A_ampliada = A.amplia(c,1).amplia(a,1)
+pasos_ampliada = A_ampliada.elim().pasos
+  <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">pycode</span>}
+  
+  Considere la matriz<span style="color: #FF5500;">\;</span>
+  <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}= </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(A)}$</span>
+  
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">parts</span>}
+  <span style="color: #0000FF; font-weight: bold;">\item</span>  <span style="color: #FF5500;">\puntos</span>{0.5}
+    &#191;Cu&#225;l es el rango de <span style="color: #FF5500;">\Mat</span>{A}?
+    
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+      Aplicando la eliminaci&#243;n vemos que
+      <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\rango</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}}= </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{A.rango()}$</span><span style="color: #FF5500;">\;</span>
+      {<span style="color: #0000FF; font-weight: bold;">\small</span><span style="color: #6434A3;">(emplear la matriz </span><span style="color: #0000ff;">$[</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}|-</span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{b}]$</span><span style="color: #6434A3;"> nos ayudar&#225; a responder tambi&#233;n al apartado b.)</span>}
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+        </span><span style="color: #6434A3;">\footnotesize</span><span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{Elim(A.amplia(-b,1)).tex}
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+    <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+    
+  <span style="color: #0000FF; font-weight: bold;">\item</span>  <span style="color: #FF5500;">\puntos</span>{1} 
+    Encuentre una matriz <span style="color: #FF5500;">\Mat</span>{B} tal que el espacio columna <span style="color: #FF5500;">\cols</span>{A} sea igual al espacio nulo <span style="color: #FF5500;">\nulls</span>{B}.
+    
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+      <span style="color: #FF5500;">\eng</span>
+      De la &#250;ltima fila tras la reducci&#243;n de <span style="color: #0000ff;">$-</span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{b}$</span> por eliminci&#243;n,
+      podemos ver que la condici&#243;n para que un vector pertenezca al espacio columna de <span style="color: #FF5500;">\Mat</span>{A} es <span style="color: #FF5500;">\;</span><span style="color: #0000ff;">$</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(condicion)}=0$</span>.<span style="color: #FF5500;">\;</span>
+      As&#237;, para <span style="color: #FF5500;">\;</span><span style="color: #0000FF; font-weight: bold;">\fbox</span>{<span style="color: #0000ff;">$</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{B}=</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(B)}$</span>}<span style="color: #FF5500;">\;</span> tenemos
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\cols</span><span style="color: #0000ff;">{B}=
+        </span><span style="color: #0000ff;">\left</span><span style="color: #0000ff;">\{
+          </span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{b}</span><span style="color: #0000ff;">\in\R</span><span style="color: #0000ff;">[3]
+          </span><span style="color: #0000ff;">\mid</span><span style="color: #0000ff;">
+          </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(condicion)}=0 
+        </span><span style="color: #0000ff;">\right</span><span style="color: #0000ff;">\}
+        =
+        </span><span style="color: #0000ff;">\left</span><span style="color: #0000ff;">\{
+          </span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{X}</span><span style="color: #0000ff;">\in\R</span><span style="color: #0000ff;">[3]
+          \, </span><span style="color: #0000ff;">\Big</span><span style="color: #0000ff;">| \,
+          </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(B)}</span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{x}=</span><span style="color: #0000ff;">\Vect</span><span style="color: #0000ff;">{0}
+        </span><span style="color: #0000ff;">\right</span><span style="color: #0000ff;">\}
+        =
+        </span><span style="color: #0000ff;">\nulls</span><span style="color: #0000ff;">{B}.
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+    <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+    
+  <span style="color: #0000FF; font-weight: bold;">\item</span>  <span style="color: #FF5500;">\puntos</span>{1}
+    &#191;Cu&#225;les de los siguientes vectores pertennecen al espacio columna <span style="color: #FF5500;">\cols</span>{A}:
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+      </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(a)},</span><span style="color: #0000FF; font-weight: bold;">\quad</span><span style="color: #0000ff;">
+      </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(c)},</span><span style="color: #0000FF; font-weight: bold;">\quad</span><span style="color: #0000ff;">
+      </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(d)},</span><span style="color: #0000FF; font-weight: bold;">\quad</span><span style="color: #0000ff;">
+      </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(e)}\,?
+    </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+    
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+      <span style="color: #FF5500;">\eng</span>
+      Los dos &#250;ltimos vectores no pertenecen al espacio columna, pues son de <span style="color: #FF5500;">\R</span>[4].
+      De la condici&#243;n obtenida en la parte (b), tenemos que
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(Vector(c,'h'))}
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+      pertenece a <span style="color: #FF5500;">\cols</span>{A}, pues
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{B}
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(Vector(c,'h'))}=
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(B*c)}
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+      pero
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(Vector(a,'h'))}
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+      no pertence puesto que.
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{B}
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(Vector(a,'h'))}=
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{latex(B*a)}.
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+      Otra forma de verlo es por eliminaci&#243;n:
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-1]{rprElim(A_ampliada, pasos_ampliada)}
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+    <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+  <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">parts</span>}
+  <span style="color: #FF5500;">\procedencia</span>{MIT Course 18.06<span style="color: #0000FF; font-weight: bold;">\quad</span> Quiz 1, March 5, 2007}
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">exercise</span>}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org49b60a6" class="outline-4">
+<h4 id="org49b60a6"><span class="section-number-4">2.2.4.</span> Pregunta 4</h4>
+<div class="outline-text-4" id="text-2-2-4">
+<p>
+Versión de la pregunta 1 del Quiz 1 del Grupo H curso 11/12
+</p>
+
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">exercise</span>}*
+  
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">pycode</span>}[2025-Quiz1-GrupoH-2]
+pasos = T([(-2,1,3), (1,3,2), (-1,3)], rpr='h')
+E = I(3) <span style="color: #ff0000; font-weight: bold;">&amp;</span> pasos
+  <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">pycode</span>}
+  
+  Sea <span style="color: #FF5500;">\Matdim</span>{A}{3}{3} tal que:
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+    </span><span style="color: #0000ff;">\TrC</span><span style="color: #0000ff;">[</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(pasos)}]{</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}}=</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I}.
+  </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+  
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">parts</span>}
+  <span style="color: #0000FF; font-weight: bold;">\item</span> <span style="color: #FF5500;">\puntos</span>{1}
+    Encuentre <span style="color: #FF5500;">\InvMat</span>{A}.
+    
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+      Las cuatro operaciones elementales por columnas en el proceso de eliminaci&#243;n Gauss-Jordan son<span style="color: #FF5500;">\;</span>
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}
+        </span><span style="color: #0000ff;">\TrCPE</span><span style="color: #0000ff;">[</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(pasos)}]{</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I}}
+        =</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I};\,
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+      es decir
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+        </span><span style="color: #6434A3;">\small</span><span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(I(3) </span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;"> pasos[0])}
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(I(3) </span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;"> pasos[1])}
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(I(3) </span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;"> pasos[2])}
+        =
+        </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(I(3) </span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;"> pasos[0] </span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;"> pasos[1])}
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(I(3) </span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;"> pasos[2])}
+        =
+        </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}
+        </span><span style="color: #0000ff;">\underbrace</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(E)}}</span><span style="color: #fa8072;">_{\text{\InvMat{A}}}</span><span style="color: #0000ff;">
+        =</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I}.
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+    <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+
+  <span style="color: #0000FF; font-weight: bold;">\item</span> <span style="color: #FF5500;">\puntos</span>{1}
+    Encuentre <span style="color: #FF5500;">\Mat</span>{A}?
+    
+    <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+      Aplicando sobre <span style="color: #FF5500;">\Mat</span>{I} la secuencia inversa de operaciones elementales
+      (operaciones inversas en el orden inverso)
+      podemos calcular la inversa de la matriz <span style="color: #FF5500;">\InvMat</span>{A} para obtener <span style="color: #FF5500;">\Mat</span>{A}:
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000FF; font-weight: bold;">\begin</span><span style="color: #0000ff;">{</span><span style="color: #006699;">bmatrix</span><span style="color: #0000ff;">}
+          </span><span style="color: #0000ff;">\InvMat</span><span style="color: #0000ff;">{A}</span><span style="color: #ff0000; font-weight: bold;">\\</span><span style="color: #0000ff;">\hline\Mat</span><span style="color: #0000ff;">{I}
+        </span><span style="color: #0000FF; font-weight: bold;">\end</span><span style="color: #0000ff;">{</span><span style="color: #006699;">bmatrix</span><span style="color: #0000ff;">}
+        =
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(E.apila(I(3),1))}
+        </span><span style="color: #0000ff;">\xrightarrow</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(T(pasos)**(-1))}}
+        </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex(E.apila(I(3),1) </span><span style="color: #ff0000; font-weight: bold;">&amp;</span><span style="color: #0000ff;"> T(pasos**(-1)))}
+        =
+        </span><span style="color: #0000FF; font-weight: bold;">\begin</span><span style="color: #0000ff;">{</span><span style="color: #006699;">bmatrix</span><span style="color: #0000ff;">}
+          </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I}
+          </span><span style="color: #ff0000; font-weight: bold;">\\</span><span style="color: #0000ff;">\hline</span><span style="color: #0000ff;">
+          </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}
+        </span><span style="color: #0000FF; font-weight: bold;">\end</span><span style="color: #0000ff;">{</span><span style="color: #006699;">bmatrix</span><span style="color: #0000ff;">},
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+      O,tambi&#233;n, calculando el siguiente producto:
+      <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\;</span><span style="color: #0000ff;">
+        </span><span style="color: #0000ff;">\TrCpE</span><span style="color: #0000ff;">[</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex((pasos**-1)[0])}]{</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I}}
+        </span><span style="color: #0000ff;">\TrCpE</span><span style="color: #0000ff;">[</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex((pasos**-1)[1])}]{</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I}}
+        </span><span style="color: #0000ff;">\TrCpE</span><span style="color: #0000ff;">[</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-2]{latex((pasos**-1)[2])}]{</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I}}
+        =</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A};
+      </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+    <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+  <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">parts</span>}
+  <span style="color: #FF5500;">\procedencia</span>{Basado en MIT Course 18.06<span style="color: #0000FF; font-weight: bold;">\quad</span> Quiz 1, March 10, 1995}
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">exercise</span>}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org78b193d" class="outline-4">
+<h4 id="org78b193d"><span class="section-number-4">2.2.5.</span> Pregunta 5</h4>
+<div class="outline-text-4" id="text-2-2-5">
+<p>
+Versión de la pregunta 1 del Quiz 1 del Grupo H curso 11/12. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">exercise</span>}*
+  
+  <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">pycode</span>}[2025-Quiz1-GrupoH-3]
+L = ~Matrix([[1,2,2,1],[0,0,-4,-2],[0,0,0,0]])
+U = Matrix([[1,0,3],[0,1,1],[0,0,1]])
+A = L*U
+c = sympy.symbols('c')
+b = Vector([1,2,6,c])
+eli = SEL(A,b,1)
+sol = SEL(A,b,1,sust=[(c,3)])
+  <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">pycode</span>}
+  
+   Suponga que la matriz <span style="color: #FF5500;">\Mat</span>{A} es el siguiente producto de matrices: 
+   <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+     </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A} = </span><span style="color: #0000ff;">\MN</span><span style="color: #0000ff;">{L}{U}=
+     </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(L)}
+     </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(U)};
+     </span><span style="color: #0000FF; font-weight: bold;">\quad</span><span style="color: #0000ff;">
+     </span><span style="color: #0000ff;">\Parentesis</span><span style="color: #0000ff;">{
+       </span><span style="color: #0000ff;">\text</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\eng</span><span style="color: #0000ff;">{as&#237; que}{so} }
+       </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}</span><span style="color: #0000ff;">\InvMatpE</span><span style="color: #0000ff;">*{U}=</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{L}}.
+   </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+ 
+   <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">parts</span>}
+   <span style="color: #0000FF; font-weight: bold;">\item</span> <span style="color: #FF5500;">\puntos</span>{1}
+     Obtenga una base del espacio fila de <span style="color: #FF5500;">\Mat</span>{A} y una base del espacio columna de <span style="color: #FF5500;">\Mat</span>{A}.
+     
+     <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+       Como<span style="color: #FF5500;">\;</span>
+       <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}=</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{L}</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{U}=
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(L)}
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(U)}
+         =
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(A)},</span><span style="color: #0000ff;">\;</span><span style="color: #0000ff;">
+       </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+       y como <span style="color: #FF5500;">\Mat</span>{L} tiene su primer pivote en la primera fila y el segundo pivote en la tercera fila; entonces
+       <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\text</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\eng</span><span style="color: #0000ff;">{Una base de}{A basis for} </span><span style="color: #0000ff;">\cols</span><span style="color: #0000ff;">{A}}:</span><span style="color: #0000ff;">\;</span><span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex((L|(1,2,)).sis())}.
+         </span><span style="color: #0000FF; font-weight: bold;">\qquad</span><span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\text</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\eng</span><span style="color: #0000ff;">{Una base de}{A basis for} </span><span style="color: #0000ff;">\cols</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\MatT</span><span style="color: #0000ff;">{A}}}:</span><span style="color: #0000ff;">\;</span><span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(SubEspacio((~A).sis()).base)}.
+       </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+     <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+     
+   <span style="color: #0000FF; font-weight: bold;">\item</span> <span style="color: #FF5500;">\puntos</span>{1} 
+     Describa expl&#237;citamente todas las soluciones del sistema <span style="color: #FF5500;">\SEL</span>{A}{x}{0}.
+     
+     <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+       Como <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\VectC</span><span style="color: #0000ff;">{L}{3}=</span><span style="color: #0000ff;">\elemR</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{A}</span><span style="color: #0000ff;">\InvMatpE</span><span style="color: #0000ff;">*{U}}{3}$</span> es la &#250;nica columna nula,<span style="color: #FF5500;">\;</span> <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\big</span><span style="color: #0000ff;">[</span><span style="color: #0000ff;">\elemR</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\InvMatpE</span><span style="color: #0000ff;">*{U}}{3};</span><span style="color: #0000ff;">\big</span><span style="color: #0000ff;">]$</span> es una base de <span style="color: #FF5500;">\nulls</span>{A}.
+       Como
+       <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{U}</span><span style="color: #0000ff;">\InvMatpE</span><span style="color: #0000ff;">*{U}=
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(U)}
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(InvMat(U))}
+         =</span><span style="color: #0000ff;">\Mat</span><span style="color: #0000ff;">{I};
+         </span><span style="color: #0000FF; font-weight: bold;">\quad</span><span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\text</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\eng</span><span style="color: #0000ff;">{entonces}{then}}
+         </span><span style="color: #0000ff;">\elemR</span><span style="color: #0000ff;">{</span><span style="color: #0000ff;">\InvMatpE</span><span style="color: #0000ff;">*{U}}{3}=</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(InvMat(U)|3)}.
+       </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+       As&#237; pues, el conjunto de soluciones del sistema <span style="color: #FF5500;">\SEL</span>{A}{x}{0} es<span style="color: #FF5500;">\;</span>
+       <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\nulls</span><span style="color: #0000ff;">{A}=
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{SubEspacio(A).EcParametricas()}.
+       </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+     <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+     
+   <span style="color: #0000FF; font-weight: bold;">\item</span> 
+     <span style="color: #FF5500;">\puntos</span>{1}
+     Resuelva (si es posible, y dependiendo de <span style="color: #0000ff;">$c$</span>) el sistema
+     <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">math</span>}<span style="color: #0000ff;">
+       </span><span style="color: #0000ff;">\MV</span><span style="color: #0000ff;">{A}{x}=</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(Vector(b,'h'))}.
+     </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">math</span>}
+     
+     <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">solution</span>}[]
+       <span style="color: #0000ff;">$</span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{eli.tex}$</span>
+       <span style="color: #FF5500;">\medskip</span>
+       
+       Si <span style="color: #0000ff;">$c</span><span style="color: #0000ff;">\neq</span><span style="color: #0000ff;">3$</span> el sistema no tiene soluci&#243;n. 
+       Cuando <span style="color: #0000ff;">$c=3$</span> la soluci&#243;n completa es:
+       <span style="color: #0000FF; font-weight: bold;">\begin</span>{<span style="color: #006699;">displaymath</span>}<span style="color: #0000ff;">
+         </span><span style="color: #0000ff;">\py</span><span style="color: #0000ff;">[2025-Quiz1-GrupoH-3]{latex(sol)}
+       </span><span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">displaymath</span>}
+     <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">solution</span>}
+     
+   <span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">parts</span>}
+   <span style="color: #FF5500;">\procedencia</span>{Basado en MIT Course 18.06<span style="color: #0000FF; font-weight: bold;">\quad</span> Quiz 1, March 10, 1995}
+<span style="color: #0000FF; font-weight: bold;">\end</span>{<span style="color: #006699;">exercise</span>}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb8bdf69" class="outline-2">
+<h2 id="orgb8bdf69"><span class="section-number-2">3.</span> Referencias</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2026-02-27 vie 11:27</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
