@@ -18,13 +18,7 @@ demanda* en un entorno *MyBinder/JupyterLab*, incluyendo:
    :PROPERTIES:
    :CUSTOM_ID: abrir-en-binder
    :END:
-1. Pulsa el badge de Binder (rellena =<OWNER>= y =<REPO>= con tu repo):
-
-#+begin_example
-https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD
-#+end_example
-
-[[https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD][file:https://mybinder.org/badge_logo.svg]] 
+1. Pulsa el badge de Binder: [[https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD][file:https://mybinder.org/badge_logo.svg]] 
 
 2. [@2] Espera a que cargue JupyterLab.
 3. Abre *Terminal* (en JupyterLab: =/File → New → Terminal/=).
@@ -34,27 +28,20 @@ https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD
    :CUSTOM_ID: compilar-bajo-demanda
    :END:
 
-Para compilar =tex/Quiz1-2025-C.tex=:
+Para compilar =tex/Quiz1-2025-C.tex= copia uno de los siguientes códigos en un terminal de MyBinder (en JupyterLab: =/File → New → Terminal/=).
 
-#+begin_src sh
-bash scripts/compila.sh tex/Quiz1-2025-C.tex
-#+end_src
+- La siguiente variante oculta los resultados intermedios (es más rápido) y copia el =pdf= generado en el directorio raíz:
+  #+begin_src sh :eval no
+    bash scripts/compila.sh tex/Quiz1-2025-C.tex
+  #+end_src
 
-o 
+- Esta segunda variante muestra los resultados intermedios (mejor para hacer depuración de errores). Pero es más lento y deja el =pdf= generado en el sub-directorio =tex=:
+  #+begin_src sh :eval no
+    bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
+  #+end_src
+  El PDF resultante quedará en: =tex/Quiz1-2025-C.pdf=
 
-#+begin_src sh
-bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
-#+end_src
-
-El PDF resultante quedará en:
-
-- =tex/Quiz1-2025-C.pdf=
-
-y una copia en el directorio raiz
-
-- =Quiz1-2025-C.pdf=
-
-Puedes abrirlo desde el explorador de archivos de JupyterLab.
+Puedes abrirlo el =pdf= desde el explorador de archivos de JupyterLab.
 
 * Estructura del repo (resumen)
    :PROPERTIES:

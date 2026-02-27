@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-02-27 vie 15:31 -->
+<!-- 2026-02-27 vie 22:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LaTeX + PythonTeX + Exerquiz + nacal en MyBinder</title>
@@ -254,20 +254,8 @@ demanda</b> en un entorno <b>MyBinder/JupyterLab</b>, incluyendo:
 <h2 id="abrir-en-binder"><span class="section-number-2">1.</span> Abrir en Binder</h2>
 <div class="outline-text-2" id="text-abrir-en-binder">
 <ol class="org-ol">
-<li>Pulsa el badge de Binder (rellena <code>&lt;OWNER&gt;</code> y <code>&lt;REPO&gt;</code> con tu repo):</li>
-</ol>
+<li>Pulsa el badge de Binder: <a href="https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD"><img src="https://mybinder.org/badge_logo.svg" alt="badge_logo.svg" class="org-svg" /></a></li>
 
-<pre class="example" id="org5736890">
-https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD
-</pre>
-
-
-<div id="org24848e5" class="figure">
-<p><a href="https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD"><img src="https://mybinder.org/badge_logo.svg" alt="badge_logo.svg" class="org-svg" /></a> 
-</p>
-</div>
-
-<ol class="org-ol">
 <li value="2">Espera a que cargue JupyterLab.</li>
 <li>Abre <b>Terminal</b> (en JupyterLab: <code>/File → New → Terminal/</code>).</li>
 </ol>
@@ -277,41 +265,32 @@ https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD
 <h2 id="compilar-bajo-demanda"><span class="section-number-2">2.</span> Compilar bajo demanda</h2>
 <div class="outline-text-2" id="text-compilar-bajo-demanda">
 <p>
-Para compilar <code>tex/Quiz1-2025-C.tex</code>:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">bash scripts/compila.sh tex/Quiz1-2025-C.tex
-</pre>
-</div>
-
-<p>
-o 
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
-</pre>
-</div>
-
-<p>
-El PDF resultante quedará en:
+Para compilar <code>tex/Quiz1-2025-C.tex</code> copia uno de los siguientes códigos en un terminal de MyBinder (en JupyterLab: <code>/File → New → Terminal/</code>).
 </p>
 
 <ul class="org-ul">
-<li><code>tex/Quiz1-2025-C.pdf</code></li>
-</ul>
-
-<p>
-y una copia en el directorio raiz
+<li><p>
+La siguiente variante oculta los resultados intermedios (es más rápido) y copia el <code>pdf</code> generado en el directorio raíz:
 </p>
+<div class="org-src-container">
+<pre class="src src-sh">    bash scripts/compila.sh tex/Quiz1-2025-C.tex
+</pre>
+</div></li>
 
-<ul class="org-ul">
-<li><code>Quiz1-2025-C.pdf</code></li>
+<li><p>
+Esta segunda variante muestra los resultados intermedios (mejor para hacer depuración de errores). Pero es más lento y deja el <code>pdf</code> generado en el sub-directorio <code>tex</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">    bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
+</pre>
+</div>
+<p>
+El PDF resultante quedará en: <code>tex/Quiz1-2025-C.pdf</code>
+</p></li>
 </ul>
 
 <p>
-Puedes abrirlo desde el explorador de archivos de JupyterLab.
+Puedes abrirlo el <code>pdf</code> desde el explorador de archivos de JupyterLab.
 </p>
 </div>
 </div>
@@ -371,7 +350,7 @@ debes editar <code>tex/nacal/PreambuloParaExamenes.tex</code> comentando las opc
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-02-27 vie 15:31</p>
+<p class="date">Created: 2026-02-27 vie 22:44</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
