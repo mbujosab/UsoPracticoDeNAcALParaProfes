@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-02-27 vie 17:00 -->
+<!-- 2026-02-27 vie 17:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fuente y explicación de algunos ficheros</title>
@@ -236,12 +236,12 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
 <li>Usar latexmk para automatizar pasadas.</li>
 <li>Insertar PythonTeX como paso intermedio (<code>pdflatex → pythontex → latexmk</code>).</li>
 </ul>
-<div id="outline-container-orgcc6cb51" class="outline-2">
-<h2 id="orgcc6cb51"><span class="section-number-2">1.</span> Repositorio</h2>
+<div id="outline-container-org9edda46" class="outline-2">
+<h2 id="org9edda46"><span class="section-number-2">1.</span> Repositorio</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org51e7a46" class="outline-3">
-<h3 id="org51e7a46"><span class="section-number-3">1.1.</span> Estructura de carpetas</h3>
+<div id="outline-container-org2cfdd56" class="outline-3">
+<h3 id="org2cfdd56"><span class="section-number-3">1.1.</span> Estructura de carpetas</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>binder/
@@ -284,8 +284,8 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdd089b2" class="outline-3">
-<h3 id="orgdd089b2"><span class="section-number-3">1.2.</span> Paquetes del sistema (TeX Live + herramientas)</h3>
+<div id="outline-container-org6fd934f" class="outline-3">
+<h3 id="org6fd934f"><span class="section-number-3">1.2.</span> Paquetes del sistema (TeX Live + herramientas)</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Fichero <code>.binder/apt.txt</code>
@@ -298,7 +298,7 @@ texlive-latex-recommended
 texlive-science
 texlive-pictures
 texlive-lang-spanish
-texlive-math-extra
+texlive-plain-generic
 latexmk
 perl
 ghostscript
@@ -321,8 +321,8 @@ Si luego al compilar te falta algún .sty, se corrige añadiendo el paquete TeX 
 </p>
 </div>
 </div>
-<div id="outline-container-orgc26a235" class="outline-3">
-<h3 id="orgc26a235"><span class="section-number-3">1.3.</span> Entorno Python (para PythonTeX)</h3>
+<div id="outline-container-orge786b07" class="outline-3">
+<h3 id="orge786b07"><span class="section-number-3">1.3.</span> Entorno Python (para PythonTeX)</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-txt">name: latex-pythontex
@@ -343,8 +343,8 @@ pygments suele ser necesario porque PythonTeX puede usarlo para resaltado/format
 </p>
 </div>
 </div>
-<div id="outline-container-orga2d3dcc" class="outline-3">
-<h3 id="orga2d3dcc"><span class="section-number-3">1.4.</span> postBuild (ajustes tras construir el entorno)</h3>
+<div id="outline-container-org431fb16" class="outline-3">
+<h3 id="org431fb16"><span class="section-number-3">1.4.</span> postBuild (ajustes tras construir el entorno)</h3>
 <div class="outline-text-3" id="text-1-4">
 <div class="org-src-container">
 <pre class="src src-txt">#!/usr/bin/env bash
@@ -365,8 +365,8 @@ Con esto Binder deja listo el script para compilar “bajo demanda”.
 </p>
 </div>
 </div>
-<div id="outline-container-org9827caf" class="outline-3">
-<h3 id="org9827caf"><span class="section-number-3">1.5.</span> Script de compilación bajo demanda (latexmk + pythontex)</h3>
+<div id="outline-container-orga85ceee" class="outline-3">
+<h3 id="orga85ceee"><span class="section-number-3">1.5.</span> Script de compilación bajo demanda (latexmk + pythontex)</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Este es mi script
@@ -391,6 +391,14 @@ Este es mi script
 <span style="color: #0000FF; font-weight: bold;">fi</span>
 
 <span style="color: #006FE0;">cd</span> <span style="color: #008000;">"$WORKDIR"</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Permite que TeX encuentre paquetes locales "vendorizados" (AcroTeX, nacal, etc.).
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">El ':' final es importante para conservar la b&#250;squeda por defecto de TeX.
+</span><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">TEXINPUTS</span>=<span style="color: #008000;">".:./acrotex:./nacal:${TEXINPUTS:-}:"</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">(Opcional) si tu .bib/.bst est&#225;n en subcarpetas y usas \bibliography{referencias/...}
+</span><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">BIBINPUTS</span>=<span style="color: #008000;">".:./referencias:${BIBINPUTS:-}:"</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">BSTINPUTS</span>=<span style="color: #008000;">".:./referencias:${BSTINPUTS:-}:"</span>
 
 pdflatex -interaction=batchmode <span style="color: #008000;">"$BASENAME"</span>
 pythontex --interpreter python:python3 <span style="color: #008000;">"$BASENAME"</span>
@@ -467,8 +475,8 @@ Ventajas:
 </ul>
 </div>
 </div>
-<div id="outline-container-org704e389" class="outline-3">
-<h3 id="org704e389"><span class="section-number-3">1.6.</span> Uso en Binder (bajo demanda)</h3>
+<div id="outline-container-orgcc1542b" class="outline-3">
+<h3 id="orgcc1542b"><span class="section-number-3">1.6.</span> Uso en Binder (bajo demanda)</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 En el README poner el enlace a Binder y explicar:
@@ -494,8 +502,8 @@ o bien
 </div>
 </div>
 </div>
-<div id="outline-container-org607b996" class="outline-3">
-<h3 id="org607b996"><span class="section-number-3">1.7.</span> Si PythonTeX no aparece en PATH (posible ajuste)</h3>
+<div id="outline-container-org8445688" class="outline-3">
+<h3 id="org8445688"><span class="section-number-3">1.7.</span> Si PythonTeX no aparece en PATH (posible ajuste)</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Si al compilar sale “No encuentro pythontex”, hay dos soluciones típicas:
@@ -514,7 +522,7 @@ Si te pasa, dime el error exacto del terminal en Binder (las últimas ~30 línea
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-02-27 vie 17:00</p>
+<p class="date">Created: 2026-02-27 vie 17:06</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

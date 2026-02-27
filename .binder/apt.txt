@@ -4,7 +4,7 @@ texlive-latex-recommended
 texlive-science
 texlive-pictures
 texlive-lang-spanish
-texlive-math-extra
+texlive-plain-generic
 latexmk
 perl
 ghostscript
