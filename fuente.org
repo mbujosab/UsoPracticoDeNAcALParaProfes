@@ -25,6 +25,8 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
   - Quiz1-2025-C.tex
   - nacal/
     - nacal.sty (copiado desde [[https://github.com/mbujosab/nacal-latex-package]].  En el .tex. poner \usepackage{nacal/nacal} (ruta relativa).
+  - acrotex
+    - (/los ficheros de este directorio los he descargado de/ https://ctan.org/tex-archive/macros/latex/contrib/acrotex)
   - referencias/
     - referencias.bib
   - aux/
@@ -45,6 +47,8 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
   (make-directory "tex/aux"))
 (unless (file-directory-p "tex/nacal")
   (make-directory "tex/nacal"))
+(unless (file-directory-p "tex/acrotex")
+  (make-directory "tex/acrotex"))
 (unless (file-directory-p "tex/referencias")
   (make-directory "tex/referencias"))
 (unless (file-directory-p "tex/preguntas")
@@ -62,9 +66,6 @@ texlive-latex-recommended
 texlive-science
 texlive-pictures
 texlive-lang-spanish
-texlive-publishers
-texlive-humanities
-texlive-extra-utils
 latexmk
 perl
 ghostscript
