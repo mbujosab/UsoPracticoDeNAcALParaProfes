@@ -1,5 +1,5 @@
 #+TITLE: LaTeX + PythonTeX + Exerquiz + nacal en MyBinder
-# +SUBTITLE: (subtitulo)
+# +SUBTITLE: (subtítulo)
 #+LANGUAGE: es
 #+AUTHOR: Marcos Bujosa
 #+OPTIONS: author:nil 
@@ -7,18 +7,17 @@
 
 #+EXPORT_FILE_NAME: index
 
-Este repositorio está pensado para compilar *documentos LaTeX bajo
-demanda* en un entorno *MyBinder/JupyterLab*, incluyendo:
+Este repositorio está diseñado para compilar *documentos LaTeX bajo demanda* en un entorno *MyBinder/JupyterLab*, incluyendo:
 
 - *PythonTeX*: ejecutar código Python desde LaTeX y reintegrar los resultados en el PDF.
 - *AcroTeX / exerquiz*: escritura de ejercicios y (opcionalmente) *soluciones agrupadas al final*.
-- *nacal.sty*: [[https://github.com/mbujosab/nacal-latex-package][paquete con la notación del curso]] (colocado en =tex/nacal/nacal.sty=), que a su vez usa paquetes como =amsmath=, =amssymb=, =esvect=, =leftidx=, =pict2e=, =stackengine=, =xparse=, =xspace=.
+- *nacal.sty*: [[https://github.com/mbujosab/nacal-latex-package][paquete con la notación del curso]] (ubicado en =tex/nacal/nacal.sty=), que a su vez utiliza paquetes como =amsmath=, =amssymb=, =esvect=, =leftidx=, =pict2e=, =stackengine=, =xparse=, =xspace=.
 
 * Abrir en Binder
    :PROPERTIES:
    :CUSTOM_ID: abrir-en-binder
    :END:
-1. Pulsa el badge de Binder: [[https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD][file:https://mybinder.org/badge_logo.svg]] 
+1. Pulsa el badge de Binder: [[https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD][file:https://mybinder.org/badge_logo.svg]]
 
 2. [@2] Espera a que cargue JupyterLab.
 3. Abre *Terminal* (en JupyterLab: =/File → New → Terminal/=).
@@ -28,22 +27,22 @@ demanda* en un entorno *MyBinder/JupyterLab*, incluyendo:
    :CUSTOM_ID: compilar-bajo-demanda
    :END:
 
-Para compilar =tex/Quiz1-2025-C.tex= copia uno de los siguientes códigos en un terminal de MyBinder (en JupyterLab: =/File → New → Terminal/=).
+Para compilar =tex/Quiz1-2025-C.tex= copia uno de los siguientes comandos en un terminal de MyBinder (en JupyterLab: =/File → New → Terminal/=).
 
-- La siguiente variante oculta los resultados intermedios (es más rápido) y copia el =pdf= generado en el directorio raíz:
+- La siguiente variante oculta parte de los resultados al compilar (es un poco más rápida) y copia el =pdf= generado en el directorio raíz:
   #+begin_src sh :eval no
     bash scripts/compila.sh tex/Quiz1-2025-C.tex
   #+end_src
 
-- Esta segunda variante muestra los resultados intermedios (mejor para hacer depuración de errores). Pero es más lento y deja el =pdf= generado en el sub-directorio =tex=:
+- Esta segunda variante muestra todos los resultados intermedios (mejor para hacer depuración de errores). Sin embargo, es más lenta y deja el =pdf= generado en el subdirectorio =tex=:
   #+begin_src sh :eval no
     bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
   #+end_src
-  El PDF resultante quedará en: =tex/Quiz1-2025-C.pdf=
+  El PDF resultante estará en: =tex/Quiz1-2025-C.pdf=
 
-Puedes abrirlo el =pdf= desde el explorador de archivos de JupyterLab.
+Puedes abrir el =pdf= desde el explorador de archivos de JupyterLab.
 
-* Estructura del repo (resumen)
+* Estructura del repositorio (resumen)
    :PROPERTIES:
    :CUSTOM_ID: estructura-del-repo-resumen
    :END:
@@ -53,11 +52,11 @@ Puedes abrirlo el =pdf= desde el explorador de archivos de JupyterLab.
 - =scripts/compila.sh=: script de compilación (=pdflatex → pythontex → latexmk=)
 - =scripts/build_latex.sh=: script de compilación (=pdflatex → pythontex → latexmk=)
 - =tex/nacal/nacal.sty=: tu paquete con la notación del curso
-- =tex/aux/PreambuloParaExamenes.tex=: preámbulo $\LaTeX{}$ para los examenes
-- =tex/aux/InstruccionesQuiz.tex=: bloque de código $\LaTeX{}$ con las instrucciones de los quizes
+- =tex/aux/PreambuloParaExamenes.tex=: preámbulo $\LaTeX{}$ para los exámenes
+- =tex/aux/InstruccionesQuiz.tex=: bloque de código $\LaTeX{}$ con las instrucciones de los quizzes
 - =tex/aux/InstruccionesExamenFinal.tex=: bloque de código $\LaTeX{}$ con las instrucciones de los exámenes finales
 - =tex/Quiz1-2025-C.tex=: documento principal de ejemplo
-- =tex/preguntas/2025-intermedio1-C.tex=: preguntas usadas en el documento de ejemplo
+- =tex/preguntas/2025-intermedio1-C.tex=: preguntas utilizadas en el documento de ejemplo
 
 * Notas sobre PythonTeX
    :PROPERTIES:
@@ -65,20 +64,18 @@ Puedes abrirlo el =pdf= desde el explorador de archivos de JupyterLab.
    :END:
 El flujo habitual requiere varias pasadas:
 
-1. =pdflatex= genera auxiliares y los ficheros de trabajo de pythontex
+1. =pdflatex= genera auxiliares y los archivos de trabajo de pythontex
 2. =pythontex= ejecuta el código Python y produce resultados intermedios
-3. =latexmk= remata pasadas para referencias/TOC y deja el PDF final
+3. =latexmk= completa las pasadas para referencias/TOC y genera el PDF final
 
-El script =scripts/compila.sh= implementa ese flujo. También el script =scripts/build_latex.sh= (sugerido por copilot de GitHub.
-
-Si al ejecutar el script aparece un error del tipo /"No encuentro pythontex"/, revisa el log del terminal y ajusta =binder/apt.txt= (o dime las últimas ~30 líneas del error y te indico el paquete exacto a añadir).
+El script =scripts/compila.sh= implementa ese flujo. También el script =scripts/build_latex.sh=.
 
 * Exerquiz: soluciones al final (plantilla)
    :PROPERTIES:
    :CUSTOM_ID: exerquiz-soluciones-al-final-plantilla
    :END:
-Si quieres que las soluciones aparezcan al final del documento, 
-debes editar =tex/nacal/PreambuloParaExamenes.tex= comentando las opciones que no quieres, y descomentando la única opción que quieres
+Si deseas que las soluciones aparezcan al final del documento, 
+debes editar =tex/nacal/PreambuloParaExamenes.tex= comentando las opciones que no quieres, y descomentando la única opción que deseas.
 
 #+begin_src latex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

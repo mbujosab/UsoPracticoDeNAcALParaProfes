@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-02-27 vie 22:44 -->
+<!-- 2026-02-27 vie 22:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LaTeX + PythonTeX + Exerquiz + nacal en MyBinder</title>
@@ -234,21 +234,20 @@
 <ul>
 <li><a href="#abrir-en-binder">1. Abrir en Binder</a></li>
 <li><a href="#compilar-bajo-demanda">2. Compilar bajo demanda</a></li>
-<li><a href="#estructura-del-repo-resumen">3. Estructura del repo (resumen)</a></li>
+<li><a href="#estructura-del-repo-resumen">3. Estructura del repositorio (resumen)</a></li>
 <li><a href="#notas-sobre-pythontex">4. Notas sobre PythonTeX</a></li>
 <li><a href="#exerquiz-soluciones-al-final-plantilla">5. Exerquiz: soluciones al final (plantilla)</a></li>
 </ul>
 </div>
 </div>
 <p>
-Este repositorio está pensado para compilar <b>documentos LaTeX bajo
-demanda</b> en un entorno <b>MyBinder/JupyterLab</b>, incluyendo:
+Este repositorio está diseñado para compilar <b>documentos LaTeX bajo demanda</b> en un entorno <b>MyBinder/JupyterLab</b>, incluyendo:
 </p>
 
 <ul class="org-ul">
 <li><b>PythonTeX</b>: ejecutar código Python desde LaTeX y reintegrar los resultados en el PDF.</li>
 <li><b>AcroTeX / exerquiz</b>: escritura de ejercicios y (opcionalmente) <b>soluciones agrupadas al final</b>.</li>
-<li><b>nacal.sty</b>: <a href="https://github.com/mbujosab/nacal-latex-package">paquete con la notación del curso</a> (colocado en <code>tex/nacal/nacal.sty</code>), que a su vez usa paquetes como <code>amsmath</code>, <code>amssymb</code>, <code>esvect</code>, <code>leftidx</code>, <code>pict2e</code>, <code>stackengine</code>, <code>xparse</code>, <code>xspace</code>.</li>
+<li><b>nacal.sty</b>: <a href="https://github.com/mbujosab/nacal-latex-package">paquete con la notación del curso</a> (ubicado en <code>tex/nacal/nacal.sty</code>), que a su vez utiliza paquetes como <code>amsmath</code>, <code>amssymb</code>, <code>esvect</code>, <code>leftidx</code>, <code>pict2e</code>, <code>stackengine</code>, <code>xparse</code>, <code>xspace</code>.</li>
 </ul>
 <div id="outline-container-abrir-en-binder" class="outline-2">
 <h2 id="abrir-en-binder"><span class="section-number-2">1.</span> Abrir en Binder</h2>
@@ -265,12 +264,12 @@ demanda</b> en un entorno <b>MyBinder/JupyterLab</b>, incluyendo:
 <h2 id="compilar-bajo-demanda"><span class="section-number-2">2.</span> Compilar bajo demanda</h2>
 <div class="outline-text-2" id="text-compilar-bajo-demanda">
 <p>
-Para compilar <code>tex/Quiz1-2025-C.tex</code> copia uno de los siguientes códigos en un terminal de MyBinder (en JupyterLab: <code>/File → New → Terminal/</code>).
+Para compilar <code>tex/Quiz1-2025-C.tex</code> copia uno de los siguientes comandos en un terminal de MyBinder (en JupyterLab: <code>/File → New → Terminal/</code>).
 </p>
 
 <ul class="org-ul">
 <li><p>
-La siguiente variante oculta los resultados intermedios (es más rápido) y copia el <code>pdf</code> generado en el directorio raíz:
+La siguiente variante oculta parte de los resultados al compilar (es un poco más rápida) y copia el <code>pdf</code> generado en el directorio raíz:
 </p>
 <div class="org-src-container">
 <pre class="src src-sh">    bash scripts/compila.sh tex/Quiz1-2025-C.tex
@@ -278,24 +277,24 @@ La siguiente variante oculta los resultados intermedios (es más rápido) y copi
 </div></li>
 
 <li><p>
-Esta segunda variante muestra los resultados intermedios (mejor para hacer depuración de errores). Pero es más lento y deja el <code>pdf</code> generado en el sub-directorio <code>tex</code>:
+Esta segunda variante muestra todos los resultados intermedios (mejor para hacer depuración de errores). Sin embargo, es más lenta y deja el <code>pdf</code> generado en el subdirectorio <code>tex</code>:
 </p>
 <div class="org-src-container">
 <pre class="src src-sh">    bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
 </pre>
 </div>
 <p>
-El PDF resultante quedará en: <code>tex/Quiz1-2025-C.pdf</code>
+El PDF resultante estará en: <code>tex/Quiz1-2025-C.pdf</code>
 </p></li>
 </ul>
 
 <p>
-Puedes abrirlo el <code>pdf</code> desde el explorador de archivos de JupyterLab.
+Puedes abrir el <code>pdf</code> desde el explorador de archivos de JupyterLab.
 </p>
 </div>
 </div>
 <div id="outline-container-estructura-del-repo-resumen" class="outline-2">
-<h2 id="estructura-del-repo-resumen"><span class="section-number-2">3.</span> Estructura del repo (resumen)</h2>
+<h2 id="estructura-del-repo-resumen"><span class="section-number-2">3.</span> Estructura del repositorio (resumen)</h2>
 <div class="outline-text-2" id="text-estructura-del-repo-resumen">
 <ul class="org-ul">
 <li><code>binder/apt.txt</code>: dependencias del sistema (TeX Live, latexmk, etc.)</li>
@@ -304,11 +303,11 @@ Puedes abrirlo el <code>pdf</code> desde el explorador de archivos de JupyterLab
 <li><code>scripts/compila.sh</code>: script de compilación (<code>pdflatex → pythontex → latexmk</code>)</li>
 <li><code>scripts/build_latex.sh</code>: script de compilación (<code>pdflatex → pythontex → latexmk</code>)</li>
 <li><code>tex/nacal/nacal.sty</code>: tu paquete con la notación del curso</li>
-<li><code>tex/aux/PreambuloParaExamenes.tex</code>: preámbulo \(\LaTeX{}\) para los examenes</li>
-<li><code>tex/aux/InstruccionesQuiz.tex</code>: bloque de código \(\LaTeX{}\) con las instrucciones de los quizes</li>
+<li><code>tex/aux/PreambuloParaExamenes.tex</code>: preámbulo \(\LaTeX{}\) para los exámenes</li>
+<li><code>tex/aux/InstruccionesQuiz.tex</code>: bloque de código \(\LaTeX{}\) con las instrucciones de los quizzes</li>
 <li><code>tex/aux/InstruccionesExamenFinal.tex</code>: bloque de código \(\LaTeX{}\) con las instrucciones de los exámenes finales</li>
 <li><code>tex/Quiz1-2025-C.tex</code>: documento principal de ejemplo</li>
-<li><code>tex/preguntas/2025-intermedio1-C.tex</code>: preguntas usadas en el documento de ejemplo</li>
+<li><code>tex/preguntas/2025-intermedio1-C.tex</code>: preguntas utilizadas en el documento de ejemplo</li>
 </ul>
 </div>
 </div>
@@ -320,17 +319,13 @@ El flujo habitual requiere varias pasadas:
 </p>
 
 <ol class="org-ol">
-<li><code>pdflatex</code> genera auxiliares y los ficheros de trabajo de pythontex</li>
+<li><code>pdflatex</code> genera auxiliares y los archivos de trabajo de pythontex</li>
 <li><code>pythontex</code> ejecuta el código Python y produce resultados intermedios</li>
-<li><code>latexmk</code> remata pasadas para referencias/TOC y deja el PDF final</li>
+<li><code>latexmk</code> completa las pasadas para referencias/TOC y genera el PDF final</li>
 </ol>
 
 <p>
-El script <code>scripts/compila.sh</code> implementa ese flujo. También el script <code>scripts/build_latex.sh</code> (sugerido por copilot de GitHub.
-</p>
-
-<p>
-Si al ejecutar el script aparece un error del tipo <i>"No encuentro pythontex"</i>, revisa el log del terminal y ajusta <code>binder/apt.txt</code> (o dime las últimas ~30 líneas del error y te indico el paquete exacto a añadir).
+El script <code>scripts/compila.sh</code> implementa ese flujo. También el script <code>scripts/build_latex.sh</code>.
 </p>
 </div>
 </div>
@@ -338,8 +333,8 @@ Si al ejecutar el script aparece un error del tipo <i>"No encuentro pythontex"</
 <h2 id="exerquiz-soluciones-al-final-plantilla"><span class="section-number-2">5.</span> Exerquiz: soluciones al final (plantilla)</h2>
 <div class="outline-text-2" id="text-exerquiz-soluciones-al-final-plantilla">
 <p>
-Si quieres que las soluciones aparezcan al final del documento, 
-debes editar <code>tex/nacal/PreambuloParaExamenes.tex</code> comentando las opciones que no quieres, y descomentando la única opción que quieres
+Si deseas que las soluciones aparezcan al final del documento, 
+debes editar <code>tex/nacal/PreambuloParaExamenes.tex</code> comentando las opciones que no quieres, y descomentando la única opción que deseas.
 </p>
 
 <ul class="org-ul">
@@ -350,7 +345,7 @@ debes editar <code>tex/nacal/PreambuloParaExamenes.tex</code> comentando las opc
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-02-27 vie 22:44</p>
+<p class="date">Created: 2026-02-27 vie 22:56</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
