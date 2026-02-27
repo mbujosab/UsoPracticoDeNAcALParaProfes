@@ -102,6 +102,7 @@ set -euxo pipefail
 
 # Permisos de ejecución para scripts
 chmod +x scripts/build_latex.sh
+chmod +x scripts/compila.sh
 
 # (Opcional) Mostrar versiones útiles para depurar en el log de build
 latexmk -v || true

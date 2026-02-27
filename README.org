@@ -33,6 +33,7 @@ https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD
    :PROPERTIES:
    :CUSTOM_ID: compilar-bajo-demanda
    :END:
+
 Para compilar =tex/Quiz1-2025-C.tex=:
 
 #+begin_src sh
