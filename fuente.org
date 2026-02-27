@@ -199,18 +199,8 @@ if [[ ! -x "$CONDA_PY" ]]; then
   exit 1
 fi
 
-# 3) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
-if command -v pythontex >/dev/null 2>&1; then
-  pythontex --interpreter python:/srv/conda/bin/python "$BASENAME"
-elif command -v pythontex3 >/dev/null 2>&1; then
-  pythontex3 "$BASENAME"
-else
-  # Fallback: intentar localizar el script pythontex3.py (a veces está en TEXMF)
-  # Si esto falla, habrá que ajustar apt.txt para instalar pythontex desde TeX Live o pip.
-  echo "No encuentro 'pythontex' ni 'pythontex3' en PATH."
-  echo "Sugerencia: verifica instalación de pythontex (TeX Live) o añade un paso de instalación."
-  exit 1
-fi
+# 3) Ejecuta PythonTeX 
+pythontex --interpreter "py:${CONDA_PY}" "$BASENAME"
 
 # 4) Completa compilación (referencias, TOC, etc.)
 latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
@@ -224,6 +214,41 @@ Ventajas:
 - Si PythonTeX no está, falla con mensaje claro.
 - latexmk se encarga de pasadas adicionales.
 
+#+BEGIN_SRC bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "Uso: $0 tex/archivo.tex"
+  exit 2
+fi
+
+TEXFILE="$1"
+WORKDIR="$(cd "$(dirname "$TEXFILE")" && pwd)"
+BASENAME="$(basename "$TEXFILE")"
+
+cd "$WORKDIR"
+
+# Mantén búsqueda de TeX local (si usas paquetes vendorizados en subcarpetas)
+export TEXINPUTS=".:./acrotex:./nacal:${TEXINPUTS:-}:"
+
+# 1) Primera pasada (genera .aux y el .pytxcode)
+pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
+
+# 2) PythonTeX con el Python de conda (env de Binder: notebook)
+CONDA_PY="/srv/conda/envs/notebook/bin/python"
+if [[ ! -x "$CONDA_PY" ]]; then
+  echo "No encuentro el python del entorno conda en $CONDA_PY"
+  echo "Entornos disponibles:"
+  conda env list || true
+  exit 1
+fi
+
+pythontex --interpreter "py:${CONDA_PY}" "$BASENAME"
+
+# 3) Compilación final (resuelve refs y recoge salida de pythontex)
+latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
+#+END_SRC
 
 ** Uso en Binder (bajo demanda)
 

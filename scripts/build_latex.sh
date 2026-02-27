@@ -32,18 +32,8 @@ if [[ ! -x "$CONDA_PY" ]]; then
   exit 1
 fi
 
-# 3) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
-if command -v pythontex >/dev/null 2>&1; then
-  pythontex --interpreter python:/srv/conda/bin/python "$BASENAME"
-elif command -v pythontex3 >/dev/null 2>&1; then
-  pythontex3 "$BASENAME"
-else
-  # Fallback: intentar localizar el script pythontex3.py (a veces está en TEXMF)
-  # Si esto falla, habrá que ajustar apt.txt para instalar pythontex desde TeX Live o pip.
-  echo "No encuentro 'pythontex' ni 'pythontex3' en PATH."
-  echo "Sugerencia: verifica instalación de pythontex (TeX Live) o añade un paso de instalación."
-  exit 1
-fi
+# 3) Ejecuta PythonTeX 
+pythontex --interpreter "py:${CONDA_PY}" "$BASENAME"
 
 # 4) Completa compilación (referencias, TOC, etc.)
 latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
