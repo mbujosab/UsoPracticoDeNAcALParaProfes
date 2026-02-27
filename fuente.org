@@ -67,6 +67,7 @@ texlive-science
 texlive-pictures
 texlive-lang-spanish
 texlive-plain-generic
+texlive-fonts-extra
 latexmk
 perl
 ghostscript
