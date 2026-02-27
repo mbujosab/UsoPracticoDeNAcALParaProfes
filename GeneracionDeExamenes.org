@@ -51,7 +51,7 @@
 \usepackage[spanish]{varioref}
 \renewcommand\shorthandsspanish{}
 
-\usepackage[pdftex,nodirectory,latextoc,spanish]{acrotex/web}
+\usepackage[pdftex,nodirectory,latextoc,spanish]{web}
 #+END_SRC
 
 *** Variantes de los exámenes
@@ -63,7 +63,7 @@
 %
 % \usepackage[pdftex,forpaper,nohiddensolutions,solutionsafter,spanish]{exerquiz}   % soluciones a continuación de los enunciados
 % \usepackage[pdftex,forpaper,nosolutions,spanish]{exerquiz}                        % sin soluciones (versión de examen para reprografía)
-\usepackage[pdftex,forpaper,spanish]{acrotex/exerquiz}                                    % soluciones al final del documento
+\usepackage[pdftex,forpaper,spanish]{exerquiz}                                    % soluciones al final del documento
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -152,7 +152,7 @@
 \usepackage{mathtools}
 \usepackage{systeme}
 
-\usepackage{nacal/nacal}
+\usepackage{nacal}
 
 \usepackage{tikz}
 \usetikzlibrary{arrows,positioning}
