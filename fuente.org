@@ -87,14 +87,14 @@ Si luego al compilar te falta algún .sty, se corrige añadiendo el paquete TeX 
 ** Entorno Python (para PythonTeX)
 
 #+BEGIN_SRC txt :tangle .binder/environment.yml
-name: latex-pythontex
+name: notebook
 channels:
   - conda-forge
 dependencies:
   - python=3.11
   - pip
-  - pygments
   - sympy
+  - pygments
   - pip:
       - nacal
 #+END_SRC
@@ -190,7 +190,16 @@ export BSTINPUTS=".:./referencias:${BSTINPUTS:-}:"
 # 1) Primera pasada: genera .aux y archivos pythontex
 pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
 
-# 2) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
+# 2) Ejecuta PythonTeX usando el Python del entorno conda de Binder (env "notebook")
+CONDA_PY="/srv/conda/envs/notebook/bin/python"
+if [[ ! -x "$CONDA_PY" ]]; then
+  echo "No encuentro el python del entorno conda en $CONDA_PY"
+  echo "Entornos disponibles:"
+  conda env list || true
+  exit 1
+fi
+
+# 3) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
 if command -v pythontex >/dev/null 2>&1; then
   pythontex --interpreter python:/srv/conda/bin/python "$BASENAME"
 elif command -v pythontex3 >/dev/null 2>&1; then
@@ -203,7 +212,7 @@ else
   exit 1
 fi
 
-# 3) Completa compilación (referencias, TOC, etc.)
+# 4) Completa compilación (referencias, TOC, etc.)
 latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
 
 echo "OK: generado $(basename "$BASENAME" .tex).pdf en $WORKDIR"
@@ -215,40 +224,6 @@ Ventajas:
 - Si PythonTeX no está, falla con mensaje claro.
 - latexmk se encarga de pasadas adicionales.
 
-#+BEGIN_SRC bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-if [[ $# -lt 1 ]]; then
-  echo "Uso: $0 tex/main.tex"
-  exit 2
-fi
-
-TEXFILE="$1"
-WORKDIR="$(cd "$(dirname "$TEXFILE")" && pwd)"
-BASENAME="$(basename "$TEXFILE")"
-
-cd "$WORKDIR"
-
-export TEXINPUTS=".:./acrotex:./nacal:${TEXINPUTS:-}:"
-export BIBINPUTS=".:./referencias:${BIBINPUTS:-}:"
-export BSTINPUTS=".:./referencias:${BSTINPUTS:-}:"
-
-pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
-
-if command -v pythontex >/dev/null 2>&1; then
-  pythontex --interpreter python:/srv/conda/bin/python "$BASENAME"
-elif command -v pythontex3 >/dev/null 2>&1; then
-  pythontex3 "$BASENAME"
-else
-  echo "No encuentro 'pythontex' ni 'pythontex3' en PATH."
-  exit 1
-fi
-
-latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
-
-echo "OK: generado $(basename "$BASENAME" .tex).pdf en $WORKDIR"
-#+END_SRC
 
 ** Uso en Binder (bajo demanda)
 

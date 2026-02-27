@@ -23,7 +23,16 @@ export BSTINPUTS=".:./referencias:${BSTINPUTS:-}:"
 # 1) Primera pasada: genera .aux y archivos pythontex
 pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
 
-# 2) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
+# 2) Ejecuta PythonTeX usando el Python del entorno conda de Binder (env "notebook")
+CONDA_PY="/srv/conda/envs/notebook/bin/python"
+if [[ ! -x "$CONDA_PY" ]]; then
+  echo "No encuentro el python del entorno conda en $CONDA_PY"
+  echo "Entornos disponibles:"
+  conda env list || true
+  exit 1
+fi
+
+# 3) Ejecuta PythonTeX (si existe). Dependiendo de la distro puede llamarse pythontex o pythontex3.
 if command -v pythontex >/dev/null 2>&1; then
   pythontex --interpreter python:/srv/conda/bin/python "$BASENAME"
 elif command -v pythontex3 >/dev/null 2>&1; then
@@ -36,7 +45,7 @@ else
   exit 1
 fi
 
-# 3) Completa compilación (referencias, TOC, etc.)
+# 4) Completa compilación (referencias, TOC, etc.)
 latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
 
 echo "OK: generado $(basename "$BASENAME" .tex).pdf en $WORKDIR"
