@@ -31,7 +31,7 @@ A=Matrix([[1,2,3],[4,5,6],[7,8,9]]) & T((-1,1,3))
     \begin{solution}[]
       Como las columnas de \Mat{A}
       (de orden $\py[2024-Quiz1-GrupoC-6]{A.n}\times\py[2024-Quiz1-GrupoC-6]{A.n}$)
-      son linealmente independientes,
+      son linealmente dependientes,
       generan un subespacio de dimensión menor que $\py[2024-Quiz1-GrupoC-6]{A.n}$.
       Y como las columnas de \Mat{AB} son combinaciones lineales de las de \Mat{A},
       también generan un subespacio de dimensión menor que $\py[2024-Quiz1-GrupoC-6]{A.n}$.
@@ -42,7 +42,7 @@ A=Matrix([[1,2,3],[4,5,6],[7,8,9]]) & T((-1,1,3))
         \Vect{x} = \VM{x}{AB}\InvMatp*{AB} =
         \Vect{0}\Mat{B}\InvMatp*{AB} = \Vect{0},
       \end{math}
-      que contradice que $\Vect{x}\ne\Vect{0}$.
+      lo cual contradice que $\Vect{x} \ne \Vect{0}$.
     \end{solution}
   \end{parts}
   \procedencia{MIT Course 18.06\quad Exam 1, Spring, 2021}
@@ -112,7 +112,7 @@ pasos_ampliada = A_ampliada.elim().pasos
     
     \begin{solution}[]
       \eng
-      De la última fila tras la reducción de $-\Vect{b}$ por eliminción,
+      De la última fila tras la reducción de $-\Vect{b}$ por eliminación,
       podemos ver que la condición para que un vector pertenezca al espacio columna de \Mat{A} es \;$\py[2025-Quiz1-GrupoH-1]{latex(condicion)}=0$.\;
       Así, para \;\fbox{$\Mat{B}=\py[2025-Quiz1-GrupoH-1]{latex(B)}$}\; tenemos
       \begin{displaymath}
@@ -134,7 +134,7 @@ pasos_ampliada = A_ampliada.elim().pasos
     \end{solution}
     
   \item  \puntos{1}
-    ¿Cuáles de los siguientes vectores pertennecen al espacio columna \cols{A}:
+    ¿Cuáles de los siguientes vectores pertenecen al espacio columna \cols{A}:
     \begin{displaymath}
       \py[2025-Quiz1-GrupoH-1]{latex(a)},\quad
       \py[2025-Quiz1-GrupoH-1]{latex(c)},\quad
@@ -159,7 +159,7 @@ pasos_ampliada = A_ampliada.elim().pasos
       \begin{math}
         \py[2025-Quiz1-GrupoH-1]{latex(Vector(a,'h'))}
       \end{math}
-      no pertence puesto que.
+      no pertenece, puesto que
       \begin{math}
         \Mat{B}
         \py[2025-Quiz1-GrupoH-1]{latex(Vector(a,'h'))}=
@@ -237,7 +237,7 @@ E = I(3) & pasos
           \Mat{A}
         \end{bmatrix},
       \end{displaymath}
-      O,también, calculando el siguiente producto:
+      O, también, calculando el siguiente producto:
       \begin{math}
         \;
         \TrCpE[\py[2025-Quiz1-GrupoH-2]{latex((pasos**-1)[0])}]{\Mat{I}}
@@ -269,7 +269,7 @@ sol = SEL(A,b,1,sust=[(c,3)])
      \py[2025-Quiz1-GrupoH-3]{latex(U)};
      \quad
      \Parentesis{
-       \text{\eng{así que}{so} }
+       \text{así que }
        \Mat{A}\InvMatpE*{U}=\Mat{L}}.
    \end{displaymath}
  
@@ -286,7 +286,7 @@ sol = SEL(A,b,1,sust=[(c,3)])
          =
          \py[2025-Quiz1-GrupoH-3]{latex(A)},\;
        \end{math}
-       y como \Mat{L} tiene su primer pivote en la primera fila y el segundo pivote en la tercera fila; entonces
+       y ya que \Mat{L} tiene su primer pivote en la primera fila y el segundo pivote en la tercera fila; entonces
        \begin{displaymath}
          \text{\eng{Una base de}{A basis for} \cols{A}}:\;
          \py[2025-Quiz1-GrupoH-3]{latex((L|(1,2,)).sis())}.
@@ -329,8 +329,8 @@ sol = SEL(A,b,1,sust=[(c,3)])
        $\py[2025-Quiz1-GrupoH-3]{eli.tex}$
        \medskip
        
-       Si $c\neq3$ el sistema no tiene solución. 
-       Cuando $c=3$ la solución completa es:
+       Si $c\neq3$, el sistema no tiene solución. 
+       Cuando $c=3$, la solución completa es:
        \begin{displaymath}
          \py[2025-Quiz1-GrupoH-3]{latex(sol)}
        \end{displaymath}

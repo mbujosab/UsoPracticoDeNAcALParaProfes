@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-02-28 sáb 10:50 -->
+<!-- 2026-02-28 sáb 11:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fuente y explicación de algunos ficheros</title>
@@ -236,12 +236,12 @@ Para la compilación bajo demanda, sin interactividad y con ejecución de códig
 <li>Usar latexmk para automatizar las pasadas.</li>
 <li>Insertar PythonTeX como paso intermedio (<code>pdflatex → pythontex → latexmk</code>).</li>
 </ul>
-<div id="outline-container-org9947ece" class="outline-2">
-<h2 id="org9947ece"><span class="section-number-2">1.</span> Repositorio</h2>
+<div id="outline-container-org6ea7dac" class="outline-2">
+<h2 id="org6ea7dac"><span class="section-number-2">1.</span> Repositorio</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgb6b4484" class="outline-3">
-<h3 id="orgb6b4484"><span class="section-number-3">1.1.</span> Estructura de carpetas</h3>
+<div id="outline-container-org551f31a" class="outline-3">
+<h3 id="org551f31a"><span class="section-number-3">1.1.</span> Estructura de carpetas</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>binder/
@@ -285,15 +285,15 @@ Para la compilación bajo demanda, sin interactividad y con ejecución de códig
 </div>
 </div>
 </div>
-<div id="outline-container-org35ca5aa" class="outline-2">
-<h2 id="org35ca5aa"><span class="section-number-2">2.</span> Ficheros de configuración en MyBinder</h2>
+<div id="outline-container-org530e5e0" class="outline-2">
+<h2 id="org530e5e0"><span class="section-number-2">2.</span> Ficheros de configuración en MyBinder</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Estos ficheros se usan para declarar las dependencias del entorno que MyBinder necesita para reproducir un proyecto en la nube.
 </p>
 </div>
-<div id="outline-container-orgc0b471a" class="outline-3">
-<h3 id="orgc0b471a"><span class="section-number-3">2.1.</span> Paquetes del sistema (TeX Live + herramientas)</h3>
+<div id="outline-container-orgda6eb1b" class="outline-3">
+<h3 id="orgda6eb1b"><span class="section-number-3">2.1.</span> Paquetes del sistema (TeX Live + herramientas)</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Archivo <code>.binder/apt.txt</code>: Lista los paquetes del sistema operativo (Ubuntu/Debian) que se instalarán a través de <code>apt-get</code>. Se utiliza cuando se necesitan dependencias a nivel de sistema que no están disponibles como paquetes de Python o conda. En este caso, serán fundamentalmente paquetes de \(\LaTeX{}\).
@@ -327,8 +327,8 @@ Notas:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfb56ea1" class="outline-3">
-<h3 id="orgfb56ea1"><span class="section-number-3">2.2.</span> Entorno Python (para PythonTeX)</h3>
+<div id="outline-container-org849e711" class="outline-3">
+<h3 id="org849e711"><span class="section-number-3">2.2.</span> Entorno Python (para PythonTeX y NAcAL)</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Archivo <code>.binder/environment.yml</code>: Define el entorno de conda, listando los paquetes de Python (y de otros lenguajes) que necesita el código del repositorio. 
@@ -357,8 +357,8 @@ Pygments es necesario porque PythonTeX lo requiere como dependencia.
 </p>
 </div>
 </div>
-<div id="outline-container-org56f238c" class="outline-3">
-<h3 id="org56f238c"><span class="section-number-3">2.3.</span> postBuild (ajustes tras construir el entorno)</h3>
+<div id="outline-container-org1f5936a" class="outline-3">
+<h3 id="org1f5936a"><span class="section-number-3">2.3.</span> postBuild (ajustes tras construir el entorno)</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 El archivo <code>.binder/postBuild</code> es un script de shell que se ejecuta después de que se instalen todas las dependencias definidas en <code>apt.txt</code>, <code>environment.yml</code> o <code>requirements.txt</code>, pero antes de que se inicie el servidor. Permite ejecutar cualquier comando adicional necesario para preparar el entorno.
@@ -393,12 +393,12 @@ Con esto, Binder deja listo el script para compilar “bajo demanda”.
 </p>
 </div>
 </div>
-<div id="outline-container-orgdf2befe" class="outline-3">
-<h3 id="orgdf2befe"><span class="section-number-3">2.4.</span> Script de compilación bajo demanda (latexmk + pythontex)</h3>
+<div id="outline-container-org7bb4679" class="outline-3">
+<h3 id="org7bb4679"><span class="section-number-3">2.4.</span> Script de compilación bajo demanda (latexmk + pythontex)</h3>
 <div class="outline-text-3" id="text-2-4">
 </div>
-<div id="outline-container-org7052d30" class="outline-4">
-<h4 id="org7052d30"><span class="section-number-4">2.4.1.</span> Mi script <code>compila.sh</code></h4>
+<div id="outline-container-org5626658" class="outline-4">
+<h4 id="org5626658"><span class="section-number-4">2.4.1.</span> Mi script <code>compila.sh</code></h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 El script <code>scripts/compila.sh</code> compila el archivo \(\LaTeX{}\) que le indiques. Por ejemplo, para compilar <code>tex/Quiz1-2025-C.tex</code> basta:
@@ -479,8 +479,8 @@ pythontex --interpreter python:python3 <span style="color: #008000;">"$BASENAME"
 </div>
 </div>
 </div>
-<div id="outline-container-org9bb8b13" class="outline-4">
-<h4 id="org9bb8b13"><span class="section-number-4">2.4.2.</span> Script <code>build_latex.sh</code> sugerido por Copilot de GitHub</h4>
+<div id="outline-container-org8dea709" class="outline-4">
+<h4 id="org8dea709"><span class="section-number-4">2.4.2.</span> Script <code>build_latex.sh</code> sugerido por Copilot de GitHub</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 Hace lo mismo que el anterior. Por ejemplo, para compilar <code>tex/Quiz1-2025-C.tex</code> basta:
@@ -553,7 +553,7 @@ pythontex --interpreter <span style="color: #008000;">"py:${CONDA_PY}"</span> <s
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-02-28 sáb 10:50</p>
+<p class="date">Created: 2026-02-28 sáb 11:01</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

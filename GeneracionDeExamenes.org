@@ -1,12 +1,11 @@
 #+TITLE: Exámenes de Matemáticas II
-# +SUBTITLE: (subtitulo)
+# +SUBTITLE: (subtítulo)
 #+LANGUAGE: es
 #+AUTHOR: Marcos Bujosa
 #+OPTIONS: author:nil 
 #+STARTUP: show3levels   
 
-
-* Preámbulo y cabeceras del los exámenes en $\LaTeX{}$
+* Preámbulo y cabeceras de los exámenes en $\LaTeX{}$
 ** Descripción del preámbulo para los ficheros de $\LaTeX{}$
   :PROPERTIES:
   :header-args: :tangle tex/aux/PreambuloParaExamenes.tex
@@ -21,13 +20,11 @@
 \usepackage{booktabs}
 \usepackage{paralist}
 \usepackage{multicol}
-
 #+END_SRC
 
 *** Algunos comandos auxiliares y opciones relacionadas con el idioma
 
 #+BEGIN_SRC latex :exports code
-
 \newcommand{\ConRef}{
   \nocite{Strang:18.06}
   \bibliography{referencias/referencias}
@@ -40,7 +37,7 @@
   \begin{flushright}
     \emph{\eng
       {El examen continúa en la siguiente página}
-      {The exam continues in the next page}}
+      {The exam continues on the next page}}
       $\rightarrow$
   \end{flushright}
   \pagebreak}
@@ -57,7 +54,6 @@
 *** Variantes de los exámenes
 
 #+BEGIN_SRC latex :exports none
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %% UNA Y SOLO UNA DE ESTAS TRES LÍNEAS DEBE ESTAR DESCOMENTADA
 %
@@ -65,7 +61,6 @@
 % \usepackage[pdftex,forpaper,nosolutions,spanish]{exerquiz}                        % sin soluciones (versión de examen para reprografía)
 \usepackage[pdftex,forpaper,spanish]{exerquiz}                                    % soluciones al final del documento
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% UNA Y SOLO UNA DE ESTAS DOS LÍNEAS DEBE ESTAR DESCOMENTADA
 \newenvironment{procedencia}[1]{\noindent }                                         % se oculta la procedencia del ejercicio
@@ -80,9 +75,8 @@
 \newenvironment{pista}{\textbf{Pista:}}{}
 
 \newcommand{\verdaderofalso}{Verdadero o falso
-  (\emph{solo puntuan respuestas correctamente justificadas; una respuesta sin explicación tendrá una calificación de cero puntos}).
+  (\emph{solo puntúan respuestas correctamente justificadas; una respuesta sin explicación tendrá una calificación de cero puntos}).
   \smallskip}
-
 
 \newcommand\myquote[2]{%
   \smallskip
@@ -99,7 +93,7 @@
   \par}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Indicador de puntos por pregunta y Contador de puntos totales
+%%%% Indicador de puntos por pregunta y contador de puntos totales
 \usepackage{xfp} % Para cálculos con decimales
 
 % Configuración del acumulador global para puntos
@@ -119,7 +113,7 @@
 
 #+end_src
 
-*** Contador del número de preguntas para el campo de calificación de los quizes
+*** Contador del número de preguntas para el campo de calificación de los quizzes
 
 #+BEGIN_SRC latex :exports code
 %%% PARA LA SECCIÓN DE CALIFICACIÓN DE LA CABECERA
@@ -127,7 +121,7 @@
 \def\computemycount{}
 \expandafter\ifx\csname computemycount\endcsname\relax
 \usetotcountfile{mycount.aux}
-\newcounter{mycount} % so that increments of this counter don't break
+\newcounter{mycount} % para que los incrementos de este contador no rompan
 \else
 \newtotcounter[auxfile=mycount.aux]{mycount}
 \fi
@@ -194,7 +188,7 @@
 #+end_src
 
 
-** Cabecera que uso en los exámenes intermedios (Quizs)
+** Cabecera que uso en los exámenes intermedios (Quizzes)
   :PROPERTIES:
   :header-args: :tangle tex/aux/InstruccionesQuiz.tex
   :END:
@@ -264,7 +258,7 @@
 #+BEGIN_SRC latex :exports code
 \begin{compactitem}
 \item {Ponga su nombre en todas las hojas que emplee}.
-\item {Resuelva \textbf{SOLO DOS} de los tres \textsl{EJERCICIOS LARGOS} y \textbf{TODAS} las \textsl{PREGUNTAS CORTAS}}
+\item {Resuelva \textbf{SOLO DOS} de los tres \textsl{EJERCICIOS LARGOS} y \textbf{TODAS} las \textsl{PREGUNTAS CORTAS}}.
 \item {Cada ejercicio largo vale 2.5 puntos. Cada apartado de las preguntas cortas 0.5 puntos}.
 \item {\textbf{Conteste exactamente lo que se le pregunta}}.
 \item {Muestre sus cálculos y explique sus respuestas con claridad}.
@@ -279,9 +273,7 @@
 \endinput
 #+end_src
 
-
 #+latex: \newpage
-
 
 * Examen de ejemplo
 ** Fichero principal
@@ -308,7 +300,6 @@
 % \ConRef     % descomentar si se quiere mostrar la referencia a los exámenes del MIT
 \end{document}
 #+END_SRC
-
 
 ** Preguntas
   :PROPERTIES:
@@ -351,7 +342,7 @@ A=Matrix([[1,2,3],[4,5,6],[7,8,9]]) & T((-1,1,3))
     \begin{solution}[]
       Como las columnas de \Mat{A}
       (de orden $\py[2024-Quiz1-GrupoC-6]{A.n}\times\py[2024-Quiz1-GrupoC-6]{A.n}$)
-      son linealmente independientes,
+      son linealmente dependientes,
       generan un subespacio de dimensión menor que $\py[2024-Quiz1-GrupoC-6]{A.n}$.
       Y como las columnas de \Mat{AB} son combinaciones lineales de las de \Mat{A},
       también generan un subespacio de dimensión menor que $\py[2024-Quiz1-GrupoC-6]{A.n}$.
@@ -362,7 +353,7 @@ A=Matrix([[1,2,3],[4,5,6],[7,8,9]]) & T((-1,1,3))
         \Vect{x} = \VM{x}{AB}\InvMatp*{AB} =
         \Vect{0}\Mat{B}\InvMatp*{AB} = \Vect{0},
       \end{math}
-      que contradice que $\Vect{x}\ne\Vect{0}$.
+      lo cual contradice que $\Vect{x} \ne \Vect{0}$.
     \end{solution}
   \end{parts}
   \procedencia{MIT Course 18.06\quad Exam 1, Spring, 2021}
@@ -442,7 +433,7 @@ pasos_ampliada = A_ampliada.elim().pasos
     
     \begin{solution}[]
       \eng
-      De la última fila tras la reducción de $-\Vect{b}$ por eliminción,
+      De la última fila tras la reducción de $-\Vect{b}$ por eliminación,
       podemos ver que la condición para que un vector pertenezca al espacio columna de \Mat{A} es \;$\py[2025-Quiz1-GrupoH-1]{latex(condicion)}=0$.\;
       Así, para \;\fbox{$\Mat{B}=\py[2025-Quiz1-GrupoH-1]{latex(B)}$}\; tenemos
       \begin{displaymath}
@@ -464,7 +455,7 @@ pasos_ampliada = A_ampliada.elim().pasos
     \end{solution}
     
   \item  \puntos{1}
-    ¿Cuáles de los siguientes vectores pertennecen al espacio columna \cols{A}:
+    ¿Cuáles de los siguientes vectores pertenecen al espacio columna \cols{A}:
     \begin{displaymath}
       \py[2025-Quiz1-GrupoH-1]{latex(a)},\quad
       \py[2025-Quiz1-GrupoH-1]{latex(c)},\quad
@@ -489,7 +480,7 @@ pasos_ampliada = A_ampliada.elim().pasos
       \begin{math}
         \py[2025-Quiz1-GrupoH-1]{latex(Vector(a,'h'))}
       \end{math}
-      no pertence puesto que.
+      no pertenece, puesto que
       \begin{math}
         \Mat{B}
         \py[2025-Quiz1-GrupoH-1]{latex(Vector(a,'h'))}=
@@ -574,7 +565,7 @@ E = I(3) & pasos
           \Mat{A}
         \end{bmatrix},
       \end{displaymath}
-      O,también, calculando el siguiente producto:
+      O, también, calculando el siguiente producto:
       \begin{math}
         \;
         \TrCpE[\py[2025-Quiz1-GrupoH-2]{latex((pasos**-1)[0])}]{\Mat{I}}
@@ -612,7 +603,7 @@ sol = SEL(A,b,1,sust=[(c,3)])
      \py[2025-Quiz1-GrupoH-3]{latex(U)};
      \quad
      \Parentesis{
-       \text{\eng{así que}{so} }
+       \text{así que }
        \Mat{A}\InvMatpE*{U}=\Mat{L}}.
    \end{displaymath}
  
@@ -629,7 +620,7 @@ sol = SEL(A,b,1,sust=[(c,3)])
          =
          \py[2025-Quiz1-GrupoH-3]{latex(A)},\;
        \end{math}
-       y como \Mat{L} tiene su primer pivote en la primera fila y el segundo pivote en la tercera fila; entonces
+       y ya que \Mat{L} tiene su primer pivote en la primera fila y el segundo pivote en la tercera fila; entonces
        \begin{displaymath}
          \text{\eng{Una base de}{A basis for} \cols{A}}:\;
          \py[2025-Quiz1-GrupoH-3]{latex((L|(1,2,)).sis())}.
@@ -672,8 +663,8 @@ sol = SEL(A,b,1,sust=[(c,3)])
        $\py[2025-Quiz1-GrupoH-3]{eli.tex}$
        \medskip
        
-       Si $c\neq3$ el sistema no tiene solución. 
-       Cuando $c=3$ la solución completa es:
+       Si $c\neq3$, el sistema no tiene solución. 
+       Cuando $c=3$, la solución completa es:
        \begin{displaymath}
          \py[2025-Quiz1-GrupoH-3]{latex(sol)}
        \end{displaymath}
@@ -724,4 +715,3 @@ sol = SEL(A,b,1,sust=[(c,3)])
   isbn = {0-03-010567-6},
 }
 #+END_SRC
-

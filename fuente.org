@@ -12,6 +12,7 @@ Para la compilación bajo demanda, sin interactividad y con ejecución de códig
 - Insertar PythonTeX como paso intermedio (=pdflatex → pythontex → latexmk=).
 
 * Repositorio
+
 ** Estructura de carpetas
 
 - binder/
@@ -85,7 +86,7 @@ Notas:
 - Los distintos paquetes =texlive= traen uno o más paquetes de $LaTeX{}$ que son necesarios en el código de los exámenes o que son dependencias de mi paquete de notación para el curso [[https://github.com/mbujosab/nacal-latex-package][=nacal.sty=]].
 - Perl es importante para latexmk y para partes de PythonTeX. 
 
-** Entorno Python (para PythonTeX)
+** Entorno Python (para PythonTeX y NAcAL)
 
 Archivo =.binder/environment.yml=: Define el entorno de conda, listando los paquetes de Python (y de otros lenguajes) que necesita el código del repositorio. 
 
@@ -202,7 +203,6 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
 # 4) Copiamos el PDF al directorio raíz
 cp $(basename "$BASENAME" .tex).pdf ../
 #+END_SRC
-
 
 *** Script =build_latex.sh= sugerido por Copilot de GitHub
 

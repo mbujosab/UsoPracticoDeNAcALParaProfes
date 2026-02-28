@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-02-28 sáb 10:50 -->
+<!-- 2026-02-28 sáb 11:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LaTeX + PythonTeX + Exerquiz + nacal en MyBinder</title>
@@ -228,18 +228,6 @@
 <body>
 <div id="content" class="content">
 <h1 class="title">LaTeX + PythonTeX + Exerquiz + nacal en MyBinder</h1>
-<div id="table-of-contents" role="doc-toc">
-<h2>&Iacute;ndice</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#abrir-en-binder">1. Abrir en Binder</a></li>
-<li><a href="#compilar-bajo-demanda">2. Compilar bajo demanda</a></li>
-<li><a href="#estructura-del-repo-resumen">3. Estructura del repositorio (resumen)</a></li>
-<li><a href="#notas-sobre-pythontex">4. Notas sobre PythonTeX</a></li>
-<li><a href="#exerquiz-soluciones-al-final-plantilla">5. Exerquiz: soluciones al final (plantilla)</a></li>
-</ul>
-</div>
-</div>
 <p>
 Este repositorio está diseñado para compilar <b>documentos LaTeX bajo demanda</b> en un entorno <b>MyBinder/JupyterLab</b>, incluyendo:
 </p>
@@ -248,7 +236,13 @@ Este repositorio está diseñado para compilar <b>documentos LaTeX bajo demanda<
 <li><b>PythonTeX</b>: ejecutar código Python desde LaTeX y reintegrar los resultados en el PDF.</li>
 <li><b>AcroTeX / exerquiz</b>: escritura de ejercicios y (opcionalmente) <b>soluciones agrupadas al final</b>.</li>
 <li><b>nacal.sty</b>: <a href="https://github.com/mbujosab/nacal-latex-package">paquete con la notación del curso</a> (ubicado en <code>tex/nacal/nacal.sty</code>), que a su vez utiliza paquetes como <code>amsmath</code>, <code>amssymb</code>, <code>esvect</code>, <code>leftidx</code>, <code>pict2e</code>, <code>stackengine</code>, <code>xparse</code>, <code>xspace</code>.</li>
+</ul>
 
+<p>
+Para más información sobre el código o el repositorio: 
+</p>
+
+<ul class="org-ul">
 <li><a href="GeneracionDeExamenes.html">Explicación del código de los exámenes</a></li>
 
 <li><a href="fuente.html">Explicaciones sobre el contenido del repositorio</a></li>
@@ -297,26 +291,8 @@ Puedes abrir el <code>pdf</code> desde el explorador de archivos de JupyterLab.
 </p>
 </div>
 </div>
-<div id="outline-container-estructura-del-repo-resumen" class="outline-2">
-<h2 id="estructura-del-repo-resumen"><span class="section-number-2">3.</span> Estructura del repositorio (resumen)</h2>
-<div class="outline-text-2" id="text-estructura-del-repo-resumen">
-<ul class="org-ul">
-<li><code>binder/apt.txt</code>: dependencias del sistema (TeX Live, latexmk, etc.)</li>
-<li><code>binder/environment.yml</code>: entorno Python (para PythonTeX)</li>
-<li><code>binder/postBuild</code>: ajustes al construir Binder (permisos, etc.)</li>
-<li><code>scripts/compila.sh</code>: script de compilación (<code>pdflatex → pythontex → latexmk</code>)</li>
-<li><code>scripts/build_latex.sh</code>: script de compilación (<code>pdflatex → pythontex → latexmk</code>)</li>
-<li><code>tex/nacal/nacal.sty</code>: tu paquete con la notación del curso</li>
-<li><code>tex/aux/PreambuloParaExamenes.tex</code>: preámbulo \(\LaTeX{}\) para los exámenes</li>
-<li><code>tex/aux/InstruccionesQuiz.tex</code>: bloque de código \(\LaTeX{}\) con las instrucciones de los quizzes</li>
-<li><code>tex/aux/InstruccionesExamenFinal.tex</code>: bloque de código \(\LaTeX{}\) con las instrucciones de los exámenes finales</li>
-<li><code>tex/Quiz1-2025-C.tex</code>: documento principal de ejemplo</li>
-<li><code>tex/preguntas/2025-intermedio1-C.tex</code>: preguntas utilizadas en el documento de ejemplo</li>
-</ul>
-</div>
-</div>
 <div id="outline-container-notas-sobre-pythontex" class="outline-2">
-<h2 id="notas-sobre-pythontex"><span class="section-number-2">4.</span> Notas sobre PythonTeX</h2>
+<h2 id="notas-sobre-pythontex"><span class="section-number-2">3.</span> Notas sobre PythonTeX</h2>
 <div class="outline-text-2" id="text-notas-sobre-pythontex">
 <p>
 El flujo habitual requiere varias pasadas:
@@ -334,17 +310,43 @@ El script <code>scripts/compila.sh</code> implementa ese flujo. También el scri
 </div>
 </div>
 <div id="outline-container-exerquiz-soluciones-al-final-plantilla" class="outline-2">
-<h2 id="exerquiz-soluciones-al-final-plantilla"><span class="section-number-2">5.</span> Exerquiz: soluciones al final (plantilla)</h2>
+<h2 id="exerquiz-soluciones-al-final-plantilla"><span class="section-number-2">4.</span> Exerquiz: soluciones al final (plantilla)</h2>
 <div class="outline-text-2" id="text-exerquiz-soluciones-al-final-plantilla">
 <p>
 Si deseas que las soluciones aparezcan al final del documento, 
 debes editar <code>tex/nacal/PreambuloParaExamenes.tex</code> comentando las opciones que no quieres, y descomentando la única opción que deseas.
 </p>
+
+<p>
+Más información sobre el código \(\LaTeX{}\) de los exámenes <a href="GeneracionDeExamenes.html">aquí</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-estructura-del-repo-resumen" class="outline-2">
+<h2 id="estructura-del-repo-resumen"><span class="section-number-2">5.</span> Estructura del repositorio</h2>
+<div class="outline-text-2" id="text-estructura-del-repo-resumen">
+<ul class="org-ul">
+<li><code>binder/apt.txt</code>: dependencias del sistema (TeX Live, latexmk, etc.)</li>
+<li><code>binder/environment.yml</code>: entorno Python (para PythonTeX)</li>
+<li><code>binder/postBuild</code>: ajustes al construir Binder (permisos, etc.)</li>
+<li><code>scripts/compila.sh</code>: script de compilación (<code>pdflatex → pythontex → latexmk</code>)</li>
+<li><code>scripts/build_latex.sh</code>: script de compilación (<code>pdflatex → pythontex → latexmk</code>)</li>
+<li><code>tex/nacal/nacal.sty</code>: tu paquete con la notación del curso</li>
+<li><code>tex/aux/PreambuloParaExamenes.tex</code>: preámbulo \(\LaTeX{}\) para los exámenes</li>
+<li><code>tex/aux/InstruccionesQuiz.tex</code>: bloque de código \(\LaTeX{}\) con las instrucciones de los quizzes</li>
+<li><code>tex/aux/InstruccionesExamenFinal.tex</code>: bloque de código \(\LaTeX{}\) con las instrucciones de los exámenes finales</li>
+<li><code>tex/Quiz1-2025-C.tex</code>: documento principal de ejemplo</li>
+<li><code>tex/preguntas/2025-intermedio1-C.tex</code>: preguntas utilizadas en el documento de ejemplo</li>
+</ul>
+
+<p>
+Más información sobre el contenido del repositorio <a href="fuente.html">aquí</a>
+</p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-02-28 sáb 10:50</p>
+<p class="date">Created: 2026-02-28 sáb 11:01</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

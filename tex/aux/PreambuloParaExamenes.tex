@@ -17,7 +17,7 @@
   \begin{flushright}
     \emph{\eng
       {El examen continúa en la siguiente página}
-      {The exam continues in the next page}}
+      {The exam continues on the next page}}
       $\rightarrow$
   \end{flushright}
   \pagebreak}
@@ -37,7 +37,6 @@
 % \usepackage[pdftex,forpaper,nosolutions,spanish]{exerquiz}                        % sin soluciones (versión de examen para reprografía)
 \usepackage[pdftex,forpaper,spanish]{exerquiz}                                    % soluciones al final del documento
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% UNA Y SOLO UNA DE ESTAS DOS LÍNEAS DEBE ESTAR DESCOMENTADA
 \newenvironment{procedencia}[1]{\noindent }                                         % se oculta la procedencia del ejercicio
@@ -47,9 +46,8 @@
 \newenvironment{pista}{\textbf{Pista:}}{}
 
 \newcommand{\verdaderofalso}{Verdadero o falso
-  (\emph{solo puntuan respuestas correctamente justificadas; una respuesta sin explicación tendrá una calificación de cero puntos}).
+  (\emph{solo puntúan respuestas correctamente justificadas; una respuesta sin explicación tendrá una calificación de cero puntos}).
   \smallskip}
-
 
 \newcommand\myquote[2]{%
   \smallskip
@@ -66,7 +64,7 @@
   \par}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Indicador de puntos por pregunta y Contador de puntos totales
+%%%% Indicador de puntos por pregunta y contador de puntos totales
 \usepackage{xfp} % Para cálculos con decimales
 
 % Configuración del acumulador global para puntos
@@ -89,7 +87,7 @@
 \def\computemycount{}
 \expandafter\ifx\csname computemycount\endcsname\relax
 \usetotcountfile{mycount.aux}
-\newcounter{mycount} % so that increments of this counter don't break
+\newcounter{mycount} % para que los incrementos de este contador no rompan
 \else
 \newtotcounter[auxfile=mycount.aux]{mycount}
 \fi
