@@ -13,6 +13,11 @@ Este repositorio está diseñado para compilar *documentos LaTeX bajo demanda* e
 - *AcroTeX / exerquiz*: escritura de ejercicios y (opcionalmente) *soluciones agrupadas al final*.
 - *nacal.sty*: [[https://github.com/mbujosab/nacal-latex-package][paquete con la notación del curso]] (ubicado en =tex/nacal/nacal.sty=), que a su vez utiliza paquetes como =amsmath=, =amssymb=, =esvect=, =leftidx=, =pict2e=, =stackengine=, =xparse=, =xspace=.
 
+- [[file:GeneracionDeExamenes.org][Explicación del código de los exámenes]]
+
+- [[file:fuente.org][Explicaciones sobre el contenido del repositorio]]
+
+
 * Abrir en Binder
    :PROPERTIES:
    :CUSTOM_ID: abrir-en-binder
@@ -87,5 +92,3 @@ debes editar =tex/nacal/PreambuloParaExamenes.tex= comentando las opciones que n
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #+end_src
 
-- [[file:GeneracionDeExamenes.org][Explicación del código de los exámenes]]
-- [[file:fuente.org][Explicaciones sobre el contenido del repositorio]]

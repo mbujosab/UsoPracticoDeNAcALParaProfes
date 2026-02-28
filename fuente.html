@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-02-27 vie 22:35 -->
+<!-- 2026-02-28 sáb 10:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fuente y explicación de algunos ficheros</title>
@@ -229,19 +229,19 @@
 <div id="content" class="content">
 <h1 class="title">Fuente y explicación de algunos ficheros</h1>
 <p>
-Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la opción más estable en Binder es:
+Para la compilación bajo demanda, sin interactividad y con ejecución de código Python en la compilación, la opción más estable en Binder es:
 </p>
 <ul class="org-ul">
 <li>Compilar con pdfLaTeX (por compatibilidad).</li>
-<li>Usar latexmk para automatizar pasadas.</li>
+<li>Usar latexmk para automatizar las pasadas.</li>
 <li>Insertar PythonTeX como paso intermedio (<code>pdflatex → pythontex → latexmk</code>).</li>
 </ul>
-<div id="outline-container-org4c3cbb2" class="outline-2">
-<h2 id="org4c3cbb2"><span class="section-number-2">1.</span> Repositorio</h2>
+<div id="outline-container-org9947ece" class="outline-2">
+<h2 id="org9947ece"><span class="section-number-2">1.</span> Repositorio</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgf13602e" class="outline-3">
-<h3 id="orgf13602e"><span class="section-number-3">1.1.</span> Estructura de carpetas</h3>
+<div id="outline-container-orgb6b4484" class="outline-3">
+<h3 id="orgb6b4484"><span class="section-number-3">1.1.</span> Estructura de carpetas</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>binder/
@@ -260,7 +260,7 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
 <li>Quiz1-2025-C.tex</li>
 <li>nacal/
 <ul class="org-ul">
-<li>nacal.sty (copiado desde <a href="https://github.com/mbujosab/nacal-latex-package">https://github.com/mbujosab/nacal-latex-package</a>.  En el .tex. poner \usepackage{nacal/nacal} (ruta relativa).</li>
+<li>nacal.sty (copiado desde <a href="https://github.com/mbujosab/nacal-latex-package">https://github.com/mbujosab/nacal-latex-package</a>. En el .tex se debe incluir \usepackage{nacal}).</li>
 </ul></li>
 <li>acrotex
 <ul class="org-ul">
@@ -284,11 +284,19 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
 </ul>
 </div>
 </div>
-<div id="outline-container-org3fbc13c" class="outline-3">
-<h3 id="org3fbc13c"><span class="section-number-3">1.2.</span> Paquetes del sistema (TeX Live + herramientas)</h3>
-<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org35ca5aa" class="outline-2">
+<h2 id="org35ca5aa"><span class="section-number-2">2.</span> Ficheros de configuración en MyBinder</h2>
+<div class="outline-text-2" id="text-2">
 <p>
-Fichero <code>.binder/apt.txt</code>
+Estos ficheros se usan para declarar las dependencias del entorno que MyBinder necesita para reproducir un proyecto en la nube.
+</p>
+</div>
+<div id="outline-container-orgc0b471a" class="outline-3">
+<h3 id="orgc0b471a"><span class="section-number-3">2.1.</span> Paquetes del sistema (TeX Live + herramientas)</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Archivo <code>.binder/apt.txt</code>: Lista los paquetes del sistema operativo (Ubuntu/Debian) que se instalarán a través de <code>apt-get</code>. Se utiliza cuando se necesitan dependencias a nivel de sistema que no están disponibles como paquetes de Python o conda. En este caso, serán fundamentalmente paquetes de \(\LaTeX{}\).
 </p>
 
 <div class="org-src-container">
@@ -314,19 +322,18 @@ Notas:
 </p>
 
 <ul class="org-ul">
-<li>texlive-latex-extra suele cubrir xparse, xspace, stackengine, etc.</li>
-<li>texlive-science ayuda con ecosistema matemático (aunque amsmath/amssymb suele estar ya incluido).</li>
-<li>texlive-pictures cubre utilidades de dibujo (incluyendo pict2e en muchas instalaciones).</li>
-<li>perl es importante para latexmk y para partes de pythontex en algunas distros.</li>
+<li>Los distintos paquetes <code>texlive</code> traen uno o más paquetes de \(LaTeX{}\) que son necesarios en el código de los exámenes o que son dependencias de mi paquete de notación para el curso <a href="https://github.com/mbujosab/nacal-latex-package"><code>nacal.sty</code></a>.</li>
+<li>Perl es importante para latexmk y para partes de PythonTeX.</li>
 </ul>
+</div>
+</div>
+<div id="outline-container-orgfb56ea1" class="outline-3">
+<h3 id="orgfb56ea1"><span class="section-number-3">2.2.</span> Entorno Python (para PythonTeX)</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
-Si luego al compilar te falta algún .sty, se corrige añadiendo el paquete TeX Live adecuado a apt.txt.
+Archivo <code>.binder/environment.yml</code>: Define el entorno de conda, listando los paquetes de Python (y de otros lenguajes) que necesita el código del repositorio. 
 </p>
-</div>
-</div>
-<div id="outline-container-orge1596cb" class="outline-3">
-<h3 id="orge1596cb"><span class="section-number-3">1.3.</span> Entorno Python (para PythonTeX)</h3>
-<div class="outline-text-3" id="text-1-3">
+
 <div class="org-src-container">
 <pre class="src src-txt">name: notebook
 channels:
@@ -342,13 +349,21 @@ dependencies:
 </div>
 
 <p>
-pygments suele ser necesario porque PythonTeX puede usarlo para resaltado/formatos.
+Pygments es necesario porque PythonTeX lo requiere como dependencia.
+</p>
+
+<p>
+<b>Nota</b>: Si usas <code>environment.yml</code>, Binder utilizará una distribución Miniconda. Así, aún es posible usar <code>pip</code> añadiendo una sección <code>- pip:</code> dentro del mismo fichero, en lugar de un <code>requirements.txt</code> separado. Es lo que se hace aquí para instalar mi módulo <a href="https://pypi.org/project/nacal/">nacal</a> de Python.
 </p>
 </div>
 </div>
-<div id="outline-container-orgdd2442b" class="outline-3">
-<h3 id="orgdd2442b"><span class="section-number-3">1.4.</span> postBuild (ajustes tras construir el entorno)</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-org56f238c" class="outline-3">
+<h3 id="org56f238c"><span class="section-number-3">2.3.</span> postBuild (ajustes tras construir el entorno)</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+El archivo <code>.binder/postBuild</code> es un script de shell que se ejecuta después de que se instalen todas las dependencias definidas en <code>apt.txt</code>, <code>environment.yml</code> o <code>requirements.txt</code>, pero antes de que se inicie el servidor. Permite ejecutar cualquier comando adicional necesario para preparar el entorno.
+</p>
+
 <div class="org-src-container">
 <pre class="src src-txt">#!/usr/bin/env bash
 set -euxo pipefail
@@ -357,22 +372,54 @@ set -euxo pipefail
 chmod +x scripts/build_latex.sh
 chmod +x scripts/compila.sh
 
-# (Opcional) Mostrar versiones útiles para depurar en el log de build
+# (Opcional) Mostrar versiones útiles para depurar en el log de construcción
 latexmk -v || true
 python --version
 </pre>
 </div>
 
+<ul class="org-ul">
+<li>El script debe tener permisos de ejecución (<code>chmod +x .binder/postBuild</code>).</li>
+<li>Debe comenzar con un shebang (como <code>#!/bin/bash</code>).</li>
+<li>Se ejecuta en un entorno de Linux (Ubuntu).</li>
+<li>Si el script falla, el entorno no se inicia.</li>
+</ul>
 <p>
-Con esto Binder deja listo el script para compilar “bajo demanda”.
+<b>Nota</b>: Si no necesitas comandos personalizados, no es necesario crear este archivo. MyBinder instalará automáticamente las dependencias definidas en los otros ficheros.
+</p>
+
+<p>
+Con esto, Binder deja listo el script para compilar “bajo demanda”.
 </p>
 </div>
 </div>
-<div id="outline-container-org93d8102" class="outline-3">
-<h3 id="org93d8102"><span class="section-number-3">1.5.</span> Script de compilación bajo demanda (latexmk + pythontex)</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-orgdf2befe" class="outline-3">
+<h3 id="orgdf2befe"><span class="section-number-3">2.4.</span> Script de compilación bajo demanda (latexmk + pythontex)</h3>
+<div class="outline-text-3" id="text-2-4">
+</div>
+<div id="outline-container-org7052d30" class="outline-4">
+<h4 id="org7052d30"><span class="section-number-4">2.4.1.</span> Mi script <code>compila.sh</code></h4>
+<div class="outline-text-4" id="text-2-4-1">
 <p>
-Este es mi script
+El script <code>scripts/compila.sh</code> compila el archivo \(\LaTeX{}\) que le indiques. Por ejemplo, para compilar <code>tex/Quiz1-2025-C.tex</code> basta:
+</p>
+
+<ul class="org-ul">
+<li>Abrir la Terminal.</li>
+<li>Ejecutar:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">bash scripts/compila.sh tex/Quiz1-2025-C.tex
+</pre>
+</div>
+
+<p>
+Genera un <code>pdf</code> en la carpeta <code>tex</code> y hace una copia del mismo en el directorio raíz.
+</p>
+
+<p>
+Este es el código de <code>scripts/compila.sh</code>:
 </p>
 
 <div class="org-src-container">
@@ -399,17 +446,17 @@ Este es mi script
 </span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">El ':' final es importante para conservar la b&#250;squeda por defecto de TeX.
 </span><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">TEXINPUTS</span>=<span style="color: #008000;">".:./acrotex:./nacal:${TEXINPUTS:-}:"</span>
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">(Opcional) si tu .bib/.bst est&#225;n en subcarpetas y usas \bibliography{referencias/...}
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">(Opcional) si tus .bib/.bst est&#225;n en subcarpetas y usas \bibliography{referencias/...}
 </span><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">BIBINPUTS</span>=<span style="color: #008000;">".:./referencias:${BIBINPUTS:-}:"</span>
 <span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">BSTINPUTS</span>=<span style="color: #008000;">".:./referencias:${BSTINPUTS:-}:"</span>
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">1) Primera pasada: genera .aux y archivos pythontex
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">1) Primera pasada: genera .aux y archivos PythonTeX
 </span>pdflatex -interaction=batchmode <span style="color: #008000;">"$BASENAME"</span>
 
 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">2) Ejecuta PythonTeX usando el Python del entorno conda de Binder (env "notebook")
 </span><span style="color: #BA36A5;">CONDA_PY</span>=<span style="color: #008000;">"/srv/conda/envs/notebook/bin/python"</span>
 <span style="color: #0000FF; font-weight: bold;">if</span> [[ ! -x <span style="color: #008000;">"$CONDA_PY"</span> ]]; <span style="color: #0000FF; font-weight: bold;">then</span>
-  <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"No encuentro el python del entorno conda en $CONDA_PY"</span>
+  <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"No encuentro el Python del entorno conda en $CONDA_PY"</span>
   <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"Entornos disponibles:"</span>
   conda env list || true
   <span style="color: #0000FF; font-weight: bold;">exit</span> 1
@@ -426,13 +473,35 @@ pythontex --interpreter python:python3 <span style="color: #008000;">"$BASENAME"
 </span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">rm $(</span><span style="color: #FF1493;">basename "$BASENAME" .tex</span><span style="color: #8D8D84; font-style: italic;">)_xdefs.cut
 </span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">rm exerquiz.djs
 </span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">4) Copiamos el pdf al directorio raiz
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">4) Copiamos el PDF al directorio ra&#237;z
 </span>cp $(<span style="color: #FF1493;">basename "$BASENAME" .tex</span>).pdf ../
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9bb8b13" class="outline-4">
+<h4 id="org9bb8b13"><span class="section-number-4">2.4.2.</span> Script <code>build_latex.sh</code> sugerido por Copilot de GitHub</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<p>
+Hace lo mismo que el anterior. Por ejemplo, para compilar <code>tex/Quiz1-2025-C.tex</code> basta:
+</p>
+
+<ul class="org-ul">
+<li>Abrir la Terminal.</li>
+<li>Ejecutar:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
 </pre>
 </div>
 
 <p>
-Este es el sugerido por copilot de GitHub
+La diferencia es que no copia el <code>pdf</code> en el directorio raíz (el <code>pdf</code> solo aparece en la carpeta <code>tex</code>) y arroja más mensajes de compilación (preferible para depurar errores, pero algo más lento al compilar). 
+</p>
+
+<p>
+Este es el código de <code>scripts/build_latex.sh</code>:
 </p>
 
 <div class="org-src-container">
@@ -454,17 +523,17 @@ Este es el sugerido por copilot de GitHub
 </span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">El ':' final es importante para conservar la b&#250;squeda por defecto de TeX.
 </span><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">TEXINPUTS</span>=<span style="color: #008000;">".:./acrotex:./nacal:${TEXINPUTS:-}:"</span>
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">(Opcional) si tu .bib/.bst est&#225;n en subcarpetas y usas \bibliography{referencias/...}
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">(Opcional) si tus .bib/.bst est&#225;n en subcarpetas y usas \bibliography{referencias/...}
 </span><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">BIBINPUTS</span>=<span style="color: #008000;">".:./referencias:${BIBINPUTS:-}:"</span>
 <span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">BSTINPUTS</span>=<span style="color: #008000;">".:./referencias:${BSTINPUTS:-}:"</span>
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">1) Primera pasada: genera .aux y archivos pythontex
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">1) Primera pasada: genera .aux y archivos PythonTeX
 </span>pdflatex -interaction=nonstopmode -halt-on-error <span style="color: #008000;">"$BASENAME"</span>
 
 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">2) Ejecuta PythonTeX usando el Python del entorno conda de Binder (env "notebook")
 </span><span style="color: #BA36A5;">CONDA_PY</span>=<span style="color: #008000;">"/srv/conda/envs/notebook/bin/python"</span>
 <span style="color: #0000FF; font-weight: bold;">if</span> [[ ! -x <span style="color: #008000;">"$CONDA_PY"</span> ]]; <span style="color: #0000FF; font-weight: bold;">then</span>
-  <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"No encuentro el python del entorno conda en $CONDA_PY"</span>
+  <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"No encuentro el Python del entorno conda en $CONDA_PY"</span>
   <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"Entornos disponibles:"</span>
   conda env list || true
   <span style="color: #0000FF; font-weight: bold;">exit</span> 1
@@ -478,66 +547,13 @@ pythontex --interpreter <span style="color: #008000;">"py:${CONDA_PY}"</span> <s
 <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"OK: generado $(</span><span style="color: #FF1493;">basename "$BASENAME" .tex</span><span style="color: #008000;">).pdf en $WORKDIR"</span>
 </pre>
 </div>
-
-<p>
-Ventajas:
-</p>
-
-<ul class="org-ul">
-<li>Muy fácil de entender.</li>
-<li>Si PythonTeX no está, falla con mensaje claro.</li>
-<li>latexmk se encarga de pasadas adicionales.</li>
-</ul>
 </div>
-</div>
-<div id="outline-container-org48120d7" class="outline-3">
-<h3 id="org48120d7"><span class="section-number-3">1.6.</span> Uso en Binder (bajo demanda)</h3>
-<div class="outline-text-3" id="text-1-6">
-<p>
-En el README poner el enlace a Binder y explicar:
-</p>
-
-<ul class="org-ul">
-<li>Abrir Terminal</li>
-<li>Ejecutar:</li>
-</ul>
-
-<div class="org-src-container">
-<pre class="src src-bash">bash scripts/compila.sh tex/Quiz1-2025-C.tex
-</pre>
-</div>
-
-<p>
-o bien
-</p>
-
-<div class="org-src-container">
-<pre class="src src-bash">bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org7c8fd3c" class="outline-3">
-<h3 id="org7c8fd3c"><span class="section-number-3">1.7.</span> Si PythonTeX no aparece en PATH (posible ajuste)</h3>
-<div class="outline-text-3" id="text-1-7">
-<p>
-Si al compilar sale “No encuentro pythontex”, hay dos soluciones típicas:
-</p>
-
-<ul class="org-ul">
-<li>Instalar el paquete TeX Live que lo trae (depende de la distro; a veces viene con colecciones grandes, a veces no).</li>
-<li>Añadir en postBuild una instalación adicional (por ejemplo vía tlmgr), pero en Binder suele ser menos recomendable por tiempo/fiabilidad.</li>
-</ul>
-
-<p>
-Si te pasa, dime el error exacto del terminal en Binder (las últimas ~30 líneas) y te digo qué paquete añadir a binder/apt.txt para que aparezca pythontex.
-</p>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-02-27 vie 22:35</p>
+<p class="date">Created: 2026-02-28 sáb 10:50</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

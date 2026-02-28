@@ -1,14 +1,14 @@
 #+TITLE: Fuente y explicación de algunos ficheros
-# +SUBTITLE: (subtitulo)
+# +SUBTITLE: (subtítulo)
 #+LANGUAGE: es
 #+AUTHOR: Marcos Bujosa
 #+OPTIONS: author:nil 
 #+OPTIONS: toc:nil 
 #+STARTUP: show3levels   
 
-Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la opción más estable en Binder es:
+Para la compilación bajo demanda, sin interactividad y con ejecución de código Python en la compilación, la opción más estable en Binder es:
 - Compilar con pdfLaTeX (por compatibilidad).
-- Usar latexmk para automatizar pasadas.
+- Usar latexmk para automatizar las pasadas.
 - Insertar PythonTeX como paso intermedio (=pdflatex → pythontex → latexmk=).
 
 * Repositorio
@@ -24,7 +24,7 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
 - tex/
   - Quiz1-2025-C.tex
   - nacal/
-    - nacal.sty (copiado desde [[https://github.com/mbujosab/nacal-latex-package]].  En el .tex. poner \usepackage{nacal/nacal} (ruta relativa).
+    - nacal.sty (copiado desde [[https://github.com/mbujosab/nacal-latex-package]]. En el .tex se debe incluir \usepackage{nacal}).
   - acrotex
     - (/los ficheros de este directorio los he descargado de/ https://ctan.org/tex-archive/macros/latex/contrib/acrotex)
   - referencias/
@@ -55,9 +55,13 @@ Para compilación bajo demanda, sin interactividad PDF especial, y nacal.sty, la
   (make-directory "tex/preguntas"))
 #+END_SRC
 
+* Ficheros de configuración en MyBinder
+
+Estos ficheros se usan para declarar las dependencias del entorno que MyBinder necesita para reproducir un proyecto en la nube.
+
 ** Paquetes del sistema (TeX Live + herramientas)
 
-Fichero =.binder/apt.txt=
+Archivo =.binder/apt.txt=: Lista los paquetes del sistema operativo (Ubuntu/Debian) que se instalarán a través de =apt-get=. Se utiliza cuando se necesitan dependencias a nivel de sistema que no están disponibles como paquetes de Python o conda. En este caso, serán fundamentalmente paquetes de $\LaTeX{}$.
 
 #+BEGIN_SRC txt :tangle .binder/apt.txt
 texlive
@@ -78,13 +82,12 @@ python3-pygments
 
 Notas:
 
-- texlive-latex-extra suele cubrir xparse, xspace, stackengine, etc.
-- texlive-science ayuda con ecosistema matemático (aunque amsmath/amssymb suele estar ya incluido).
-- texlive-pictures cubre utilidades de dibujo (incluyendo pict2e en muchas instalaciones).
-- perl es importante para latexmk y para partes de pythontex en algunas distros.
-Si luego al compilar te falta algún .sty, se corrige añadiendo el paquete TeX Live adecuado a apt.txt.
+- Los distintos paquetes =texlive= traen uno o más paquetes de $LaTeX{}$ que son necesarios en el código de los exámenes o que son dependencias de mi paquete de notación para el curso [[https://github.com/mbujosab/nacal-latex-package][=nacal.sty=]].
+- Perl es importante para latexmk y para partes de PythonTeX. 
 
 ** Entorno Python (para PythonTeX)
+
+Archivo =.binder/environment.yml=: Define el entorno de conda, listando los paquetes de Python (y de otros lenguajes) que necesita el código del repositorio. 
 
 #+BEGIN_SRC txt :tangle .binder/environment.yml
 name: notebook
@@ -99,9 +102,13 @@ dependencies:
       - nacal
 #+END_SRC
 
-pygments suele ser necesario porque PythonTeX puede usarlo para resaltado/formatos.
+Pygments es necesario porque PythonTeX lo requiere como dependencia.
+
+*Nota*: Si usas =environment.yml=, Binder utilizará una distribución Miniconda. Así, aún es posible usar =pip= añadiendo una sección =- pip:= dentro del mismo fichero, en lugar de un =requirements.txt= separado. Es lo que se hace aquí para instalar mi módulo [[https://pypi.org/project/nacal/][nacal]] de Python.
 
 ** postBuild (ajustes tras construir el entorno)
+
+El archivo =.binder/postBuild= es un script de shell que se ejecuta después de que se instalen todas las dependencias definidas en =apt.txt=, =environment.yml= o =requirements.txt=, pero antes de que se inicie el servidor. Permite ejecutar cualquier comando adicional necesario para preparar el entorno.
 
 #+BEGIN_SRC txt :tangle .binder/postBuild
 #!/usr/bin/env bash
@@ -111,16 +118,35 @@ set -euxo pipefail
 chmod +x scripts/build_latex.sh
 chmod +x scripts/compila.sh
 
-# (Opcional) Mostrar versiones útiles para depurar en el log de build
+# (Opcional) Mostrar versiones útiles para depurar en el log de construcción
 latexmk -v || true
 python --version
 #+END_SRC
 
-Con esto Binder deja listo el script para compilar “bajo demanda”.
+- El script debe tener permisos de ejecución (=chmod +x .binder/postBuild=).
+- Debe comenzar con un shebang (como =#!/bin/bash=).
+- Se ejecuta en un entorno de Linux (Ubuntu).
+- Si el script falla, el entorno no se inicia.
+*Nota*: Si no necesitas comandos personalizados, no es necesario crear este archivo. MyBinder instalará automáticamente las dependencias definidas en los otros ficheros.
+
+Con esto, Binder deja listo el script para compilar “bajo demanda”.
 
 ** Script de compilación bajo demanda (latexmk + pythontex)
 
-Este es mi script
+*** Mi script =compila.sh=
+
+El script =scripts/compila.sh= compila el archivo $\LaTeX{}$ que le indiques. Por ejemplo, para compilar =tex/Quiz1-2025-C.tex= basta:
+
+- Abrir la Terminal.
+- Ejecutar:
+
+#+BEGIN_SRC bash :eval no
+bash scripts/compila.sh tex/Quiz1-2025-C.tex
+#+END_SRC
+
+Genera un =pdf= en la carpeta =tex= y hace una copia del mismo en el directorio raíz.
+
+Este es el código de =scripts/compila.sh=:
 
 #+BEGIN_SRC bash :tangle scripts/compila.sh
 #!/usr/bin/env bash
@@ -146,17 +172,17 @@ cd "$WORKDIR"
 # El ':' final es importante para conservar la búsqueda por defecto de TeX.
 export TEXINPUTS=".:./acrotex:./nacal:${TEXINPUTS:-}:"
 
-# (Opcional) si tu .bib/.bst están en subcarpetas y usas \bibliography{referencias/...}
+# (Opcional) si tus .bib/.bst están en subcarpetas y usas \bibliography{referencias/...}
 export BIBINPUTS=".:./referencias:${BIBINPUTS:-}:"
 export BSTINPUTS=".:./referencias:${BSTINPUTS:-}:"
 
-# 1) Primera pasada: genera .aux y archivos pythontex
+# 1) Primera pasada: genera .aux y archivos PythonTeX
 pdflatex -interaction=batchmode "$BASENAME"
 
 # 2) Ejecuta PythonTeX usando el Python del entorno conda de Binder (env "notebook")
 CONDA_PY="/srv/conda/envs/notebook/bin/python"
 if [[ ! -x "$CONDA_PY" ]]; then
-  echo "No encuentro el python del entorno conda en $CONDA_PY"
+  echo "No encuentro el Python del entorno conda en $CONDA_PY"
   echo "Entornos disponibles:"
   conda env list || true
   exit 1
@@ -173,11 +199,25 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
 # rm $(basename "$BASENAME" .tex)_xdefs.cut
 # rm exerquiz.djs
 
-# 4) Copiamos el pdf al directorio raiz
+# 4) Copiamos el PDF al directorio raíz
 cp $(basename "$BASENAME" .tex).pdf ../
 #+END_SRC
 
-Este es el sugerido por copilot de GitHub
+
+*** Script =build_latex.sh= sugerido por Copilot de GitHub
+
+Hace lo mismo que el anterior. Por ejemplo, para compilar =tex/Quiz1-2025-C.tex= basta:
+
+- Abrir la Terminal.
+- Ejecutar:
+
+#+BEGIN_SRC bash :eval no
+bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
+#+END_SRC
+
+La diferencia es que no copia el =pdf= en el directorio raíz (el =pdf= solo aparece en la carpeta =tex=) y arroja más mensajes de compilación (preferible para depurar errores, pero algo más lento al compilar). 
+
+Este es el código de =scripts/build_latex.sh=:
 
 #+BEGIN_SRC bash :tangle scripts/build_latex.sh
 #!/usr/bin/env bash
@@ -198,17 +238,17 @@ cd "$WORKDIR"
 # El ':' final es importante para conservar la búsqueda por defecto de TeX.
 export TEXINPUTS=".:./acrotex:./nacal:${TEXINPUTS:-}:"
 
-# (Opcional) si tu .bib/.bst están en subcarpetas y usas \bibliography{referencias/...}
+# (Opcional) si tus .bib/.bst están en subcarpetas y usas \bibliography{referencias/...}
 export BIBINPUTS=".:./referencias:${BIBINPUTS:-}:"
 export BSTINPUTS=".:./referencias:${BSTINPUTS:-}:"
 
-# 1) Primera pasada: genera .aux y archivos pythontex
+# 1) Primera pasada: genera .aux y archivos PythonTeX
 pdflatex -interaction=nonstopmode -halt-on-error "$BASENAME"
 
 # 2) Ejecuta PythonTeX usando el Python del entorno conda de Binder (env "notebook")
 CONDA_PY="/srv/conda/envs/notebook/bin/python"
 if [[ ! -x "$CONDA_PY" ]]; then
-  echo "No encuentro el python del entorno conda en $CONDA_PY"
+  echo "No encuentro el Python del entorno conda en $CONDA_PY"
   echo "Entornos disponibles:"
   conda env list || true
   exit 1
@@ -221,38 +261,3 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
 
 echo "OK: generado $(basename "$BASENAME" .tex).pdf en $WORKDIR"
 #+END_SRC
-
-Ventajas:
-
-- Muy fácil de entender.
-- Si PythonTeX no está, falla con mensaje claro.
-- latexmk se encarga de pasadas adicionales.
-
-
-** Uso en Binder (bajo demanda)
-
-En el README poner el enlace a Binder y explicar:
-
-- Abrir Terminal
-- Ejecutar:
-
-#+BEGIN_SRC bash :eval no
-bash scripts/compila.sh tex/Quiz1-2025-C.tex
-#+END_SRC
-
-o bien
-
-#+BEGIN_SRC bash :eval no
-bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
-#+END_SRC
-
-** Si PythonTeX no aparece en PATH (posible ajuste)
-
-Si al compilar sale “No encuentro pythontex”, hay dos soluciones típicas:
-
-- Instalar el paquete TeX Live que lo trae (depende de la distro; a veces viene con colecciones grandes, a veces no).
-- Añadir en postBuild una instalación adicional (por ejemplo vía tlmgr), pero en Binder suele ser menos recomendable por tiempo/fiabilidad.
-
-Si te pasa, dime el error exacto del terminal en Binder (las últimas ~30 líneas) y te digo qué paquete añadir a binder/apt.txt para que aparezca pythontex.
-
-

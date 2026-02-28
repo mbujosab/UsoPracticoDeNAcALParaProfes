@@ -21,17 +21,17 @@ cd "$WORKDIR"
 # El ':' final es importante para conservar la búsqueda por defecto de TeX.
 export TEXINPUTS=".:./acrotex:./nacal:${TEXINPUTS:-}:"
 
-# (Opcional) si tu .bib/.bst están en subcarpetas y usas \bibliography{referencias/...}
+# (Opcional) si tus .bib/.bst están en subcarpetas y usas \bibliography{referencias/...}
 export BIBINPUTS=".:./referencias:${BIBINPUTS:-}:"
 export BSTINPUTS=".:./referencias:${BSTINPUTS:-}:"
 
-# 1) Primera pasada: genera .aux y archivos pythontex
+# 1) Primera pasada: genera .aux y archivos PythonTeX
 pdflatex -interaction=batchmode "$BASENAME"
 
 # 2) Ejecuta PythonTeX usando el Python del entorno conda de Binder (env "notebook")
 CONDA_PY="/srv/conda/envs/notebook/bin/python"
 if [[ ! -x "$CONDA_PY" ]]; then
-  echo "No encuentro el python del entorno conda en $CONDA_PY"
+  echo "No encuentro el Python del entorno conda en $CONDA_PY"
   echo "Entornos disponibles:"
   conda env list || true
   exit 1
@@ -48,5 +48,5 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASENAME"
 # rm $(basename "$BASENAME" .tex)_xdefs.cut
 # rm exerquiz.djs
 
-# 4) Copiamos el pdf al directorio raiz
+# 4) Copiamos el PDF al directorio raíz
 cp $(basename "$BASENAME" .tex).pdf ../

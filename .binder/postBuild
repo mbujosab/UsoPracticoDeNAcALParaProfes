@@ -5,6 +5,6 @@ set -euxo pipefail
 chmod +x scripts/build_latex.sh
 chmod +x scripts/compila.sh
 
-# (Opcional) Mostrar versiones útiles para depurar en el log de build
+# (Opcional) Mostrar versiones útiles para depurar en el log de construcción
 latexmk -v || true
 python --version
