@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-02-28 sáb 11:01 -->
+<!-- 2026-02-28 sáb 17:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LaTeX + PythonTeX + Exerquiz + nacal en MyBinder</title>
@@ -256,6 +256,10 @@ Para más información sobre el código o el repositorio:
 <li value="2">Espera a que cargue JupyterLab.</li>
 <li>Abre <b>Terminal</b> (en JupyterLab: <code>/File → New → Terminal/</code>).</li>
 </ol>
+
+<p>
+Sobre la privacidad de las sesiones en MyBinder, lea la <a href="#aclaracion-sobre-los-entornos-y-sesiones-en-mybinder">sección correspondiente</a>.
+</p>
 </div>
 </div>
 <div id="outline-container-compilar-bajo-demanda" class="outline-2">
@@ -344,9 +348,126 @@ Más información sobre el contenido del repositorio <a href="fuente.html">aquí
 </p>
 </div>
 </div>
+<div id="outline-container-aclaracion-sobre-los-entornos-y-sesiones-en-mybinder" class="outline-2">
+<h2 id="aclaracion-sobre-los-entornos-y-sesiones-en-mybinder"><span class="section-number-2">6.</span> Aclaración sobre los entornos y sesiones en MyBinder</h2>
+<div class="outline-text-2" id="text-aclaracion-sobre-los-entornos-y-sesiones-en-mybinder">
+<p>
+En MyBinder, el entorno que se crea es técnicamente accesible para cualquiera que tenga el enlace activo, pero con limitaciones importantes.
+</p>
+</div>
+<div id="outline-container-orgdfd49fb" class="outline-3">
+<h3 id="orgdfd49fb"><span class="section-number-3">6.1.</span> ¿Es accesible para otros?</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Depende del enlace:
+</p>
+
+<dl class="org-dl">
+<dt>Enlace público (URL que compartes)</dt><dd>Cualquiera que tenga el enlace puede lanzar <span class="underline">su propia</span> instancia independiente del entorno.</dd>
+<dt>En cuanto a tu sesión específica activa</dt><dd>No es colaborativa por defecto. Nadie puede entrar en <b>tu</b> sesión a menos que compartas exactamente la URL con el token activo (lo cual no es recomendable).</dd>
+</dl>
+
+<p>
+Cada usuario obtiene:
+</p>
+
+<ul class="org-ul">
+<li>Su propio contenedor</li>
+<li>Su propio kernel</li>
+<li>Su propia memoria temporal</li>
+</ul>
+
+<p>
+No hay persistencia compartida entre sesiones.
+</p>
+</div>
+</div>
+<div id="outline-container-org471cd69" class="outline-3">
+<h3 id="org471cd69"><span class="section-number-3">6.2.</span> ¿Cuánto tiempo tarda en desaparecer?</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+MyBinder funciona con contenedores efímeros. 
+El entorno se elimina tras:
+</p>
+
+<ul class="org-ul">
+<li>10 minutos de inactividad: la sesión se cierra automáticamente.</li>
+<li>Límite máximo aproximado de 6 horas: aunque haya actividad, el contenedor puede reiniciarse.</li>
+<li>Si el servidor necesita recursos, puede terminar antes.</li>
+</ul>
+
+<p>
+Después de cerrarse:
+</p>
+
+<ul class="org-ul">
+<li>Se pierde cualquier archivo no guardado externamente.</li>
+<li>No hay persistencia local.</li>
+<li>Al volver a abrir el enlace, se crea un entorno nuevo desde el repositorio.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org659b05d" class="outline-3">
+<h3 id="org659b05d"><span class="section-number-3">6.3.</span> Consideraciones técnicas importantes</h3>
+<div class="outline-text-3" id="text-6-3">
+<ul class="org-ul">
+<li>No es adecuado para producción.</li>
+<li>No es persistente.</li>
+<li>Los recursos (CPU/RAM) son limitados.</li>
+<li>Está pensado para demos, docencia y pruebas reproducibles.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org15a8e1a" class="outline-3">
+<h3 id="org15a8e1a"><span class="section-number-3">6.4.</span> Resumen</h3>
+<div class="outline-text-3" id="text-6-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Pregunta</th>
+<th scope="col" class="org-left">Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">¿Es el entorno público?</td>
+<td class="org-left">Sí, si compartes el enlace</td>
+</tr>
+
+<tr>
+<td class="org-left">¿Puede alguien entrar en mi sesión?</td>
+<td class="org-left">Muy improbable, necesita el token aleatorio que se ha generado (no lo compartas nunca)</td>
+</tr>
+
+<tr>
+<td class="org-left">¿Es colaborativo en tiempo real?</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left">¿Guarda cambios?</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left">¿Cuándo se borra?</td>
+<td class="org-left">~10 min inactivo o máx ~6h</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-02-28 sáb 11:01</p>
+<p class="date">Created: 2026-02-28 sáb 17:13</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

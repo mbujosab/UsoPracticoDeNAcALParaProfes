@@ -23,11 +23,14 @@ Para más información sobre el código o el repositorio:
 * Abrir en Binder
    :PROPERTIES:
    :CUSTOM_ID: abrir-en-binder
+   :ID:       a9cabe20-9434-44a4-ab91-508bda4a1352
    :END:
 1. Pulsa el badge de Binder: [[https://mybinder.org/v2/gh/mbujosab/UsoPracticoDeNAcALParaProfes/HEAD][file:https://mybinder.org/badge_logo.svg]]
 
 2. [@2] Espera a que cargue JupyterLab.
 3. Abre *Terminal* (en JupyterLab: =/File → New → Terminal/=).
+
+Sobre la privacidad de las sesiones en MyBinder, lea la [[id:86707293-0bc5-4097-ab2f-05d76312155a][sección correspondiente]].
 
 * Compilar bajo demanda
    :PROPERTIES:
@@ -98,5 +101,62 @@ Más información sobre el código $\LaTeX{}$ de los exámenes [[file:Generacion
 - =tex/preguntas/2025-intermedio1-C.tex=: preguntas utilizadas en el documento de ejemplo
 
 Más información sobre el contenido del repositorio [[file:fuente.org][aquí]]
+
+* Aclaración sobre los entornos y sesiones en MyBinder
+   :PROPERTIES:
+   :CUSTOM_ID: aclaracion-sobre-los-entornos-y-sesiones-en-mybinder
+   :ID:       86707293-0bc5-4097-ab2f-05d76312155a
+   :END:
+
+En MyBinder, el entorno que se crea es técnicamente accesible para cualquiera que tenga el enlace activo, pero con limitaciones importantes.
+
+** ¿Es accesible para otros?
+
+Depende del enlace:
+
+- Enlace público (URL que compartes) :: Cualquiera que tenga el enlace puede lanzar _su propia_ instancia independiente del entorno.
+- En cuanto a tu sesión específica activa :: No es colaborativa por defecto. Nadie puede entrar en *tu* sesión a menos que compartas exactamente la URL con el token activo (lo cual no es recomendable).
+
+Cada usuario obtiene:
+
+- Su propio contenedor
+- Su propio kernel
+- Su propia memoria temporal
+
+No hay persistencia compartida entre sesiones.
+
+** ¿Cuánto tiempo tarda en desaparecer?
+
+MyBinder funciona con contenedores efímeros. 
+El entorno se elimina tras:
+
+- 10 minutos de inactividad: la sesión se cierra automáticamente.
+- Límite máximo aproximado de 6 horas: aunque haya actividad, el contenedor puede reiniciarse.
+- Si el servidor necesita recursos, puede terminar antes.
+
+Después de cerrarse:
+
+- Se pierde cualquier archivo no guardado externamente.
+- No hay persistencia local.
+- Al volver a abrir el enlace, se crea un entorno nuevo desde el repositorio.
+
+** Consideraciones técnicas importantes
+
+- No es adecuado para producción.
+- No es persistente.
+- Los recursos (CPU/RAM) son limitados.
+- Está pensado para demos, docencia y pruebas reproducibles.
+
+** Resumen 
+
+| Pregunta                            | Respuesta                                                                              |
+|-------------------------------------+----------------------------------------------------------------------------------------|
+| ¿Es el entorno público?             | Sí, si compartes el enlace                                                             |
+| ¿Puede alguien entrar en mi sesión? | Muy improbable, necesita el token aleatorio que se ha generado (no lo compartas nunca) |
+| ¿Es colaborativo en tiempo real?    | No                                                                                     |
+| ¿Guarda cambios?                    | No                                                                                     |
+| ¿Cuándo se borra?                   | ~10 min inactivo o máx ~6h                                                             |
+
+
 
 
