@@ -69,7 +69,7 @@ El script =scripts/compila.sh= implementa ese flujo. También el script =scripts
    :CUSTOM_ID: exerquiz-soluciones-al-final-plantilla
    :END:
 Si deseas que las soluciones aparezcan al final del documento, 
-debes editar =tex/nacal/PreambuloParaExamenes.tex= comentando las opciones que no quieres, y descomentando la única opción que deseas.
+debes editar =tex/aux/PreambuloParaExamenes.tex= comentando las opciones que no quieres, y descomentando la única opción que deseas.
 
 #+begin_src latex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

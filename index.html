@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-02-28 sáb 17:13 -->
+<!-- 2026-06-20 sáb 23:04 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LaTeX + PythonTeX + Exerquiz + nacal en MyBinder</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -274,16 +275,16 @@ Para compilar <code>tex/Quiz1-2025-C.tex</code> copia uno de los siguientes coma
 La siguiente variante oculta parte de los resultados al compilar (es un poco más rápida) y copia el <code>pdf</code> generado en el directorio raíz:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">    bash scripts/compila.sh tex/Quiz1-2025-C.tex
-</pre>
+<pre class="src src-sh"><code>    bash scripts/compila.sh tex/Quiz1-2025-C.tex
+</code></pre>
 </div></li>
 
 <li><p>
 Esta segunda variante muestra todos los resultados intermedios (mejor para hacer depuración de errores). Sin embargo, es más lenta y deja el <code>pdf</code> generado en el subdirectorio <code>tex</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">    bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
-</pre>
+<pre class="src src-sh"><code>    bash scripts/build_latex.sh tex/Quiz1-2025-C.tex
+</code></pre>
 </div>
 <p>
 El PDF resultante estará en: <code>tex/Quiz1-2025-C.pdf</code>
@@ -318,7 +319,7 @@ El script <code>scripts/compila.sh</code> implementa ese flujo. También el scri
 <div class="outline-text-2" id="text-exerquiz-soluciones-al-final-plantilla">
 <p>
 Si deseas que las soluciones aparezcan al final del documento, 
-debes editar <code>tex/nacal/PreambuloParaExamenes.tex</code> comentando las opciones que no quieres, y descomentando la única opción que deseas.
+debes editar <code>tex/aux/PreambuloParaExamenes.tex</code> comentando las opciones que no quieres, y descomentando la única opción que deseas.
 </p>
 
 <p>
@@ -355,8 +356,8 @@ Más información sobre el contenido del repositorio <a href="fuente.html">aquí
 En MyBinder, el entorno que se crea es técnicamente accesible para cualquiera que tenga el enlace activo, pero con limitaciones importantes.
 </p>
 </div>
-<div id="outline-container-orgdfd49fb" class="outline-3">
-<h3 id="orgdfd49fb"><span class="section-number-3">6.1.</span> ¿Es accesible para otros?</h3>
+<div id="outline-container-org2259928" class="outline-3">
+<h3 id="org2259928"><span class="section-number-3">6.1.</span> ¿Es accesible para otros?</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Depende del enlace:
@@ -382,8 +383,8 @@ No hay persistencia compartida entre sesiones.
 </p>
 </div>
 </div>
-<div id="outline-container-org471cd69" class="outline-3">
-<h3 id="org471cd69"><span class="section-number-3">6.2.</span> ¿Cuánto tiempo tarda en desaparecer?</h3>
+<div id="outline-container-org4c3a464" class="outline-3">
+<h3 id="org4c3a464"><span class="section-number-3">6.2.</span> ¿Cuánto tiempo tarda en desaparecer?</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 MyBinder funciona con contenedores efímeros. 
@@ -407,8 +408,8 @@ Después de cerrarse:
 </ul>
 </div>
 </div>
-<div id="outline-container-org659b05d" class="outline-3">
-<h3 id="org659b05d"><span class="section-number-3">6.3.</span> Consideraciones técnicas importantes</h3>
+<div id="outline-container-org8b16171" class="outline-3">
+<h3 id="org8b16171"><span class="section-number-3">6.3.</span> Consideraciones técnicas importantes</h3>
 <div class="outline-text-3" id="text-6-3">
 <ul class="org-ul">
 <li>No es adecuado para producción.</li>
@@ -418,8 +419,8 @@ Después de cerrarse:
 </ul>
 </div>
 </div>
-<div id="outline-container-org15a8e1a" class="outline-3">
-<h3 id="org15a8e1a"><span class="section-number-3">6.4.</span> Resumen</h3>
+<div id="outline-container-org9c56c9c" class="outline-3">
+<h3 id="org9c56c9c"><span class="section-number-3">6.4.</span> Resumen</h3>
 <div class="outline-text-3" id="text-6-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -467,7 +468,7 @@ Después de cerrarse:
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-02-28 sáb 17:13</p>
+<p class="date">Created: 2026-06-20 sáb 23:04</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
