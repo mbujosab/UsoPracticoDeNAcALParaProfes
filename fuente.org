@@ -81,7 +81,7 @@ gnuplot
 python3-pygments
 #+END_SRC
 
-Notas:
+*Notas*:
 
 - Los distintos paquetes =texlive= traen uno o más paquetes de $LaTeX{}$ que son necesarios en el código de los exámenes o que son dependencias de mi paquete de notación para el curso [[https://github.com/mbujosab/nacal-latex-package][=nacal.sty=]].
 - Perl es importante para latexmk y para partes de PythonTeX. 
